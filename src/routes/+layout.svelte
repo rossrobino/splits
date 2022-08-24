@@ -16,7 +16,7 @@
         <header>
             <NavBar />
         </header>
-        <main class="max-w-7xl mx-auto my-4">
+        <main class="max-w-6xl mx-auto p-8">
             <slot />  
         </main>
     </div>

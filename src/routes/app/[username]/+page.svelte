@@ -1,7 +1,10 @@
 <script>
     import { routeProfile } from "$lib/sessionStore";
+    import { title, tagline } from '$lib/modules/info';
 </script>
 
-<ul>
-    <li>Username: @{$routeProfile.username}</li>
-</ul>
+<svelte:head>
+    <title>{title} - @{routeProfile.username}</title>
+    <meta name="description" content={tagline} />
+</svelte:head>
+

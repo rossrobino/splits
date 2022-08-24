@@ -2,6 +2,7 @@
     import { supabase } from "$lib/modules/supabaseClient";
     import { page } from '$app/stores';
     import AlertError from "$lib/components/AlertError.svelte";
+    import LoadingBar from "$lib/components/LoadingBar.svelte";
     import { routeProfile } from "$lib/sessionStore";
 
     async function getRouteProfile() {
@@ -15,24 +16,12 @@
     }
 </script>
 
-
-
-
-
 {#await getRouteProfile()}
-    <progress class="progress w-56"></progress>
+    <LoadingBar class="mt-24" />
 {:then}
-
     <div class="p-4 bg-base-100">
-        <div class="prose my-8">
-            <h1>{$routeProfile.first_name} {$routeProfile.last_name}</h1> 
-        </div>
-        <div class="tabs tabs-boxed w-full">
-            <a href="/app/{$routeProfile.username}" class="tab tab-active">Profile</a> 
-            <a href="/app" class="tab">Teams</a> 
-            <a href="/app" class="tab">Splits</a>
-        </div>
-    
+            <h1 class="text-5xl font-bold">{$routeProfile.first_name} {$routeProfile.last_name}</h1> 
+            <h2 class="text-2xl">@{$routeProfile.username}</h2>    
         <slot />
     </div>
     

@@ -91,7 +91,7 @@
                     </label>
                     
                     {#if (err==='duplicate key value violates unique constraint "profiles_username_key"')}
-                        <AlertError error={"username is unavailable"}/>
+                        <AlertError error="username is unavailable" />
                     {:else if err}
                         <AlertError error={err} />
                     {/if}
