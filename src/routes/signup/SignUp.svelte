@@ -83,7 +83,7 @@
                         <label class="label" for="password">
                             <span class="label-text">Password</span>
                         </label>
-                        <input id="password" type="password"  placeholder="password" class="input input-bordered" required bind:value="{password}"/>
+                        <input id="password" type="password" minlength="8" placeholder="password" class="input input-bordered" required bind:value="{password}"/>
                     </div>
 
                     <label class="label" for="login">
@@ -100,10 +100,12 @@
                         <input type="submit" class="btn btn-primary" value={loading ? "Loading" : "Sign Up"} disabled={loading}/>
                     </div>
                 </form>
+
+
         </div>
     </div>
 {:else}
-    <div class="hero min-h-screen bg-base-200">
+    <div class="hero min-h-screen bg-base-100">
         <div class="hero-content text-center">
         <div class="max-w-md">
             <p class="py-6">Check your email to complete verification!</p>

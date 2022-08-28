@@ -1,9 +1,11 @@
 <script>
     import { user, userProfile } from '$lib/sessionStore';
     import { title } from '$lib/modules/info';
+    import { supabase } from '$lib/modules/supabaseClient';
     import LoadingBar from '$lib/components/LoadingBar.svelte';
     import AlertError from '$lib/components/AlertError.svelte';
-    import { supabase } from '$lib/modules/supabaseClient';
+    import AlertSuccess from '$lib/components/AlertSuccess.svelte';
+    
 
     let email = "";
     let username = "";
@@ -11,7 +13,7 @@
     let lname = "";
     let loading = false;
     let alert = "";
-
+    let success = "";
 
 
     // controls the focus outline of the wrapper div for @ prefix
@@ -22,33 +24,59 @@
     async function updateProfile() {
         try {
             alert = "";
+            success = "";
             loading = true;
 
             const profileUpdates= { updated_at: new Date() };
-            if ( username != "" ) profileUpdates.username = username;
-            if ( fname != "" ) profileUpdates.first_name = fname;
-            if ( lname != "" ) profileUpdates.last_name = lname;
-            if ( Object.keys(profileUpdates).length > 1 ) {
-                console.log(profileUpdates);
-                let { error } = await supabase
-                    .from('profiles')
-                    .update(profileUpdates)
-                    .match({id: $user.id});
-                if ( error ) throw error;
-                // success:
-                $userProfile
+            // check which fields have values and set to profileUpdates
+            if ( username ) profileUpdates.username = username;
+            if ( fname ) profileUpdates.first_name = fname;
+            if ( lname ) profileUpdates.last_name = lname;
+
+            // if there is anything entered...
+            if ( Object.keys(profileUpdates).length > 1 || email ) {
+
+                if ( Object.keys(profileUpdates).length > 1 ) {
+                    let { error } = await supabase
+                        .from('profiles')
+                        .update(profileUpdates)
+                        .match({id: $user.id});
+                    if ( error ) throw error;
+
+                    // success set $userProfile immediately according to which values were entered
+                    let keys = Object.keys(profileUpdates);
+                    for (const key of keys) {
+                        if (key === "username") {
+                            $userProfile.username = username; 
+                            username = "";
+                        }
+                        if (key === "first_name") {
+                            $userProfile.first_name = fname;
+                            fname = "";
+                        } 
+                        if (key === "last_name") {
+                            $userProfile.last_name = lname; 
+                            lname = "";
+                        }
+                    }
+                }
+                if ( email ) {
+                    const { user, error } = await supabase.auth.update({ email });
+                    if ( error ) throw error;
+                }
+                success = "Your updates have been confirmed!"
             } else {
                 alert = "Please enter a new value to submit."
             }
-            
-
-
-
         } catch (error) {
             alert = error.message;
         } finally {
             loading = false;
         }
+    }
+
+    async function sendResetEmail() {
+        const { data, error } = await supabase.auth.api.resetPasswordForEmail( $user.email );
     }
 
 </script>
@@ -64,12 +92,15 @@
     <h1 class="text-5xl font-bold">Account</h1>
     <p class="mt-4 mb-8">Update your information:</p>
 
-    <div class="form-control w-full max-w-sm">
+    <form class="form-control w-full max-w-sm">
         <label for="email" class="label">
             <span class="label-text">Email</span>
             <span class="label-text-alt">{$user.email}</span>
         </label>
-        <input id="email" type="text" placeholder="new email" bind:value={email} class="input input-bordered input-secondary w-full max-w-sm mb-3" />
+        <input id="email" type="text" placeholder="new email" bind:value={email} class="input input-bordered input-secondary w-full max-w-sm " />
+        <label for="email" class="label mb-3">
+            <span class="label-text-alt">Upon email update a confirmation email will be sent to the current and new address. Both messages must be confirmed to update.</span>
+        </label>
 
         <label for="username" class="label">
             <span class="label-text">Username</span>
@@ -91,13 +122,11 @@
         </label>
         <input id="last_name" type="text" placeholder="new last name" bind:value={lname} class="input input-bordered input-secondary w-full max-w-sm mb-3" />
 
-        <button 
-            on:click={updateProfile} 
-            class="btn btn-secondary {loading ? "loading" : ''} mt-3"
-            disabled={loading}
-        >
-            {loading ? "Loading" : "Submit"}
-        </button>
+        {#if loading}
+            <button class="btn loading mt-3">Loading</button>
+        {:else}
+            <input type="submit" value="Submit" on:click={updateProfile} class="btn btn-secondary mt-3">
+        {/if}
 
         {#if alert}
             {#if ( alert == 'duplicate key value violates unique constraint "profiles_username_key"')}
@@ -106,6 +135,17 @@
                 <AlertError error={alert} class="mt-6"/>
             {/if}
         {/if}
+
+        {#if success}
+            <AlertSuccess success={success} class="mt-6"/>
+        {/if}
+    </form>
+
+    <div 
+        class="link link-neutral mt-6"
+        on:click={sendResetEmail}
+    >
+        Reset Password
     </div>
 {:else}
     <LoadingBar class="mt-24" />
