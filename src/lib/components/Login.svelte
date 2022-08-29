@@ -25,7 +25,7 @@
     <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
         <form class="card-body" on:submit|preventDefault="{handleLogin}">
 
-            <h1>Login</h1>
+            <h1 class="font-bold">Login</h1>
 
             <div class="form-control">
                 <label class="label" for="email">
@@ -39,7 +39,7 @@
                 </label>
                 <input id="password" type="password" placeholder="password" class="input input-bordered" bind:value="{password}"/>
                 <label class="label" for="forgot">
-                    <a href="/" id="forgot" class="label-text-alt link link-hover">Forgot password?</a>
+                    <a href="/forgotPassword" id="forgot" class="label-text-alt link link-hover">Forgot password?</a>
                 </label>
                 <label class="label" for="signup">
                     <a href="/signup" id="signup" class="label-text-alt link link-hover">New here? Sign Up</a>

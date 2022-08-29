@@ -1,7 +1,6 @@
 <script>
     import { supabase } from '$lib/modules/supabaseClient';
     import AlertError from '$lib/components/AlertError.svelte';
-    import { onMount } from 'svelte';
   
     let loading = false;
     let email;
@@ -10,8 +9,6 @@
     let firstname;
     let lastname;
     let err = false;
-    
-
     let sent = false;
   
     async function handleSignUp() {
@@ -49,7 +46,7 @@
         <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                 <form class="card-body" on:submit|preventDefault="{handleSignUp}">
 
-                    <h1>Sign Up</h1>
+                    <h1 class="font-bold">Sign Up</h1>
 
                     <div class="form-control">
                         <label class="label" for="email">

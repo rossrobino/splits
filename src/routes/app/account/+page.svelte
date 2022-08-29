@@ -5,16 +5,18 @@
     import LoadingBar from '$lib/components/LoadingBar.svelte';
     import AlertError from '$lib/components/AlertError.svelte';
     import AlertSuccess from '$lib/components/AlertSuccess.svelte';
+    import Avatar from '$lib/components/Avatar.svelte';
     
-
     let email = "";
     let username = "";
     let fname = "";
     let lname = "";
+
+    console.log($userProfile.username)
+
     let loading = false;
     let alert = "";
     let success = "";
-
 
     // controls the focus outline of the wrapper div for @ prefix
     let usernameFocus = false;
@@ -32,6 +34,7 @@
             if ( username ) profileUpdates.username = username;
             if ( fname ) profileUpdates.first_name = fname;
             if ( lname ) profileUpdates.last_name = lname;
+            if ( $userProfile.avatar_url ) profileUpdates.avatar_url = $userProfile.avatar_url;
 
             // if there is anything entered...
             if ( Object.keys(profileUpdates).length > 1 || email ) {
@@ -43,7 +46,7 @@
                         .match({id: $user.id});
                     if ( error ) throw error;
 
-                    // success set $userProfile immediately according to which values were entered
+                    // success - set $userProfile immediately according to which values were entered
                     let keys = Object.keys(profileUpdates);
                     for (const key of keys) {
                         if (key === "username") {
@@ -76,7 +79,18 @@
     }
 
     async function sendResetEmail() {
-        const { data, error } = await supabase.auth.api.resetPasswordForEmail( $user.email );
+        try {
+            loading = true;
+            success = '';
+            const { data, error } = await supabase.auth.api.resetPasswordForEmail( $user.email );
+            if ( error ) throw error;
+            // success
+            success = "Password reset sent."
+        } catch (error) {
+            alert = error.message;
+        } finally {
+            loading = false;
+        }
     }
 
 </script>
@@ -89,10 +103,23 @@
 
 
 {#if ($userProfile)}
-    <h1 class="text-5xl font-bold">Account</h1>
-    <p class="mt-4 mb-8">Update your information:</p>
+    
 
     <form class="form-control w-full max-w-sm">
+        <div class="flex mb-6">
+            <div class="mr-4">
+                <Avatar 
+                    bind:path={$userProfile.avatar_url} 
+                    on:upload={updateProfile} 
+                    updateLink=true
+                />
+            </div>
+            <div>
+                <h1 class="text-3xl sm:text-5xl font-bold">Account</h1>
+                <p>Update your information:</p>
+            </div>
+        </div>
+
         <label for="email" class="label">
             <span class="label-text">Email</span>
             <span class="label-text-alt">{$user.email}</span>
