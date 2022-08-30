@@ -11,11 +11,11 @@
 
     onMount(async () => {
         // password reset
-        if(window.location.hash) {
+        if( window.location.hash ) {
             // hash exists
             hash = new URLSearchParams(window.location.hash.substring(1));
-            if (hash) {
-                if (hash.get("error_description")) {
+            if ( hash ) {
+                if ( hash.get("error_description") ) {
                     hashError = hash.get("error_description");
                 } else {
                     hashType = hash.get("type");
@@ -28,16 +28,16 @@
 </script>
 
 <svelte:head>
-    <title>{title}</title>
-    <meta name="description" content={tagline} />
+    <title>{ title }</title>
+    <meta name="description" content={ tagline } />
 </svelte:head>
 
-{#if hash}
+{#if ( hashType === "recovery" )}
     <!-- password recovery -->
-    {#if (hashType && hashToken)}
+    {#if ( hashToken )}
         <ResetPassword token={hashToken}/>
     {:else}
-        <AlertError error={hashError} />
+        <AlertError error={ hashError } />
     {/if}
 {:else}
     <div class="hero bg-base-100 py-24">

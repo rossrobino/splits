@@ -11,9 +11,6 @@
     let username = "";
     let fname = "";
     let lname = "";
-
-    console.log($userProfile.username)
-
     let loading = false;
     let alert = "";
     let success = "";
@@ -92,31 +89,24 @@
             loading = false;
         }
     }
-
 </script>
-
 
 <svelte:head>
     <title>{title} - Account</title>
     <meta name="description" content="Edit your account information." />
 </svelte:head>
 
-
 {#if ($userProfile)}
-    
-
     <form class="form-control w-full max-w-sm">
         <div class="flex mb-6">
-            <div class="mr-4">
-                <Avatar 
-                    bind:path={$userProfile.avatar_url} 
-                    on:upload={updateProfile} 
-                    updateLink=true
-                />
-            </div>
+            <Avatar  
+                class="mr-4"
+                on:upload={updateProfile} 
+                updateLink=true
+            />
             <div>
                 <h1 class="text-3xl sm:text-5xl font-bold">Account</h1>
-                <p>Update your information:</p>
+                <h2 class="text-xl sm:text-2xl">Update your information:</h2>
             </div>
         </div>
 

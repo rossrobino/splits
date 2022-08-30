@@ -3,6 +3,7 @@
     import { page } from '$app/stores';
     import AlertError from "$lib/components/AlertError.svelte";
     import LoadingBar from "$lib/components/LoadingBar.svelte";
+    import Avatar from "$lib/components/Avatar.svelte";
     import { routeProfile } from "$lib/sessionStore";
 
     async function getRouteProfile() {
@@ -19,9 +20,15 @@
 {#await getRouteProfile()}
     <LoadingBar class="mt-24" />
 {:then}
-    <div class="p-4 bg-base-100">
-            <h1 class="text-5xl font-bold">{$routeProfile.first_name} {$routeProfile.last_name}</h1> 
-            <h2 class="text-2xl">@{$routeProfile.username}</h2>    
+    <div class="bg-base-100 flex">
+        <Avatar class="mr-4" />
+        <div>
+            <h1 class="text-2xl sm:text-5xl font-bold">
+                {$routeProfile.first_name} {$routeProfile.last_name}
+            </h1> 
+            <h2 class="text-xl sm:text-2xl">@{$routeProfile.username}</h2>  
+        </div>
+          
         <slot />
     </div>
     
