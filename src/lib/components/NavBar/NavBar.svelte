@@ -1,6 +1,6 @@
 <script>
     import { title } from '$lib/modules/info.js';
-    import NavListItems from '$lib/components/NavListItems.svelte';
+    import NavListItems from './NavListItems.svelte';
     import LogInOutButton from '$lib/components/LogInOutButton.svelte';
 </script>
 
@@ -15,7 +15,7 @@
                 <NavListItems />
             </ul>
         </div>
-        <a href="/app" class="btn btn-ghost normal-case text-xl">{title}</a>
+        <a href="/" class="btn btn-ghost normal-case text-xl">{title}</a>
     </div>
     <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal p-0">

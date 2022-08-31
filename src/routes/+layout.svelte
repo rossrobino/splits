@@ -1,6 +1,6 @@
 <script>
     import "../app.postcss";
-    import NavBar from "$lib/components/NavBar.svelte";
+    import NavBar from "$lib/components/NavBar/NavBar.svelte";
     import Footer from "$lib/components/Footer.svelte";
     import { user, userProfile } from '$lib/sessionStore';
     import { supabase } from '$lib/modules/supabaseClient';

@@ -3,7 +3,7 @@
     import { page } from '$app/stores';
     import AlertError from "$lib/components/AlertError.svelte";
     import LoadingBar from "$lib/components/LoadingBar.svelte";
-    import Avatar from "$lib/components/Avatar.svelte";
+    import PageHeader from "$lib/components/PageHeader.svelte";
     import { routeProfile } from "$lib/sessionStore";
 
     async function getRouteProfile() {
@@ -20,21 +20,17 @@
 {#await getRouteProfile()}
     <LoadingBar class="mt-24" />
 {:then}
-    <div class="bg-base-100 flex">
-        <Avatar class="mr-4" />
-        <div>
-            <h1 class="text-2xl sm:text-5xl font-bold">
-                {$routeProfile.first_name} {$routeProfile.last_name}
-            </h1> 
-            <h2 class="text-xl sm:text-2xl">@{$routeProfile.username}</h2>  
-        </div>
-          
-        <slot />
-    </div>
-    
+    <PageHeader>
+        <span slot="h1">{$routeProfile.first_name} {$routeProfile.last_name}</span>
+        <span slot="h2">@{$routeProfile.username}</span>
+    </PageHeader>
+
+
+    <slot />
+
 {:catch error}
     {#if (error=="Error: JSON object requested, multiple (or no) rows returned")}
-        <AlertError error="User not found" />
+        <AlertError error="User not found - This user may not be registered, or you may not be their teammate." />
     {:else}
         <AlertError error={error} />
     {/if}

@@ -5,7 +5,7 @@
     import LoadingBar from '$lib/components/LoadingBar.svelte';
     import AlertError from '$lib/components/AlertError.svelte';
     import AlertSuccess from '$lib/components/AlertSuccess.svelte';
-    import Avatar from '$lib/components/Avatar.svelte';
+    import PageHeader from '$lib/components/PageHeader.svelte';
     
     let email = "";
     let username = "";
@@ -98,17 +98,10 @@
 
 {#if ($userProfile)}
     <form class="form-control w-full max-w-sm">
-        <div class="flex mb-6">
-            <Avatar  
-                class="mr-4"
-                on:upload={updateProfile} 
-                updateLink=true
-            />
-            <div>
-                <h1 class="text-3xl sm:text-5xl font-bold">Account</h1>
-                <h2 class="text-xl sm:text-2xl">Update your information:</h2>
-            </div>
-        </div>
+        <PageHeader>
+            <span slot="h1">Account</span>
+            <span slot="h2">Update your information:</span>
+        </PageHeader>
 
         <label for="email" class="label">
             <span class="label-text">Email</span>
@@ -124,7 +117,7 @@
             <span class="label-text-alt">@{$userProfile.username}</span>
         </label>
         <div class="input input-bordered input-secondary {usernameFocus ? "inputOutline" : ""} w-full max-w-sm mb-3">
-            @<input class="h-full w-[90%] focus:outline-0" id="username" type="text" placeholder="new username" on:focus={onFocus} on:blur={onBlur} bind:value={username}  />
+            @<input class="h-full w-[90%] focus:outline-0 bg-base-100" id="username" type="text" placeholder="new username" on:focus={onFocus} on:blur={onBlur} bind:value={username}  />
         </div>
 
         <label for="first_name" class="label">
@@ -159,7 +152,7 @@
     </form>
 
     <div 
-        class="link link-neutral mt-6"
+        class="link mt-6"
         on:click={sendResetEmail}
     >
         Reset Password
