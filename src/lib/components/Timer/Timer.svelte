@@ -1,8 +1,9 @@
 <script>
     import TimerBox from "./TimerBox.svelte";
-    import { time, totalMs, timerInterval, trackAthletes, lapAllWarning } from "$lib/sessionStore";
+    import { time, totalMs, startTime, timerInterval, trackAthletes, lapAllWarning } from "$lib/sessionStore";
 
     let resetWarning = false;
+    let now;
 
     // running totals caluculated from $totalMs store
     let totalHun;
@@ -23,8 +24,10 @@
     function button1Click() {
         if ( !$timerInterval ) {
             console.log("start");
+            $startTime = new Date();
             $timerInterval = setInterval(() => {
-                $totalMs += 10;
+                now = new Date();
+                $totalMs = now - $startTime;
             }, 10);
             resetWarning = false;
         }
@@ -47,10 +50,6 @@
             resetWarning = false;
         }
         $lapAllWarning = false;
-    }
-    
-    function keepTime() {
-        $totalMs += 10;        
     }
     
     let buttonClasses = "btn w-[127px] xs:w-[155px] sm:w-[184px] h-14";
