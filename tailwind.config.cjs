@@ -1,8 +1,13 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 const config = {
   content: ["./src/**/*.{html,js,svelte,ts}"],
 
   theme: {
-    extend: {},
+    screens: {
+        'xs': '370px',
+        ...defaultTheme.screens,
+    },
   },
 
   plugins: [
@@ -11,7 +16,7 @@ const config = {
   ],
 
   daisyui: {
-    themes: ['emerald', 'black'],
+    themes: ['emerald', 'black', 'valentine'],
   },
 };
 

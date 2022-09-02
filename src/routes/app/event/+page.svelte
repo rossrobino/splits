@@ -70,6 +70,4 @@
             <td>41st Annual Prefontaine Memorial Run</td>
         </tr> 
     </Table>    
-
-Datatable Countdown
 </Card>
