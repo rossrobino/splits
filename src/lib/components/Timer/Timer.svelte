@@ -1,6 +1,6 @@
 <script>
     import TimerBox from "./TimerBox.svelte";
-    import { time, totalMs, timerInterval, trackAthletes } from "$lib/sessionStore";
+    import { time, totalMs, timerInterval, trackAthletes, lapAllWarning } from "$lib/sessionStore";
 
     let resetWarning = false;
 
@@ -28,6 +28,7 @@
             }, 10);
             resetWarning = false;
         }
+        $lapAllWarning = false;
     }
 
     function button2Click() {
@@ -45,7 +46,7 @@
             $trackAthletes = $trackAthletes; // to update lap counter reactivity
             resetWarning = false;
         }
-        
+        $lapAllWarning = false;
     }
     
     function keepTime() {
@@ -70,7 +71,7 @@
         </button>
     </div>
 </div>
-<div class="grid grid-flow-col gap-2 text-center auto-cols-max place-content-center">
+<div class="grid grid-flow-col gap-2 text-center auto-cols-max place-content-center mb-4">
     <TimerBox bind:value={$time.hr} units='hours'/>
     <TimerBox bind:value={$time.min} units='min'/>
     <TimerBox bind:value={$time.sec} units='sec'/>

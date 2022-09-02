@@ -1,5 +1,5 @@
 <script>
-    import { totalMs, timerInterval, trackAthletes } from "$lib/sessionStore";
+    import { totalMs, timerInterval, trackAthletes, lapAllWarning } from "$lib/sessionStore";
     import { msToTime } from "$lib/modules/msToTime";
 
     let colorIndex = 0;
@@ -31,9 +31,31 @@
             $trackAthletes = $trackAthletes;
             console.log(athlete.name, athlete.laps);
         }
+        $lapAllWarning = false;
+    }
+
+    function lapAll() {
+        if ( $timerInterval ) {
+            if (!$lapAllWarning) {
+                $lapAllWarning = true;
+            } else {
+                $trackAthletes.forEach(athlete => {
+                    lap(athlete);
+                });
+            }
+        }
     }
 
 </script>
+
+<div 
+    class="rounded-2xl shadow-xl cursor-pointer p-4 sm:p-6 flex justify-center
+        {$lapAllWarning ? "bg-primary text-primary-content" : "bg-base-200 text-base-content"}
+    "
+    on:click={lapAll}
+>
+    <div class="font-bold text-xl" >Lap All</div>
+</div>
 
 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 my-4">
     {#each $trackAthletes as athlete}
