@@ -2,7 +2,7 @@
     import "../app.postcss";
     import NavBar from "$lib/components/NavBar/NavBar.svelte";
     import Footer from "$lib/components/Footer.svelte";
-    import { user, userProfile } from '$lib/sessionStore';
+    import { user, userProfile, theme } from '$lib/sessionStore';
     import { supabase } from '$lib/modules/supabaseClient';
 
     user.set(supabase.auth.user());
@@ -39,7 +39,9 @@
     min-h-screen 
     min-w-[270px]
     vp-dyn
-">
+    "
+    data-theme={$theme}
+>
     <div>
         <header>
             <NavBar />

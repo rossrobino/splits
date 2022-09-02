@@ -16,7 +16,7 @@ const config = {
   ],
 
   daisyui: {
-    themes: ['emerald', 'black', 'valentine'],
+    themes: ['emerald', 'business'],
   },
 };
 
