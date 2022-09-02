@@ -38,15 +38,17 @@
     }
 
 </script>
-
-<div 
-    class="rounded-2xl shadow-xl cursor-pointer p-4 sm:p-6 flex justify-center
-        {$lapAllWarning ? "bg-primary text-primary-content" : "bg-base-200 text-base-content"}
-    "
-    on:click={lapAll}
->
-    <div class="font-bold text-xl" >Lap All</div>
+<div class="flex justify-center">
+    <button 
+        class="btn w-[260px] xs:w-[319px] sm:w-[377px] h-12
+            {$lapAllWarning ? "btn-warning" : ""}
+        "
+        on:click={lapAll}
+    >
+        Lap All
+    </button>
 </div>
+
 
 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 my-4">
     {#each $trackAthletes as athlete}

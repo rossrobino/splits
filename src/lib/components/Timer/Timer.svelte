@@ -61,7 +61,7 @@
         $lapAllWarning = false;
     }
     
-    let buttonClasses = "btn w-[127px] xs:w-[155px] sm:w-[184px] h-14";
+    let buttonClasses = "btn w-[127px] xs:w-[155px] sm:w-[184px] h-12";
 
 </script>
 
@@ -79,7 +79,7 @@
         </button>
     </div>
 </div>
-<div class="grid grid-flow-col gap-2 text-center auto-cols-max place-content-center mb-4">
+<div class="grid grid-flow-col gap-2 text-center auto-cols-max place-content-center mb-2">
     <TimerBox bind:value={$time.hr} units='hours'/>
     <TimerBox bind:value={$time.min} units='min'/>
     <TimerBox bind:value={$time.sec} units='sec'/>
