@@ -2,24 +2,15 @@
     import { totalMs, timerInterval, trackAthletes, lapAllWarning } from "$lib/sessionStore";
     import { msToTime } from "$lib/modules/msToTime";
 
-    let colorIndex = 0;
-    function getNextColor() {
-        let colors = ['primary', 'secondary', 'accent', 'neutral', ];
-        let color = colors[colorIndex];
-        colorIndex++;
-        if (colorIndex >= colors.length) {
-            colorIndex = 0;
-        }
-        return color;
-    }
-
+    let colors = ['primary', 'base-300', 'neutral', 'base-100',  ];
+    let uid = 0;
     let names = ["Ross Robino", "Keely Robino", "Paige Robino", "Dee Robino", "Barry Robino"];
 
     if (!$trackAthletes) {
         $trackAthletes = [];
         names.forEach(name => {
             $trackAthletes.push(
-                { name: name, laps: [], color: getNextColor(), }
+                { id: uid++, name: name, laps: [], }
             )
         });
     }
@@ -60,7 +51,7 @@
 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 my-4">
     {#each $trackAthletes as athlete}
         <div 
-            class="card bg-{athlete.color} text-{athlete.color}-content shadow-xl cursor-pointer" 
+            class="card bg-{colors[athlete.id % 4]} text-{colors[athlete.id % 4]}-content shadow-xl cursor-pointer" 
             on:click={()=>lap(athlete)}
         >
             <div class="card-body p-4 sm:p-6">

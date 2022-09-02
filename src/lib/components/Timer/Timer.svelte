@@ -1,6 +1,6 @@
 <script>
     import TimerBox from "./TimerBox.svelte";
-    import { time, totalMs, startTime, timerInterval, trackAthletes, lapAllWarning } from "$lib/sessionStore";
+    import { time, totalMs, startTime, pausedTime, pausedMs, timerInterval, trackAthletes, lapAllWarning } from "$lib/sessionStore";
 
     let resetWarning = false;
     let now;
@@ -24,10 +24,16 @@
     function button1Click() {
         if ( !$timerInterval ) {
             console.log("start");
-            $startTime = new Date();
+            if (!$totalMs) {
+                $startTime = new Date();
+            }
+            if ($pausedTime) {
+                now = new Date();
+                $pausedMs += now - $pausedTime;
+            }
             $timerInterval = setInterval(() => {
                 now = new Date();
-                $totalMs = now - $startTime;
+                $totalMs = now - $startTime - $pausedMs;
             }, 10);
             resetWarning = false;
         }
@@ -38,11 +44,14 @@
         if ($timerInterval) {
             console.log("stop");
             clearInterval($timerInterval);
+            $pausedTime = new Date();
             $timerInterval = false;
         } else if (!resetWarning && $totalMs > 0) {
             resetWarning = true;
         } else {
             $totalMs = 0;
+            $pausedTime = 0;
+            $pausedMs = 0;
             $trackAthletes.forEach(athlete => {
                 athlete.laps = [];
             });

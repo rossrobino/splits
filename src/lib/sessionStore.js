@@ -10,6 +10,8 @@ export const routeProfile = writable(false);
 // app/event/track - lib/timer
 export const timerInterval = writable(false);
 export const startTime = writable(0);
+export const pausedTime = writable(0);
+export const pausedMs = writable(0);
 export const totalMs = writable(0);
 export const time = writable({
     "hun": 0,
