@@ -3,17 +3,17 @@
     import Card from "$lib/components/Card.svelte";
     import ResponsiveGrid from "$lib/components/ResponsiveGrid.svelte";
     import Table from "$lib/components/Table.svelte";
-    import {title} from "$lib/modules/info";
+    import { title, eventTag } from "$lib/modules/info";
 </script>
 
 <svelte:head>
     <title>{title} - Event</title>
-    <meta name="description" content={"Track, add, or schedule an event."} />
+    <meta name="description" content={eventTag} />
 </svelte:head>
 
 <PageHeader>
     <span slot="h1">Event</span>
-    <span slot="h2">race, practice, or workout</span>
+    <span slot="h2">{eventTag}</span>
 </PageHeader>
 
 <ResponsiveGrid>
@@ -21,6 +21,7 @@
         title="Track"
         buttonText="Start"
         buttonLink="/app/event/track"
+        class="bg-primary text-primary-content"
     >
         Start a new event to track in real time.
     </Card>

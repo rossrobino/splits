@@ -1,13 +1,16 @@
 <script>
-    import { routeProfile } from "$lib/sessionStore";
-    import { title, tagline } from '$lib/modules/info';
+    import { routeProfile, userProfile } from "$lib/sessionStore";
+    import { title, profileTag } from '$lib/modules/info';
     import Card from "$lib/components/Card.svelte";
+    import TeamSelect from "$lib/components/TeamSelect.svelte";
 </script>
 
 <svelte:head>
     <title>{title} - @{$routeProfile.username}</title>
-    <meta name="description" content={tagline} />
+    <meta name="description" content={profileTag} />
 </svelte:head>
+
+
 
 <div class="grid grid-cols-1 gap-4">
     <Card
@@ -17,9 +20,6 @@
     <Card
         title="Teams"
     >
-    </Card>
-    <Card
-        title="Charts?"
-    >
+        <TeamSelect profileId={$routeProfile.id}></TeamSelect>
     </Card>
 </div>

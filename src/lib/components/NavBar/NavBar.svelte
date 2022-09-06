@@ -16,7 +16,7 @@
                 <NavListItems />
             </ul>
         </div>
-        <a href="/" class="btn btn-ghost normal-case text-xl">{title}</a>
+        <a href="/app" class="btn btn-ghost normal-case text-xl">{title}</a>
     </div>
     <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal p-0">

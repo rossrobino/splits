@@ -1,8 +1,9 @@
 <script>
     import Card from '$lib/components/Card.svelte';
-    import { title, tagline } from '$lib/modules/info';
+    import { title, tagline, teamTag, profileTag } from '$lib/modules/info';
     import PageHeader from '$lib/components/PageHeader.svelte';
     import ResponsiveGrid from '$lib/components/ResponsiveGrid.svelte';
+    import { userProfile } from '$lib/sessionStore.js';
 </script>
 
 <svelte:head>
@@ -18,12 +19,19 @@
     title="Start"
     buttonText="Go"
     buttonLink="/app/event"
-    class="mb-4 bg-primary"
+    class="mb-4 bg-primary text-primary-content"
 >
     Track your splits - start or add an event to track your performance. 
 </Card>
 
 <ResponsiveGrid>
+    <Card 
+        title="Profile"
+        buttonText="Go" 
+        buttonLink="/app/profile/{ $userProfile.username }"
+    >
+        {profileTag}
+    </Card>
     <Card 
         title="Pace"
         buttonText="Go" 
@@ -32,18 +40,11 @@
         Calculate pace for your next event.
     </Card>
     <Card 
-        title="Teams"
+        title="Team"
         buttonText="Go" 
-        buttonLink="/app"
+        buttonLink="/app/team"
     >
-        View your teams upcoming events, races and more.
-    </Card>
-    <Card 
-        title="Friends"
-        buttonText="Go" 
-        buttonLink="/app"
-    >
-        View your friends list and see their { title } profiles.
+        {teamTag}
     </Card>
     <Card></Card>
     <Card></Card>

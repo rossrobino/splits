@@ -5,7 +5,7 @@
 
 {#if $userProfile}
     <li><a href="/app">Dashboard</a></li>
-    <li><a href="/app/user/{ $userProfile.username }">Profile</a></li>
+    <li><a href="/app/profile/{ $userProfile.username }">Profile</a></li>
     <li><a href="/app/account">Account</a></li>
     
 {/if}

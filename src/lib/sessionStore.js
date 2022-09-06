@@ -26,3 +26,6 @@ export const time = writable({
 // app/event/track - ./tiles
 export const trackAthletes = writable(false);
 export const lapAllWarning = writable(false);
+
+// app/team
+export const currentTeams = writable([]);
