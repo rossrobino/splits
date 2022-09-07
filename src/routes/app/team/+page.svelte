@@ -1,8 +1,9 @@
 <script>
-    import { title, teamTag } from '$lib/modules/info';
-    import { userProfile } from '$lib/sessionStore';
-    import PageHeader from '$lib/components/PageHeader.svelte';
-    import TeamSelect from '$lib/components/TeamSelect.svelte';
+    import { title, teamTag } from "$lib/modules/info";
+    import { userProfile } from "$lib/sessionStore";
+    import PageHeader from "$lib/components/PageHeader.svelte";
+    import TeamSelect from "$lib/components/TeamSelect.svelte";
+    import TeamInfo from "$lib/components/TeamInfo.svelte";
 </script>
 
 <svelte:head>
@@ -14,5 +15,6 @@
     <span slot="h1">Team</span>
 </PageHeader>
 
-<TeamSelect profileId={$userProfile.id}></TeamSelect>
+<TeamSelect profileId={$userProfile.id} />
 
+<TeamInfo />

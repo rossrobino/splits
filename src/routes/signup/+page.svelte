@@ -1,6 +1,6 @@
 <script>
     import SignUp from "./SignUp.svelte";
-    import { title } from '$lib/modules/info.js';
+    import { title } from "$lib/modules/info.js";
 </script>
 
 <svelte:head>

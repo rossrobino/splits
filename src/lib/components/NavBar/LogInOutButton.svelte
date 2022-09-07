@@ -1,6 +1,6 @@
 <script>
-    import { supabase } from '$lib/modules/supabaseClient';
-    import { user } from '$lib/sessionStore';
+    import { supabase } from "$lib/modules/supabaseClient";
+    import { user } from "$lib/sessionStore";
 
     let loading = false;
 
@@ -19,10 +19,8 @@
 
 {#if loading}
     <button class="btn loading">Loading</button>
+{:else if !$user}
+    <a href="/app" class="btn">Sign In</a>
 {:else}
-    {#if !$user}
-        <a href="/app" class="btn">Sign In</a>
-    {:else}
-        <button on:click={signOut} class="btn">Sign Out</button>
-    {/if}
+    <button on:click={signOut} class="btn">Sign Out</button>
 {/if}

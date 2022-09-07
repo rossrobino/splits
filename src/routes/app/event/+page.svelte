@@ -25,26 +25,15 @@
     >
         Start a new event to track in real time.
     </Card>
-    <Card
-        title="Add"
-        buttonText="Create"
-        buttonLink="/app/event/add"
-    >
-        Add a past event. 
+    <Card title="Add" buttonText="Create" buttonLink="/app/event/add">
+        Add a past event.
     </Card>
-    <Card
-        title="Schedule"
-        buttonText="Schedule"
-        buttonLink="/app/event/add"
-    >
-        Schedule a future event, invite teams and athletes. 
+    <Card title="Schedule" buttonText="Schedule" buttonLink="/app/event/add">
+        Schedule a future event, invite teams and athletes.
     </Card>
 </ResponsiveGrid>
 
-<Card 
-    title="Upcoming Events"
-    class="mt-4"
->
+<Card title="Upcoming Events" class="mt-4">
     <Table columnNames={["Event", "Date", "Description"]}>
         <tr>
             <td>
@@ -53,11 +42,11 @@
             </td>
             <td>
                 September 17th, 2022
-                <br>
+                <br />
                 <span class="badge badge-ghost badge-sm">10:00am</span>
             </td>
             <td>41st Annual Prefontaine Memorial Run</td>
-        </tr> 
+        </tr>
         <tr>
             <td>
                 <div class="font-bold">Prefontaine Memorial Run</div>
@@ -65,10 +54,10 @@
             </td>
             <td>
                 September 17th, 2022
-                <br>
+                <br />
                 <span class="badge badge-ghost badge-sm">10:00am</span>
             </td>
             <td>41st Annual Prefontaine Memorial Run</td>
-        </tr> 
-    </Table>    
+        </tr>
+    </Table>
 </Card>

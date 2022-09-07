@@ -1,5 +1,5 @@
 <script>
-    import {title} from "$lib/modules/info";
+    import { title } from "$lib/modules/info";
 </script>
 
 <svelte:head>

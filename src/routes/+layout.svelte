@@ -2,8 +2,8 @@
     import "../app.postcss";
     import NavBar from "$lib/components/NavBar/NavBar.svelte";
     import Footer from "$lib/components/Footer.svelte";
-    import { user, userProfile, theme } from '$lib/sessionStore';
-    import { supabase } from '$lib/modules/supabaseClient';
+    import { user, userProfile, theme } from "$lib/sessionStore";
+    import { supabase } from "$lib/modules/supabaseClient";
 
     user.set(supabase.auth.user());
     if ($user) {
@@ -11,13 +11,13 @@
     }
 
     supabase.auth.onAuthStateChange((state, session) => {
-        if (state == 'SIGNED_IN') {
-    		user.set(session.user);
+        if (state == "SIGNED_IN") {
+            user.set(session.user);
             setUserProfile();
-    	} else {
-    		user.set(false);
+        } else {
+            user.set(false);
             userProfile.set(false);
-    	}
+        }
     });
 
     async function setUserProfile() {
@@ -32,7 +32,8 @@
     }
 </script>
 
-<div class="
+<div
+    class="
     flex 
     flex-col 
     justify-between 
@@ -47,7 +48,7 @@
             <NavBar />
         </header>
         <main class="max-w-6xl mx-auto p-4 sm:p-8">
-            <slot />  
+            <slot />
         </main>
     </div>
     <Footer />
