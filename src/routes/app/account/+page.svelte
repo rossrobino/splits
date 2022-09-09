@@ -115,7 +115,7 @@
             type="text"
             placeholder="new email"
             bind:value={email}
-            class="input input-bordered input-secondary w-full max-w-sm "
+            class="input input-bordered input-secondary w-full max-w-sm"
         />
         <label for="email" class="label mb-3">
             <span class="label-text-alt"

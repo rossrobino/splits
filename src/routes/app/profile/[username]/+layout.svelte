@@ -4,7 +4,6 @@
     import AlertError from "$lib/components/AlertError.svelte";
     import LoadingBar from "$lib/components/LoadingBar.svelte";
     import PageHeader from "$lib/components/PageHeader.svelte";
-    import Card from "$lib/components/Card.svelte";
     import { routeProfile } from "$lib/sessionStore";
 
     const username = $page.params.username; // params are passed into the url

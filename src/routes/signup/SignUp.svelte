@@ -8,13 +8,13 @@
     let username;
     let firstname;
     let lastname;
-    let err = false;
+    let err = "";
     let sent = false;
 
     async function handleSignUp() {
         try {
             loading = true;
-            err = false;
+            err = "";
             const { user, error } = await supabase.auth.signUp(
                 {
                     email: email,

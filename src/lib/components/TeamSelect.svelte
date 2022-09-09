@@ -4,78 +4,70 @@
     controls which team is selected
 -->
 <script>
-    import { supabase } from "$lib/modules/supabaseClient";
-    import { currentTeams } from "$lib/sessionStore";
+	import { supabase } from "$lib/modules/supabaseClient";
+	import { currentTeams } from "$lib/sessionStore";
+	import Table from "$lib/components/Table.svelte";
+	import LoadingBar from "$lib/components/LoadingBar.svelte";
 
-    export let profileId;
+	export let profileId;
+	let loading = false;
+	let err = "";
 
-    async function getContracts(pId) {
-        const { data, error } = await supabase
-            .from("contracts")
-            .select(
-                `
-                team_id,
-                teams (
-                    team_name,
-                    coach,
-                    profiles (
-                        first_name,
-                        last_name
-                    )
-                )
-            `
-            )
-            .eq("profile_id", pId);
-        if (error) throw new Error(error.message);
-        $currentTeams = [];
-        data.forEach((team) => {
-            $currentTeams.push({
-                id: team.team_id,
-                team_name: team.teams.team_name,
-                coach: `${team.teams.profiles.first_name} ${team.teams.profiles.last_name}`,
-                coach_id: team.teams.coach,
-                selected: false,
-            });
-        });
-        $currentTeams[0].selected = true;
-    }
+	async function getContracts(pId) {
+		try {
+			loading = true;
+			const { data, error } = await supabase
+				.from("contracts")
+				.select(
+					`
+				team_id,
+				teams (
+					team_name,
+					coach,
+					profiles (
+						first_name,
+						last_name
+					)
+				)
+            	`
+				)
+				.eq("profile_id", pId);
+			if (error) throw new Error(error.message);
+			$currentTeams = [];
+			data.forEach((team) => {
+				$currentTeams.push({
+					id: team.team_id,
+					team_name: team.teams.team_name,
+					coach: `${team.teams.profiles.first_name} ${team.teams.profiles.last_name}`,
+					coach_id: team.teams.coach,
+				});
+			});
+		} catch (error) {
+			err = error.error_description || error.message;
+		} finally {
+			loading = false;
+		}
+	}
 
-    function changeTeam(selectedTeam) {
-        $currentTeams.forEach((team) => {
-            team.selected = false;
-        });
-        selectedTeam.selected = true;
-        $currentTeams = $currentTeams;
-    }
-
-    $: if (profileId) getContracts(profileId);
+	$: if (profileId) getContracts(profileId);
 </script>
 
-<div class="dropdown dropdown-hover">
-    <label for="teamSelect" tabindex="0" class="btn mb-1">
-        {#if $currentTeams[0]}
-            #{$currentTeams.filter((team) => team.selected == true)[0]
-                .team_name}
-        {:else}
-            Loading
-        {/if}
-    </label>
-    {#if $currentTeams[0]}
-        <ul
-            id="teamSelect"
-            tabindex="0"
-            class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-        >
-            {#each $currentTeams as team}
-                <li>
-                    <span
-                        on:click={changeTeam(team)}
-                        class={team.selected ? "bg-base-200" : ""}
-                    >
-                        #{team.team_name}
-                    </span>
-                </li>
-            {/each}
-        </ul>
-    {/if}
-</div>
+{#if !loading && $currentTeams[0]}
+	<Table columnNames={["Team", "Coach"]}>
+		{#each $currentTeams as team}
+			<tr>
+				<td>
+					<a
+						href="/app/team/id/{team.team_name}"
+						class="btn btn-primary lowercase font-bold"
+					>
+						#{team.team_name}
+					</a>
+				</td>
+				<td>{team.coach}</td>
+			</tr>
+		{/each}
+	</Table>
+{:else if loading}
+	<LoadingBar />
+{/if}

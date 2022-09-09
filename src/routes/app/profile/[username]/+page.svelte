@@ -1,5 +1,5 @@
 <script>
-    import { routeProfile, userProfile } from "$lib/sessionStore";
+    import { routeProfile } from "$lib/sessionStore";
     import { title, profileTag } from "$lib/modules/info";
     import Card from "$lib/components/Card.svelte";
     import TeamSelect from "$lib/components/TeamSelect.svelte";
