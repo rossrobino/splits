@@ -1,7 +1,7 @@
 <script>
 	import { page } from "$app/stores";
 	import TeamSettingsButton from "./TeamSettingsButton.svelte";
-	import TeamRoster from "./TeamRoster.svelte";
+	import TeamRoster from "./rosterComponents/TeamRoster.svelte";
 	import { title, selectedTeamTag } from "$lib/modules/info";
 	import PageHeader from "$lib/components/PageHeader.svelte";
 

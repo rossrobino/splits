@@ -22,6 +22,7 @@
 				if (error) throw new Error(error.message);
 				window.location.href = `/app/team/id/${newTeamName}`;
 			} catch (error) {
+				console.log("hello")
 				alert = error.description || error.message;
 			} finally {
 				loading = false;

@@ -2,8 +2,6 @@
     import { routeProfile } from "$lib/sessionStore";
     import { title, profileTag } from "$lib/modules/info";
     import Card from "$lib/components/Card.svelte";
-    import TeamSelect from "$lib/components/TeamSelect.svelte";
-    import TeamInfo from "$lib/components/TeamInfo.svelte";
 </script>
 
 <svelte:head>
@@ -14,7 +12,6 @@
 <div class="grid grid-cols-1 gap-4">
     <Card title="Personal Records" />
     <Card title="Teams">
-        <TeamSelect profileId={$routeProfile.id} />
-        <TeamInfo />
+
     </Card>
 </div>
