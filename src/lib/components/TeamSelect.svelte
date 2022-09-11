@@ -11,7 +11,6 @@
 
 	export let profileId;
 	let loading = false;
-	let err = "";
 
 	async function getContracts(pId) {
 		try {
@@ -43,13 +42,14 @@
 				});
 			});
 		} catch (error) {
-			err = error.error_description || error.message;
+			console.log(error.message);
 		} finally {
 			loading = false;
 		}
 	}
 
-	$: if (profileId) getContracts(profileId);
+	// called this way to await prop assignment, onMount did not work
+	$: if (profileId) getContracts(profileId); 
 </script>
 
 {#if !loading && $currentTeams[0]}

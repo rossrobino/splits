@@ -6,19 +6,70 @@
 	import { team, userProfile } from "$lib/sessionStore";
 	import StatusBadge from "./StatusBadge.svelte";
 	import ActionButtons from "./ActionButtons.svelte";
+	import { onMount } from "svelte";
 
 	export let teamName = "";
 	let roster = [];
 	let loading = false;
-
 	let userCoach = false;
-	// $: userCoach = $userProfile.id === $team.coach;
+
+	async function checkUserCoach() {
+		try {
+			const { data, error } = await supabase
+				.from("teams")
+				.select("coach")
+				.eq("team_name", teamName)
+				.single();
+			if (error) throw new Error(error.message);
+			userCoach = $userProfile.id === data.coach;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async function getRoster() {
+		let matchArg = userCoach ? {} : { "contracts.confirmed": true };
+		try {
+			loading = true;
+			const { data, error } = await supabase
+				.from("teams")
+				.select(
+					`
+					coach,
+					team_name,
+					id,
+					contracts (
+						id,
+						confirmed,
+						profiles (
+							id,
+							first_name,
+							last_name,
+							username
+						)
+					)
+				`
+				)
+				.eq("team_name", teamName)
+				.match(matchArg)
+				.single();
+			if (error) throw new Error(error.message);
+			$team = data;
+			roster = [];
+			parseContracts($team.contracts);
+		} catch (error) {
+			console.log(error.message);
+		} finally {
+			loading = false;
+		}
+	}
 
 	function parseContracts(contracts) {
 		contracts.forEach((contract) => {
 			let id = contract.profiles.id;
 			let isCoach = id == $team.coach ? true : false;
 			roster.push({
+				contractId: contract.id,
 				name: `${contract.profiles.first_name} ${contract.profiles.last_name}`,
 				id,
 				username: contract.profiles.username,
@@ -29,52 +80,39 @@
 		roster = roster;
 	}
 
-	async function getRoster(confirmed) {
+	async function confirmContract(person) {
 		try {
-			loading = true;
 			const { data, error } = await supabase
-				.from("teams")
-				.select(
-					`
-						coach,
-						team_name,
-						id,
-						contracts (
-							confirmed,
-							profiles (
-								id,
-								first_name,
-								last_name,
-								username
-							)
-						)
-					`
-				)
-				.eq("team_name", teamName)
-				.eq("contracts.confirmed", confirmed)
-				.single();
+				.from("contracts")
+				.update({ confirmed: true })
+				.eq("id", person.contractId);
 			if (error) throw new Error(error.message);
-			$team = data;
-			if (confirmed) roster = [];
-			parseContracts($team.contracts);
-			userCoach = $userProfile.id === $team.coach;
-			if (confirmed && userCoach) getRoster(false);
+			person.confirmed = true;
+			roster = roster;
 		} catch (error) {
 			console.log(error.message);
-		} finally {
-			loading = false;
 		}
 	}
 
-	$: if (teamName && $userProfile) getRoster(true);
-
-	async function confirmContract() {
-		console.log("confirmed!");
+	async function deleteContract(person) {
+		try {
+			const { data, error } = await supabase
+				.from("contracts")
+				.delete()
+				.eq("id", person.contractId)
+				.select();
+			if (error) throw new Error(error.message);
+			console.log(data);
+			roster = roster;
+		} catch (error) {
+			console.log(error.message);
+		}
 	}
 
-	async function deleteContract() {
-		console.log("deleted!");
-	}
+	onMount(async () => {
+		checkUserCoach();
+		getRoster();
+	});
 </script>
 
 <Card title="Roster" class="my-4">
@@ -112,8 +150,9 @@
 						<td>
 							<ActionButtons
 								confirmed={person.confirmed}
-								confirmContract={() => confirmContract()}
-								deleteContract={() => deleteContract()}
+								isCoach={person.isCoach}
+								confirmContract={() => confirmContract(person)}
+								deleteContract={() => deleteContract(person)}
 							/>
 						</td>
 					{/if}
