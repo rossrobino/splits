@@ -4,9 +4,9 @@
 	export { className as class };
 </script>
 
-<div class="card bg-base-100 shadow-xl">
+<div class="card bg-base-100 shadow-xl {className}">
 	<div class="card-body p-0">
-		<div class="overflow-x-auto w-full {className}">
+		<div class="overflow-x-auto w-full">
 			<table class="table table-zebra w-full">
 				{#if columnNames}
 					<thead>

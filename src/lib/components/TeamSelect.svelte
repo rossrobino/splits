@@ -49,25 +49,27 @@
 	}
 
 	// called this way to await prop assignment, onMount did not work
-	$: if (profileId) getContracts(profileId); 
+	$: if (profileId) getContracts(profileId);
 </script>
 
-{#if !loading && $currentTeams[0]}
-	<Table columnNames={["Team", "Coach"]}>
-		{#each $currentTeams as team}
-			<tr>
-				<td>
-					<a
-						href="/app/team/id/{team.team_name}"
-						class="btn btn-primary lowercase font-bold"
-					>
-						#{team.team_name}
-					</a>
-				</td>
-				<td>{team.coach}</td>
-			</tr>
-		{/each}
-	</Table>
-{:else if loading}
-	<LoadingBar />
-{/if}
+<div class="mb-4">
+	{#if !loading && $currentTeams[0]}
+		<Table columnNames={["Team", "Coach"]}>
+			{#each $currentTeams as team}
+				<tr>
+					<td>
+						<a
+							href="/app/team/id/{team.team_name}"
+							class="btn btn-primary lowercase font-bold"
+						>
+							#{team.team_name}
+						</a>
+					</td>
+					<td>{team.coach}</td>
+				</tr>
+			{/each}
+		</Table>
+	{:else if loading}
+		<LoadingBar />
+	{/if}
+</div>

@@ -3,6 +3,7 @@
 	import { title, teamSettingsTag } from "$lib/modules/info";
 	import PageHeader from "$lib/components/PageHeader.svelte";
 	import AlertError from "$lib/components/AlertError.svelte";
+	import DeleteTeamButton from "./DeleteTeamButton.svelte";
 	import { supabase } from "$lib/modules/supabaseClient";
 
 	const teamName = $page.params.slug;
@@ -52,7 +53,7 @@
 
 <form
 	on:submit|preventDefault={updateTeam}
-	class="form-control w-full max-w-sm"
+	class="form-control w-full max-w-sm mb-6"
 >
 	<label for="teamName" class="label">
 		<span class="label-text">Team Name</span>
@@ -90,3 +91,5 @@
 		{/if}
 	{/if}
 </form>
+
+<DeleteTeamButton {teamName} />

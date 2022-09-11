@@ -1,5 +1,4 @@
 <script>
-	import Card from "$lib/components/Card.svelte";
 	import Table from "$lib/components/Table.svelte";
 	import LoadingBar from "$lib/components/LoadingBar.svelte";
 	import { supabase } from "$lib/modules/supabaseClient";
@@ -115,49 +114,47 @@
 	});
 </script>
 
-<Card title="Roster" class="my-4">
-	{#if loading}
-		<LoadingBar />
-	{:else}
-		<Table
-			columnNames={userCoach
-				? ["Name", "Username", "Status", "Action"]
-				: ["Name", "Username"]}
-		>
-			{#each roster as person}
-				<tr>
-					<td>
-						<span class="font-bold">{person.name}</span>
-						{#if person.isCoach}
-							<br />
-							<span class="badge badge-secondary badge-sm"
-								>coach</span
-							>
-						{/if}
-					</td>
-					<td>
-						<a
-							href="/app/profile/{person.username}"
-							class="btn btn-primary btn-sm text-base lowercase"
+{#if loading}
+	<LoadingBar />
+{:else}
+	<Table
+		columnNames={userCoach
+			? ["Name", "Username", "Status", "Action"]
+			: ["Name", "Username"]}
+		class="mb-4"
+	>
+		{#each roster as person}
+			<tr>
+				<td>
+					<span class="font-bold">{person.name}</span>
+					{#if person.isCoach}
+						<br />
+						<span class="badge badge-secondary badge-sm">coach</span
 						>
-							@{person.username}
-						</a>
-					</td>
-					{#if userCoach}
-						<td>
-							<StatusBadge confirmed={person.confirmed} />
-						</td>
-						<td>
-							<ActionButtons
-								confirmed={person.confirmed}
-								isCoach={person.isCoach}
-								confirmContract={() => confirmContract(person)}
-								deleteContract={() => deleteContract(person)}
-							/>
-						</td>
 					{/if}
-				</tr>
-			{/each}
-		</Table>
-	{/if}
-</Card>
+				</td>
+				<td>
+					<a
+						href="/app/profile/{person.username}"
+						class="btn btn-primary btn-sm text-base lowercase"
+					>
+						@{person.username}
+					</a>
+				</td>
+				{#if userCoach}
+					<td>
+						<StatusBadge confirmed={person.confirmed} />
+					</td>
+					<td>
+						<ActionButtons
+							confirmed={person.confirmed}
+							isCoach={person.isCoach}
+							confirmContract={() => confirmContract(person)}
+							deleteContract={() => deleteContract(person)}
+						/>
+					</td>
+				{/if}
+			</tr>
+		{/each}
+	</Table>
+{/if}

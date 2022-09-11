@@ -17,4 +17,6 @@
 
 <TeamSelect profileId={$userProfile.id} />
 
-<slot />
+<a href="/app/team/new" class="btn">
+	New Team
+</a>
