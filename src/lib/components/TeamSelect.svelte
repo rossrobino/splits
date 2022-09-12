@@ -57,14 +57,14 @@
 		<Table columnNames={["Team", "Coach"]}>
 			{#each $currentTeams as team}
 				<tr>
-					<td>
+					<th>
 						<a
 							href="/app/team/id/{team.team_name}"
 							class="btn btn-primary lowercase font-bold"
 						>
 							#{team.team_name}
 						</a>
-					</td>
+					</th>
 					<td>{team.coach}</td>
 				</tr>
 			{/each}

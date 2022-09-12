@@ -98,10 +98,12 @@
 			const { data, error } = await supabase
 				.from("contracts")
 				.delete()
-				.eq("id", person.contractId)
-				.select();
+				.eq("id", person.contractId);
 			if (error) throw new Error(error.message);
-			console.log(data);
+			const i = roster.findIndex(item => {
+				return item.id === person.id;
+			})
+			roster.splice(i, 1);
 			roster = roster;
 		} catch (error) {
 			console.log(error.message);
@@ -125,14 +127,14 @@
 	>
 		{#each roster as person}
 			<tr>
-				<td>
+				<th>
 					<span class="font-bold">{person.name}</span>
 					{#if person.isCoach}
 						<br />
 						<span class="badge badge-secondary badge-sm">coach</span
 						>
 					{/if}
-				</td>
+				</th>
 				<td>
 					<a
 						href="/app/profile/{person.username}"

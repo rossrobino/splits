@@ -1,9 +1,57 @@
 <script>
-	export let teamName = "";
 	import { supabase } from "$lib/modules/supabaseClient";
 
+	export let teamName = "";
+	export let teamId = "";
+	let loading = false;
+	let warning = false;
+
+	async function deleteContracts() {
+		try {
+			const { data, error } = await supabase
+				.from("contracts")
+				.delete()
+				.match({ team_id: teamId });
+			if (error) throw new Error(error.message);
+		} catch (error) {
+			console.log(error.message);
+		}
+	}
+
+	async function deleteTeam() {
+		try {
+			const { data, error } = await supabase
+				.from("teams")
+				.delete()
+				.eq("team_name", teamName);
+			if (error) throw new Error(error.message);
+		} catch (error) {
+			console.log(error.message);
+		} finally {
+			loading = false;
+		}
+	}
+
+	async function handleClick() {
+		if (warning) {
+			await deleteContracts();
+			await deleteTeam();
+			window.location.href = "/app/team";
+		} else {
+			warning = true;
+		}
+	}
+
+	function blur() {
+		warning = false;
+	}
 </script>
 
-<button class="btn btn-error">
+<button
+	class="btn {warning ? 'btn-warning' : 'btn-error'}"
+	class:loading
+	on:click={handleClick}
+	on:blur={blur}
+>
 	Delete Team
 </button>

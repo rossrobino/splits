@@ -21,7 +21,7 @@
 	buttonLink="/app/event"
 	class="mb-4 bg-primary text-primary-content"
 >
-	Track your splits - start or add an event to track your performance.
+	Track splits - start or add an event.
 </Card>
 
 <ResponsiveGrid>
@@ -38,8 +38,4 @@
 	<Card title="Team" buttonText="Go" buttonLink="/app/team">
 		{teamTag}
 	</Card>
-	<Card />
-	<Card />
-	<Card />
-	<Card />
 </ResponsiveGrid>
