@@ -32,6 +32,10 @@
 	}
 </script>
 
+<svelte:head>
+	<meta name="theme-color" content="#ff0000">
+</svelte:head>
+
 <div
 	class="
     flex 
