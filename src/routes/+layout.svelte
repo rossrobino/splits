@@ -33,7 +33,7 @@
 </script>
 
 <svelte:head>
-	<meta name="theme-color" content="#ff0000">
+	<meta name="theme-color" content="hsl(var(--p))">
 </svelte:head>
 
 <div
