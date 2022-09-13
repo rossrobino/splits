@@ -5,6 +5,7 @@
 	import { team, userProfile } from "$lib/sessionStore";
 	import StatusBadge from "./StatusBadge.svelte";
 	import ActionButtons from "./ActionButtons.svelte";
+	import JoinTeamButton from "./JoinTeamButton.svelte";
 	import { onMount } from "svelte";
 
 	export let teamName = "";
@@ -159,4 +160,6 @@
 			</tr>
 		{/each}
 	</Table>
+
+	<JoinTeamButton id={$userProfile.id} {roster} />
 {/if}
