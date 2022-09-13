@@ -4,7 +4,17 @@
 	import Footer from "$lib/components/Footer.svelte";
 	import { user, userProfile, theme } from "$lib/sessionStore";
 	import { supabase } from "$lib/modules/supabaseClient";
+	import { onMount } from "svelte";
 
+	let colorDiv;
+	let compStyles;
+	let primaryColor;
+
+	onMount(async () => {
+		compStyles = window.getComputedStyle(colorDiv);
+		primaryColor = compStyles.getPropertyValue('color');
+	})
+	
 	user.set(supabase.auth.user());
 	if ($user) {
 		setUserProfile();
@@ -33,8 +43,9 @@
 </script>
 
 <svelte:head>
-	<meta name="theme-color" content="hsl(var(--p))">
+	<meta name="theme-color" content="{primaryColor}">
 </svelte:head>
+<div bind:this={colorDiv} class="" style="color: hsl(var(--p));" >{primaryColor}</div>
 
 <div
 	class="
