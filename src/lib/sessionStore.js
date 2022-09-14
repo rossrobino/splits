@@ -30,3 +30,6 @@ export const lapAllWarning = writable(false);
 // app/team
 export const currentTeams = writable([]);
 export const team = writable({});
+export const onTeam = writable(false);
+export const requestSent = writable(false);
+export const myContractId = writable("");

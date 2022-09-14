@@ -6,11 +6,11 @@
 	import StatusBadge from "./StatusBadge.svelte";
 	import ActionButtons from "./ActionButtons.svelte";
 	import JoinTeamButton from "./JoinTeamButton.svelte";
-	import { onMount } from "svelte";
+	import LeaveTeamButton from "./LeaveTeamButton.svelte";
 
 	export let teamName = "";
 	let roster = [];
-	let loading = false;
+	let loading = true;
 	let userCoach = false;
 
 	async function checkUserCoach() {
@@ -101,9 +101,9 @@
 				.delete()
 				.eq("id", person.contractId);
 			if (error) throw new Error(error.message);
-			const i = roster.findIndex(item => {
+			const i = roster.findIndex((item) => {
 				return item.id === person.id;
-			})
+			});
 			roster.splice(i, 1);
 			roster = roster;
 		} catch (error) {
@@ -111,55 +111,61 @@
 		}
 	}
 
-	onMount(async () => {
-		checkUserCoach();
-		getRoster();
-	});
+	async function getData(user) {
+		if (user) {
+			await checkUserCoach();
+			await getRoster();
+		}
+	}
+
+	$: getData($userProfile.id);
 </script>
 
-{#if loading}
-	<LoadingBar />
-{:else}
+{#if !loading}
 	<Table
 		columnNames={userCoach
 			? ["Name", "Username", "Status", "Action"]
 			: ["Name", "Username"]}
 		class="mb-4"
-	>
-		{#each roster as person}
-			<tr>
-				<th>
-					<span class="font-bold">{person.name}</span>
-					{#if person.isCoach}
-						<br />
-						<span class="badge badge-secondary badge-sm">coach</span
+		>{#if !loading}
+			{#each roster as person}
+				<tr>
+					<th>
+						<span class="font-bold">{person.name}</span>
+						{#if person.isCoach}
+							<br />
+							<span class="badge badge-secondary badge-sm"
+								>coach</span
+							>
+						{/if}
+					</th>
+					<td>
+						<a
+							href="/app/profile/{person.username}"
+							class="btn btn-primary btn-sm text-base lowercase"
 						>
+							@{person.username}
+						</a>
+					</td>
+					{#if userCoach}
+						<td>
+							<StatusBadge confirmed={person.confirmed} />
+						</td>
+						<td>
+							<ActionButtons
+								confirmed={person.confirmed}
+								isCoach={person.isCoach}
+								confirmContract={() => confirmContract(person)}
+								deleteContract={() => deleteContract(person)}
+							/>
+						</td>
 					{/if}
-				</th>
-				<td>
-					<a
-						href="/app/profile/{person.username}"
-						class="btn btn-primary btn-sm text-base lowercase"
-					>
-						@{person.username}
-					</a>
-				</td>
-				{#if userCoach}
-					<td>
-						<StatusBadge confirmed={person.confirmed} />
-					</td>
-					<td>
-						<ActionButtons
-							confirmed={person.confirmed}
-							isCoach={person.isCoach}
-							confirmContract={() => confirmContract(person)}
-							deleteContract={() => deleteContract(person)}
-						/>
-					</td>
-				{/if}
-			</tr>
-		{/each}
+				</tr>
+			{/each}
+		{/if}
 	</Table>
-
-	<JoinTeamButton id={$userProfile.id} {roster} />
+	<JoinTeamButton {roster} />
+	<LeaveTeamButton {userCoach} />
+{:else}
+	<LoadingBar />
 {/if}

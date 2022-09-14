@@ -21,7 +21,7 @@
 <svelte:head>
 	<meta name="theme-color" content="{primaryColor}">
 </svelte:head>
-<div bind:this={colorDiv} class="hidden" style="color: hsl(var(--p));" />
+<div bind:this={colorDiv} class="hidden" style="color: hsl(var(--b2));" />
 
 <label class="swap swap-rotate mx-4">
     <input type="checkbox" bind:checked  />

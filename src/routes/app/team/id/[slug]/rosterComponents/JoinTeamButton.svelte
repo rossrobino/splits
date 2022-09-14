@@ -1,49 +1,72 @@
 <script>
+	import { supabase } from "$lib/modules/supabaseClient";
+	import { onTeam, requestSent, myContractId, userProfile, team } from "$lib/sessionStore";
 	import AlertError from "$lib/components/AlertError.svelte";
 
-	export let id = "";
 	export let roster = [];
-	let display = true;
 	let loading = false;
 	let alert = "";
+	let myContract;
+	$: $requestSent = myContract ? true : false;
+	$: $myContractId = myContract ? myContract.id : "";
 
 	$: {
+		if ($userProfile.id && roster[0]) checkRequest();
+	}
+
+	async function checkOnTeam() {
 		roster.forEach((person) => {
-			if (person.id === id) {
-				display = false;
+			if (person.id === $userProfile.id) {
+				$onTeam = true;
 			}
 		});
 	}
 
-	async function joinTeam() {
+	async function checkRequest() {
+		await checkOnTeam();
+		if ($userProfile.id) {
+			try {
+				const { data, error } = await supabase
+					.from("contracts")
+					.select(`team_id, profile_id, id, confirmed`)
+					.match({
+						team_id: $team.id,
+						profile_id: $userProfile.id,
+					});
+				if (error) throw new Error(error.message);
+				myContract = data[0];
+			} catch (error) {
+				console.log(error.message);
+			}
+		}
+	}
+
+	async function submitRequest() {
 		try {
 			loading = true;
-			const {data,error} = await supabase
-				.from("contracts")
-				.insert()
+			const { data, error } = await supabase.from("contracts").insert([
+				{
+					team_id: $team.id,
+					profile_id: $userProfile.id,
+				},
+			]);
 			if (error) throw new Error(error.message);
+			$requestSent = true;
 		} catch (error) {
 			alert = error.message;
+		} finally {
+			loading = false;
+			checkRequest();
 		}
 	}
 </script>
 
-{#if display}
-	<button class="btn"
-		on:click={joinTeam}
-	>
-		Join Team
-	</button>
+{#if !$onTeam && !$requestSent}
+	<button class="btn mb-4" class:loading on:click={submitRequest}> Join Team </button>
+{:else if !$onTeam || ($requestSent && !myContract.confirmed)}
+	<div class="btn btn-disabled">Request Sent</div>
 {/if}
 
 {#if alert}
 	<AlertError error={alert} />
 {/if}
-
-<br /><br /><br />
-{JSON.stringify(roster)}
-<br /><br />
-{id}
-<br /><br />
-{display}
-<br /><br />
