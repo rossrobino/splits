@@ -1,15 +1,30 @@
 <script>
     import { theme } from "$lib/sessionStore";
+	import { afterUpdate } from "svelte";
 
     const size = "5";
     const light = "emerald";
     const dark = "business";
     let checked = false; // default light
     $: $theme = checked ? dark : light;
+
+	let colorDiv;
+	let compStyles;
+	let primaryColor;
+	afterUpdate(async () => {
+		compStyles = window.getComputedStyle(colorDiv);
+		primaryColor = compStyles.getPropertyValue('color');
+	});
+
 </script>
 
+<svelte:head>
+	<meta name="theme-color" content="{primaryColor}">
+</svelte:head>
+<div bind:this={colorDiv} class="hidden" style="color: hsl(var(--p));" />
+
 <label class="swap swap-rotate mx-4">
-    <input type="checkbox" bind:checked />
+    <input type="checkbox" bind:checked  />
     <!-- sun icon -->
     <svg
         class="swap-on fill-current w-{size} h-{size}"
