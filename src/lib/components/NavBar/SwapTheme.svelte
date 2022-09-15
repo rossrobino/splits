@@ -3,10 +3,8 @@
 	import { afterUpdate } from "svelte";
 
     const size = "5";
-    const light = "emerald";
-    const dark = "business";
     let checked = false; // default light
-    $: $theme = checked ? dark : light;
+    $: $theme = checked ? "dark" : "light";
 
 	let colorDiv;
 	let compStyles;
