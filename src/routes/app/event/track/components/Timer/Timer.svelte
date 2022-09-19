@@ -7,14 +7,13 @@
         pausedTime,
         pausedMs,
         timerInterval,
-        trackAthletes,
-        lapAllWarning,
+        athletes,
     } from "$lib/sessionStore";
 
     let resetWarning = false;
     let now;
 
-    // running totals caluculated from $totalMs store
+    // running totals calculated from $totalMs store
     let totalHun;
     let totalSec;
     let totalMin;
@@ -32,7 +31,6 @@
 
     function button1Click() {
         if (!$timerInterval) {
-            console.log("start");
             if (!$totalMs) {
                 $startTime = new Date();
             }
@@ -46,12 +44,10 @@
             }, 10);
             resetWarning = false;
         }
-        $lapAllWarning = false;
     }
 
     function button2Click() {
         if ($timerInterval) {
-            console.log("stop");
             clearInterval($timerInterval);
             $pausedTime = new Date();
             $timerInterval = false;
@@ -61,13 +57,12 @@
             $totalMs = 0;
             $pausedTime = 0;
             $pausedMs = 0;
-            $trackAthletes.forEach((athlete) => {
+            $athletes.forEach((athlete) => {
                 athlete.laps = [];
             });
-            $trackAthletes = $trackAthletes; // to update lap counter reactivity
+            $athletes = $athletes; // to update lap counter reactivity
             resetWarning = false;
         }
-        $lapAllWarning = false;
     }
 
     let buttonClasses = "btn w-[127px] xs:w-[155px] sm:w-[184px] h-12";

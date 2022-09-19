@@ -83,7 +83,7 @@
 			</span>
 		</label>
 		<div
-			class="input input-bordered input-secondary {teamNameFocus
+			class="input input-bordered input-accent {teamNameFocus
 				? 'inputOutline'
 				: ''} w-full max-w-sm mb-3"
 		>
@@ -104,7 +104,7 @@
 			<input
 				type="submit"
 				value="Submit"
-				class="btn btn-secondary mt-3"
+				class="btn btn-accent mt-3"
 			/>
 		{/if}
 

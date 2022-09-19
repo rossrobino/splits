@@ -10,7 +10,10 @@
 <div class="card bg-base-100 shadow-xl {className}">
 	<div class="card-body p-0">
 		<div class="overflow-x-auto w-full">
-			<table class="table table-zebra w-full {windowWidth < 370 ? 'table-compact' : ''}">
+			<table 
+				class="table w-full"
+				class:table-compact={windowWidth < 640}
+			>
 				{#if columnNames}
 					<thead>
 						<tr>
@@ -23,14 +26,6 @@
 				<tbody>
 					<slot />
 				</tbody>
-
-				<!-- <tfoot>
-            <tr>
-                {#each columnNames as name}
-                    <th>{name}</th>
-                {/each}
-            </tr>
-        </tfoot> -->
 			</table>
 		</div>
 	</div>

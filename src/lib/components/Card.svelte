@@ -5,9 +5,10 @@
     let className = "";
     export { className as class };
     export let buttonClass = "";
+	export let cardClick = () => {};
 </script>
 
-<div class="card bg-base-100 shadow-xl {className}">
+<div class="card bg-base-100 shadow-xl {className}" on:click={cardClick}>
     <div class="card-body">
         <h2 class="card-title">{title}</h2>
         <div>
