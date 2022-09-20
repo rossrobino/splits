@@ -10,8 +10,8 @@
 </svelte:head>
 
 <div class="grid grid-cols-1 gap-4">
-    <Card title="Personal Records" />
-    <Card title="Teams">
+    <Card title="Personal Records" isLink={false} />
+    <Card title="Teams" isLink={false}>
 
     </Card>
 </div>

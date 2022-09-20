@@ -194,7 +194,7 @@
 
 <style>
 	.inputOutline {
-		outline: 2px solid hsl(var(--s));
+		outline: 2px solid hsl(var(--a));
 		outline-offset: 2px;
 	}
 </style>

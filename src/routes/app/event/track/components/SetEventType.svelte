@@ -23,13 +23,13 @@
 
 <ResponsiveGrid>
 	<Card
-		class="bg-primary text-primary-content hover:cursor-pointer h-48"
+		class="bg-primary text-primary-content"
 		title="Group"
 		cardClick={startGroup}
 	>
 		Start a group event.
 	</Card>
-	<Card class="hover:cursor-pointer h-48" title="Solo" cardClick={startSolo}>
+	<Card class="" title="Solo" cardClick={startSolo}>
 		Start an individual event.
 	</Card>
 </ResponsiveGrid>

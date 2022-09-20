@@ -17,8 +17,7 @@
 
 <Card
 	title="Start"
-	buttonText="Go"
-	buttonLink="/app/event"
+	cardLink="/app/event"
 	class="mb-4 bg-primary text-primary-content"
 >
 	Track splits - start or add an event.
@@ -27,15 +26,14 @@
 <ResponsiveGrid>
 	<Card
 		title="Profile"
-		buttonText="Go"
-		buttonLink="/app/profile/{$userProfile.username}"
+		cardLink="/app/profile/{$userProfile.username}"
 	>
 		{profileTag}
 	</Card>
-	<Card title="Pace" buttonText="Go" buttonLink="/app/">
+	<Card title="Pace" cardLink="/app/">
 		Calculate pace for your next event.
 	</Card>
-	<Card title="Team" buttonText="Go" buttonLink="/app/team">
+	<Card title="Team" cardLink="/app/team">
 		{teamTag}
 	</Card>
 </ResponsiveGrid>

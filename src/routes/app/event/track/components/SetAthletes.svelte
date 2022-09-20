@@ -69,7 +69,6 @@
 				});
 			});
 			teams = teams;
-			console.log(teams);
 		} catch (error) {
 			console.log(error.message);
 		}

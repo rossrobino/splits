@@ -16,7 +16,6 @@
             let lapSum = athlete.laps.reduce((a, b) => a + b, 0);
             athlete.laps.push($totalMs - lapSum);
             $athletes = $athletes;
-            console.log(athlete.first_name, athlete.last_name, athlete.laps);
         }
         lapAllWarning = false;
     }

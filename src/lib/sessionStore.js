@@ -13,6 +13,7 @@ export const routeProfile = writable(false);
 // app/event/track 
 export const athletes = writable([]);
 export const eventStarted = writable(false);
+export const eventName = writable("");
 
 // app/event/track - lib/Timer
 export const timerInterval = writable(false);

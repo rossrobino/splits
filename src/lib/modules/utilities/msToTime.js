@@ -5,21 +5,15 @@ export const msToTime = (ms, hund = true) => {
     const sec = Math.floor((ms / 1000) % 60);
     const min = Math.floor((ms / 1000 / 60) % 60);
     // const hr  = Math.floor((ms/1000/60/60)%24);
-    let time = [];
-    if (hund) {
-        time = [
-            // hr.toString().padStart(2,"0"),
-            min.toString().padStart(2, "0"),
-            sec.toString().padStart(2, "0"),
-            hun.toString().padStart(2, "0"),
-        ].join(":");
-    } else {
-        time = [
-            // hr.toString().padStart(2,"0"),
-            min.toString().padStart(2, "0"),
-            sec.toString().padStart(2, "0"),
-        ].join(":");
-    }
-
+	let time = "";
+	let minutes = min.toString().padStart(2, "0");
+	let seconds = sec.toString().padStart(2, "0");
+	let hundredths = 0;
+	if (hund) {
+		hundredths = hun.toString().padStart(2, "0");
+		time = `${minutes}:${seconds}.${hundredths}`;
+	} else {
+		time = `${minutes}:${seconds}`;
+	}
     return time;
 };

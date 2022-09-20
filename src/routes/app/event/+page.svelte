@@ -19,16 +19,15 @@
 <ResponsiveGrid>
 	<Card
 		title="Track"
-		buttonText="Start"
-		buttonLink="/app/event/track"
+		cardLink="/app/event/track"
 		class="bg-primary text-primary-content"
 	>
 		Start a new event to track in real time.
 	</Card>
-	<Card title="Add" buttonText="Create" buttonLink="/app/event/add">
+	<Card title="Add" cardLink="/app/event/add">
 		Add a past event.
 	</Card>
-	<Card title="Schedule" buttonText="Schedule" buttonLink="/app/event/add">
+	<Card title="Schedule" cardLink="/app/event/">
 		Schedule a future event, invite teams and athletes.
 	</Card>
 </ResponsiveGrid>

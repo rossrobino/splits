@@ -1,4 +1,5 @@
 <script>
+	import { goto } from "$app/navigation";
 	import { title, newTeamTag } from "$lib/modules/info";
 	import PageHeader from "$lib/components/PageHeader.svelte";
 	import AlertError from "$lib/components/AlertError.svelte";
@@ -23,7 +24,7 @@
 	async function handleSubmit() {
 		await createTeam();
 		await createContract();
-		window.location.href=`/app/team/id/${team.team_name}`;
+		goto(`/app/team/id/${team.team_name}`);
 	}
 
 	async function createTeam() {

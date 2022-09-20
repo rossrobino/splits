@@ -1,5 +1,6 @@
 <script>
 	import { supabase } from "$lib/modules/supabaseClient";
+	import { goto } from "$app/navigation";
 
 	export let teamName = "";
 	export let teamId = "";
@@ -36,7 +37,7 @@
 		if (warning) {
 			await deleteContracts();
 			await deleteTeam();
-			window.location.href = "/app/team";
+			goto("/app/team");
 		} else {
 			warning = true;
 		}

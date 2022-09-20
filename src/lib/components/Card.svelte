@@ -1,25 +1,31 @@
 <script>
-    export let title = "title";
-    export let buttonText = ""; // controls if button is visible -- if text entered
-    export let buttonLink = "/";
-    let className = "";
-    export { className as class };
-    export let buttonClass = "";
-	export let cardClick = () => {};
+	import { goto } from "$app/navigation";
+	export let title = "title";
+	export let cardLink = "/";
+	export let isLink = true;
+	let className = "";
+	export { className as class };
+	export let cardClick = () => {
+		if (isLink) goto(cardLink);
+	};
 </script>
 
-<div class="card bg-base-100 shadow-xl {className}" on:click={cardClick}>
-    <div class="card-body">
-        <h2 class="card-title">{title}</h2>
-        <div>
-            <slot
-                >props / title, buttonText, buttonLink, buttonClass<br />slot /
-            </slot>
-        </div>
-        {#if buttonText}
-            <div class="card-actions justify-end">
-                <a href={buttonLink} class="btn {buttonClass}">{buttonText}</a>
-            </div>
-        {/if}
-    </div>
+<div
+	class="
+		card bg-base-100 shadow-xl 
+		{isLink ? 'hover:cursor-pointer' : ''} 
+		{className}
+	"
+	on:click={cardClick}
+>
+	<div class="card-body">
+		<h2 class="card-title">{title}</h2>
+		<div>
+			<slot>
+				props / title, buttonText, buttonLink, buttonClass
+				<br />
+				slot /
+			</slot>
+		</div>
+	</div>
 </div>
