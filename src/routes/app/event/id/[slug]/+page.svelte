@@ -76,7 +76,7 @@
 
 <svelte:head>
 	<title>{title} - {event.name ? event.name : "Event"}</title>
-	<meta name="description" content={"Track an event."} />
+	<meta name="description" content="View details about your event." />
 </svelte:head>
 
 {#if loading}

@@ -1,6 +1,6 @@
 <script>
 	import { user, userProfile } from "$lib/sessionStore";
-	import { title } from "$lib/modules/info";
+	import { title, accountTag } from "$lib/modules/info";
 	import { supabase } from "$lib/modules/supabaseClient";
 	import AlertError from "$lib/components/AlertError.svelte";
 	import AlertSuccess from "$lib/components/AlertSuccess.svelte";
@@ -95,13 +95,13 @@
 
 <svelte:head>
 	<title>{title} - Account</title>
-	<meta name="description" content="Edit your account information." />
+	<meta name={accountTag} />
 </svelte:head>
 
 <form class="form-control w-full max-w-sm">
 	<PageHeader>
 		<span slot="h1">Account</span>
-		<span slot="h2">Update your information:</span>
+		<span slot="h2">{accountTag}</span>
 	</PageHeader>
 
 	<label for="email" class="label">

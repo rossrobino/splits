@@ -10,10 +10,7 @@
 <div class="card bg-base-100 shadow-xl {className}">
 	<div class="card-body p-0">
 		<div class="overflow-x-auto w-full">
-			<table 
-				class="table w-full"
-				class:table-compact={windowWidth < 640}
-			>
+			<table class="table w-full" class:table-compact={windowWidth < 640}>
 				{#if columnNames}
 					<thead>
 						<tr>

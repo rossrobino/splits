@@ -1,7 +1,7 @@
 <script>
     import { title } from '$lib/modules/info.js';
     import NavListItems from './NavListItems.svelte';
-    import LogInOutButton from './LogInOutButton.svelte';
+    import LogInProfileButton from './LogInProfileButton.svelte';
     import SwapTheme from './SwapTheme.svelte';
 </script>
 
@@ -25,6 +25,6 @@
     </div>
     <div class="navbar-end">
         <SwapTheme />
-        <LogInOutButton />
+        <LogInProfileButton />
     </div>
 </div>

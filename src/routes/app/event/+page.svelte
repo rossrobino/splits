@@ -17,11 +17,11 @@
 	<span slot="h2">{eventTag}</span>
 </PageHeader>
 
-<ResponsiveGrid>
+<!-- <ResponsiveGrid class="mb-8"> -->
 	<Card
 		title="Track"
 		cardLink="/app/event/track"
-		class="bg-primary text-primary-content"
+		class="bg-primary text-primary-content mb-8"
 	>
 		Start a new event to track in real time.
 	</Card>
@@ -31,6 +31,6 @@
 	<Card title="Schedule" cardLink="/app/event/">
 		Schedule a future event, invite teams and athletes.
 	</Card> -->
-</ResponsiveGrid>
+<!-- </ResponsiveGrid> -->
 
 <PastEventsTable />
