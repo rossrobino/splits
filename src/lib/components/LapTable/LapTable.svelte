@@ -1,15 +1,17 @@
 <script>
-	import { athletes } from "$lib/sessionStore";
 	import { msToTime } from "$lib/modules/utilities/msToTime";
 	import Table from "$lib/components/Table.svelte";
 	import FinishButton from "./FinishButton.svelte";
 
+	export let finishButton = false;
+	export let athletes = []; // [{first_name, last_name, laps[int]}, ...]
 	let columnNames = ["Athlete"];
 	let totalLaps = 0;
+
 	$: {
 		columnNames = ["Athlete"];
 		totalLaps = 0;
-		$athletes.forEach((athlete) => {
+		athletes.forEach((athlete) => {
 			if (athlete.laps.length > totalLaps) {
 				totalLaps = athlete.laps.length;
 			}
@@ -23,9 +25,18 @@
 
 {#if totalLaps > 0}
 	<Table {columnNames} class="mb-4">
-		{#each $athletes as athlete}
+		{#each athletes as athlete}
 			<tr>
-				<th>{athlete.first_name} {athlete.last_name}</th>
+				<th>
+					<span>{athlete.first_name} {athlete.last_name}</span>
+					<br />
+					<a
+						href="/app/profile/{athlete.username}"
+						class="badge badge-secondary badge-sm"
+					>
+						@{athlete.username}
+					</a>
+				</th>
 				{#each [...Array(totalLaps).keys()] as i}
 					<td>
 						{#if athlete.laps[i]}
@@ -36,5 +47,7 @@
 			</tr>
 		{/each}
 	</Table>
-	<FinishButton />
+	{#if finishButton}
+		<FinishButton />
+	{/if}
 {/if}

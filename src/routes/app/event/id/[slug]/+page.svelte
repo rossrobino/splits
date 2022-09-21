@@ -5,13 +5,16 @@
 	import { supabase } from "$lib/modules/supabaseClient";
 	import PageHeader from "$lib/components/PageHeader.svelte";
 	import LoadingBar from "$lib/components/LoadingBar.svelte";
+	import LapTable from "$lib/components/LapTable/LapTable.svelte";
 
 	let loading = false;
 	let event = {};
+	let athletes = [];
 
 	onMount(async () => {
 		loading = true;
 		await getEvent();
+		await getLaps();
 		loading = false;
 	});
 
@@ -45,18 +48,24 @@
 				.from("laps")
 				.select(
 					`
-					id,
-					name,
-					date,
+					laps,
 					profiles(
-						username
+						username,
+						first_name,
+						last_name
 					)
 				`
 				)
-				.eq("id", $page.params.slug)
-				.single();
+				.eq("event_id", $page.params.slug);
 			if (error) throw new Error(error.message);
-			event = data;
+			data.forEach(element => {
+				athletes.push({
+					username: element.profiles.username,
+					first_name: element.profiles.first_name,
+					last_name: element.profiles.last_name,
+					laps: element.laps,
+				});
+			});
 		} catch (error) {
 			console.log(error.message);
 		} finally {
@@ -77,11 +86,11 @@
 		<span slot="h1">{event.name}</span>
 		<span slot="h2">
 			<span>{event.date}</span>
-			<a href="/app/profile/{event.profiles.username}" class="badge">
+			<a href="/app/profile/{event.profiles.username}" class="badge badge-primary">
 				organizer @{event.profiles.username}
 			</a>
 		</span>
 	</PageHeader>
 
-	{JSON.stringify(event)}
+	<LapTable athletes={athletes} />
 {/if}

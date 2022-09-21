@@ -1,6 +1,11 @@
 <script>
 	import { title } from "$lib/modules/info";
-	import { eventType, eventStarted, eventName } from "$lib/sessionStore";
+	import {
+		eventType,
+		eventStarted,
+		eventName,
+		athletes,
+	} from "$lib/sessionStore";
 	import { capitalizeFirstLetter } from "$lib/modules/utilities/capitalizeFirstLetter";
 	import { getCurrentDate } from "$lib/modules/utilities/getCurrentDate";
 	import PageHeader from "$lib/components/PageHeader.svelte";
@@ -11,7 +16,7 @@
 	import ResetButton from "./components/ResetButton.svelte";
 	import SetAthletes from "./components/SetAthletes.svelte";
 	import StartButton from "./components/StartButton.svelte";
-	import LapTable from "./components/LapTable.svelte";
+	import LapTable from "$lib/components/LapTable/LapTable.svelte";
 
 	$: $eventName = `${getCurrentDate()}-${capitalizeFirstLetter(
 		$eventType
@@ -34,8 +39,7 @@
 		<Timer />
 		<!-- LapAll in Tiles -->
 		<Tiles />
-		<LapTable />
-		<!-- FinishButton in LapTable -->
+		<LapTable athletes={$athletes} finishButton={true} />
 	{/if}
 	<ResetButton />
 {:else}

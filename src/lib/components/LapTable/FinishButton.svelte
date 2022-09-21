@@ -1,5 +1,16 @@
 <script>
-	import { athletes, eventName, userProfile } from "$lib/sessionStore";
+	import { goto } from "$app/navigation";
+	import {
+		athletes,
+		eventName,
+		userProfile,
+		eventType,
+		eventStarted,
+		timerInterval,
+		totalMs,
+		pausedTime,
+		pausedMs,
+	} from "$lib/sessionStore";
 	import { supabase } from "$lib/modules/supabaseClient";
 	import { getCurrentDate } from "$lib/modules/utilities/getCurrentDate";
 
@@ -42,17 +53,34 @@
 	async function uploadLaps(athlete) {
 		try {
 			loading = true;
-			const { data, error } = await supabase.from("laps").insert({
-				event_id: eventId,
-				profile_id: athlete.id,
-				laps: athlete.laps,
-			}).single();
+			const { data, error } = await supabase
+				.from("laps")
+				.insert({
+					event_id: eventId,
+					profile_id: athlete.id,
+					laps: athlete.laps,
+				})
+				.single();
 			if (error) throw new Error(error.message);
-			console.log(data);
+			resetEvent();
+			goto(`/app/event/id/${eventId}`);
 		} catch (error) {
 			console.log(error.message);
 		} finally {
 			loading = false;
+		}
+	}
+
+	function resetEvent() {
+		$eventType = "";
+		$eventStarted = false;
+		$athletes = [];
+		$totalMs = 0;
+		$pausedTime = 0;
+		$pausedMs = 0;
+		if ($timerInterval) {
+			clearInterval($timerInterval);
+			$timerInterval = false;
 		}
 	}
 

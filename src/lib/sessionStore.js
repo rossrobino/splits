@@ -4,8 +4,11 @@ import { writable } from "svelte/store";
 export const user = writable(false);
 export const userProfile = writable(false);
 
-// theme
+// $lib/components/NavBar/SwapTheme
 export const theme = writable("");
+
+// $lib/components/LapTable
+export const totalLaps = writable(0);
 
 // app/user/[username]
 export const routeProfile = writable(false);
