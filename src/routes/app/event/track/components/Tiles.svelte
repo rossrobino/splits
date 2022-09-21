@@ -54,9 +54,17 @@
 <ResponsiveGrid class="mt-4 {($athletes.length > 1) ? "grid-cols-2" : "sm:grid-cols-1 lg:grid-cols-1"}">
     {#each $athletes as athlete}
         <div
-            class="card bg-{colors[athlete.uid % 3]} text-{colors[
-                athlete.uid % 3
-            ]}-content shadow-xl cursor-pointer"
+            class="
+				card bg-{
+					colors[athlete.uid % 3]
+				} 
+				text-{
+					colors[athlete.uid % 3]
+				}-content 
+			shadow-xl 
+			cursor-pointer
+			{$timerInterval ? "active:scale-[0.98] transform transition duration-200 active:brightness-95" : ""}
+			"
             on:click={() => lap(athlete)}
         >
             <div class="card-body p-4 sm:p-6">
