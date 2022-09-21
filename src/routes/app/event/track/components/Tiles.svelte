@@ -38,9 +38,9 @@
 </script>
 {#if $athletes.length > 1}
 	<!-- Lap All Button -->
-	<div class="flex justify-center mb-4">
+	<div class="flex justify-center">
 		<button
-			class="btn w-[260px] xs:w-[319px] sm:w-[377px] h-12"
+			class="btn w-[260px] xs:w-[319px] sm:w-[377px] h-12 mt-2"
 			class:btn-warning={lapAllWarning}
 			on:blur={onBlur}
 			on:click={lapAll}
@@ -51,7 +51,7 @@
 {/if}
 
 
-<ResponsiveGrid class={($athletes.length > 1) ? "grid-cols-2" : "sm:grid-cols-1 lg:grid-cols-1"}>
+<ResponsiveGrid class="mt-4 {($athletes.length > 1) ? "grid-cols-2" : "sm:grid-cols-1 lg:grid-cols-1"}">
     {#each $athletes as athlete}
         <div
             class="card bg-{colors[athlete.uid % 3]} text-{colors[

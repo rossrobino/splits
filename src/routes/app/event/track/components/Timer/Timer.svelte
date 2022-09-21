@@ -84,7 +84,7 @@
     </div>
 </div>
 <div
-    class="grid grid-flow-col gap-2 text-center auto-cols-max place-content-center mb-2"
+    class="grid grid-flow-col gap-2 text-center auto-cols-max place-content-center"
 >
     <TimerBox bind:value={$time.hr} units="hours" />
     <TimerBox bind:value={$time.min} units="min" />
