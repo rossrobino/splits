@@ -39,7 +39,7 @@
 		<AlertError error={hashError} />
 	{/if}
 {:else}
-	<div class="hero bg-base-100 py-24">
+	<div class="hero py-24">
 		<div class="hero-content text-center">
 			<div class="max-w-md">
 				<h1 class="text-5xl font-bold">{title.toLowerCase()}</h1>

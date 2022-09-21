@@ -16,7 +16,7 @@
                 <NavListItems />
             </ul>
         </div>
-        <a href="/app" class="btn btn-ghost normal-case text-xl">{title.toLowerCase()}</a>
+        <a href="/app" class="btn btn-ghost normal-case text-xl font-bold">{title.toLowerCase()}</a>
     </div>
     <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal p-0">

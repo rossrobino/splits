@@ -12,8 +12,10 @@
 
 <div
 	class="
-		card bg-base-100 shadow-xl 
-		{isLink ? 'hover:cursor-pointer' : ''} 
+		card bg-base-100 shadow-xl
+		{isLink
+		? 'hover:cursor-pointer active:scale-[0.99] transform transition duration-200 hover:brightness-95'
+		: ''} 
 		{className}
 	"
 	on:click={cardClick}

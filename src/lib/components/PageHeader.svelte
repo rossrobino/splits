@@ -2,7 +2,7 @@
 	export let h2 = true;
 </script>
 
-<div class="bg-base-100 mb-4 sm:mb-6">
+<div class="mb-4 sm:mb-6">
 	<h1 class="text-2xl sm:text-5xl font-bold">
 		<slot name="h1">slot="h1"</slot>
 	</h1>
