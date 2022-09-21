@@ -22,7 +22,7 @@
 {:else if !$user}
 	<a href="/app" class="btn">Sign In</a>
 {:else if $userProfile.username}
-	<div class="dropdown dropdown-end dropdown-hover">
+	<div class="dropdown dropdown-end dropdown-hover mx-2">
 		<label
 			for="navEnd"
 			tabindex="0"
