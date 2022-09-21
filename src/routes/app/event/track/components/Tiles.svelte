@@ -36,17 +36,20 @@
 		lapAllWarning = false;
 	}
 </script>
+{#if $athletes.length > 1}
+	<!-- Lap All Button -->
+	<div class="flex justify-center mb-4">
+		<button
+			class="btn w-[260px] xs:w-[319px] sm:w-[377px] h-12"
+			class:btn-warning={lapAllWarning}
+			on:blur={onBlur}
+			on:click={lapAll}
+		>
+			Lap All
+		</button>
+	</div>
+{/if}
 
-<div class="flex justify-center mb-4">
-    <button
-        class="btn w-[260px] xs:w-[319px] sm:w-[377px] h-12"
-		class:btn-warning={lapAllWarning}
-		on:blur={onBlur}
-        on:click={lapAll}
-    >
-        Lap All
-    </button>
-</div>
 
 <ResponsiveGrid class={($athletes.length > 1) ? "grid-cols-2" : "sm:grid-cols-1 lg:grid-cols-1"}>
     {#each $athletes as athlete}
