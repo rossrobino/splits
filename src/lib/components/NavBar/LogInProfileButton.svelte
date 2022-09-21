@@ -22,16 +22,16 @@
 {:else if !$user}
 	<a href="/app" class="btn">Sign In</a>
 {:else if $userProfile.username}
-	<div class="dropdown dropdown-end dropdown-hover mx-2">
+	<div class="dropdown dropdown-end dropdown-hover">
 		<label
 			for="navEnd"
 			tabindex="0"
 			class="btn btn-ghost btn-circle avatar placeholder"
 		>
 			<div
-				class="bg-base-content text-base-100 rounded-full w-full"
+				class="bg-base-content text-base-100 rounded-full w-10"
 			>
-				<span class="text-lg">
+				<span class="text-md">
 					{`${$userProfile.first_name.charAt(
 						0
 					)}${$userProfile.last_name.charAt(0)}`}
