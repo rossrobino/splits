@@ -2,10 +2,8 @@
 	import { supabase } from "$lib/modules/supabaseClient";
 	import { goto } from "$app/navigation";
 	import Table from "$lib/components/Table.svelte";
-	import LoadingBar from "$lib/components/LoadingBar.svelte";
 
 	export let profileId = "";
-	let loading = false;
 	let events = [];
 
 	$: getPastEvents(profileId);
@@ -14,12 +12,12 @@
 		if (id) {
 			try {
 				events = [];
-				loading = true;
 				const { data, error } = await supabase
 					.from("laps")
 					.select(
 						`
 						event_id,
+						created_at,
 						events(
 							name,
 							date,
@@ -31,7 +29,8 @@
 						)
 				`
 					)
-					.eq("profile_id", id);
+					.eq("profile_id", id)
+					.order("created_at", { ascending: false });
 				if (error) throw new Error(error.message);
 				data.forEach((element) => {
 					events.push({
@@ -48,8 +47,6 @@
 				events = events;
 			} catch (error) {
 				console.log(error.message);
-			} finally {
-				loading = false;
 			}
 		}
 	}
@@ -59,20 +56,22 @@
 	}
 </script>
 
-{#if loading}
-	<LoadingBar />
-{:else if events.length > 0}
+{#if events.length > 0}
 	<Table columnNames={["Event", "Organizer", "Date"]}>
 		{#each events as event}
 			<tr
 				class="cursor-pointer group"
 				on:click={() => rowClick(`/app/event/id/${event.id}`)}
 			>
-				<th class="group-hover:bg-base-300 transform transition duration-250">
+				<th
+					class="group-hover:bg-base-300 transform transition duration-250"
+				>
 					<div>{event.name}</div>
 					<!-- <div class="text-sm opacity-50">Location</div> -->
 				</th>
-				<td class="group-hover:bg-base-300 transform transition duration-250">
+				<td
+					class="group-hover:bg-base-300 transform transition duration-250"
+				>
 					<span>
 						{event.organizer.first_name}
 						{event.organizer.last_name}
@@ -85,7 +84,9 @@
 						@{event.organizer.username}
 					</a>
 				</td>
-				<td class="group-hover:bg-base-300 transform transition duration-250">
+				<td
+					class="group-hover:bg-base-300 transform transition duration-250"
+				>
 					{event.date}
 				</td>
 			</tr>

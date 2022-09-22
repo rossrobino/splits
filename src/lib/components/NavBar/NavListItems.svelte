@@ -14,4 +14,5 @@
 	</li>
 	<li><a href="/app/event">Events</a></li>
 	<li><a href="/app/team">Teams</a></li>
+	<li><a href="/">About</a></li>
 {/if}

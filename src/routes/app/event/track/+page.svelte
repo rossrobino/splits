@@ -18,9 +18,7 @@
 	import StartButton from "./components/StartButton.svelte";
 	import LapTable from "$lib/components/LapTable/LapTable.svelte";
 
-	$: $eventName = `${getCurrentDate()}-${capitalizeFirstLetter(
-		$eventType
-	)}-Event`;
+	$: $eventName = `${getCurrentDate()}-${capitalizeFirstLetter($eventType)}`;
 </script>
 
 <svelte:head>

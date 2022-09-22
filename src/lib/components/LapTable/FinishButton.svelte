@@ -42,7 +42,6 @@
 				.single();
 			if (error) throw new Error(error.message);
 			eventId = data.id;
-			console.log(data);
 		} catch (error) {
 			console.log(error.message);
 		} finally {
