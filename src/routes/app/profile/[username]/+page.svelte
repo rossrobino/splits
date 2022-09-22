@@ -1,7 +1,8 @@
 <script>
     import { routeProfile } from "$lib/sessionStore";
     import { title, profileTag } from "$lib/modules/info";
-    import Card from "$lib/components/Card.svelte";
+	import TeamSelect from "$lib/components/TeamSelect.svelte";
+	import PastEventsTable from "$lib/components/PastEventsTable.svelte";
 </script>
 
 <svelte:head>
@@ -10,8 +11,6 @@
 </svelte:head>
 
 <div class="grid grid-cols-1 gap-4">
-    <Card title="Personal Records" isLink={false} />
-    <Card title="Teams" isLink={false}>
-
-    </Card>
+	<TeamSelect profileId={$routeProfile.id} />
+	<PastEventsTable profileId={$routeProfile.id}/>
 </div>

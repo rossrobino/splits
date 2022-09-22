@@ -1,14 +1,14 @@
 <script>
 	import { supabase } from "$lib/modules/supabaseClient";
-	import { userProfile } from "$lib/sessionStore";
 	import { goto } from "$app/navigation";
 	import Table from "$lib/components/Table.svelte";
 	import LoadingBar from "$lib/components/LoadingBar.svelte";
 
+	export let profileId = "";
 	let loading = false;
 	let events = [];
 
-	$: getPastEvents($userProfile.id);
+	$: getPastEvents(profileId);
 
 	async function getPastEvents(id) {
 		if (id) {
@@ -62,18 +62,21 @@
 {#if loading}
 	<LoadingBar />
 {:else if events.length > 0}
-	<Table columnNames={["Name", "Organizer", "Date"]}>
+	<Table columnNames={["Event", "Organizer", "Date"]}>
 		{#each events as event}
-			<tr class="hover:cursor-pointer" on:click={() => rowClick(`/app/event/id/${event.id}`)}>
-				<th>
+			<tr
+				class="cursor-pointer group"
+				on:click={() => rowClick(`/app/event/id/${event.id}`)}
+			>
+				<th class="group-hover:bg-base-300 transform transition duration-250">
 					<div>{event.name}</div>
 					<!-- <div class="text-sm opacity-50">Location</div> -->
 				</th>
-				<td>
-					<span
-						>{event.organizer.first_name}
-						{event.organizer.last_name}</span
-					>
+				<td class="group-hover:bg-base-300 transform transition duration-250">
+					<span>
+						{event.organizer.first_name}
+						{event.organizer.last_name}
+					</span>
 					<br />
 					<a
 						href="/app/profile/{event.organizer.username}"
@@ -82,7 +85,7 @@
 						@{event.organizer.username}
 					</a>
 				</td>
-				<td>
+				<td class="group-hover:bg-base-300 transform transition duration-250">
 					{event.date}
 				</td>
 			</tr>

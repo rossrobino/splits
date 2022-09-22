@@ -5,6 +5,7 @@
 	import Table from "$lib/components/Table.svelte";
 	import PastEventsTable from "$lib/components/PastEventsTable.svelte";
 	import { title, eventTag } from "$lib/modules/info";
+	import { userProfile } from "$lib/sessionStore";
 </script>
 
 <svelte:head>
@@ -18,14 +19,14 @@
 </PageHeader>
 
 <!-- <ResponsiveGrid class="mb-8"> -->
-	<Card
-		title="Track"
-		cardLink="/app/event/track"
-		class="bg-primary text-primary-content mb-8"
-	>
-		Start a new event to track in real time.
-	</Card>
-	<!-- <Card title="Add" cardLink="/app/event/add">
+<Card
+	title="Track"
+	cardLink="/app/event/track"
+	class="bg-primary text-primary-content mb-8"
+>
+	Start a new event to track in real time.
+</Card>
+<!-- <Card title="Add" cardLink="/app/event/add">
 		Add a past event.
 	</Card>
 	<Card title="Schedule" cardLink="/app/event/">
@@ -33,4 +34,4 @@
 	</Card> -->
 <!-- </ResponsiveGrid> -->
 
-<PastEventsTable />
+<PastEventsTable profileId={$userProfile.id}/>

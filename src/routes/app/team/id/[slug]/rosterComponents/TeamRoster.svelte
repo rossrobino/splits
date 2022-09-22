@@ -7,6 +7,7 @@
 	import ActionButtons from "./ActionButtons.svelte";
 	import JoinTeamButton from "./JoinTeamButton.svelte";
 	import LeaveTeamButton from "./LeaveTeamButton.svelte";
+	import { goto } from "$app/navigation";
 
 	export let teamName = "";
 	let roster = [];
@@ -119,39 +120,44 @@
 	}
 
 	$: getData($userProfile.id);
+
+	function rowClick(url) {
+		goto(url);
+	}
 </script>
 
 {#if !loading}
 	<Table
 		columnNames={userCoach
-			? ["Name", "Username", "Status", "Action"]
-			: ["Name", "Username"]}
+			? ["Name", "Status", "Action"]
+			: ["Name"]}
 		class="mb-4"
 		>{#if !loading}
 			{#each roster as person}
-				<tr>
-					<th>
+				<tr
+					class="cursor-pointer group"
+					on:click={() => rowClick(`/app/profile/${person.username}`)}
+				>
+					<th class="group-hover:bg-base-300 transform transition duration-250">
 						<span class="font-bold">{person.name}</span>
-						{#if person.isCoach}
-							<br />
-							<span class="badge badge-secondary badge-sm"
-								>coach</span
-							>
-						{/if}
-					</th>
-					<td>
+						<br />
 						<a
 							href="/app/profile/{person.username}"
-							class="btn btn-primary btn-sm text-base lowercase"
+							class="badge badge-secondary badge-sm"
 						>
 							@{person.username}
 						</a>
-					</td>
+						{#if person.isCoach}
+							<span class="badge badge-primary badge-sm">
+								coach
+							</span>
+						{/if}
+					</th>
 					{#if userCoach}
-						<td>
+						<td class="group-hover:bg-base-300 transform transition duration-250">
 							<StatusBadge confirmed={person.confirmed} />
 						</td>
-						<td>
+						<td class="group-hover:bg-base-300 transform transition duration-250">
 							<ActionButtons
 								confirmed={person.confirmed}
 								isCoach={person.isCoach}
