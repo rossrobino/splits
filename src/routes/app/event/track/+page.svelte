@@ -35,8 +35,7 @@
 		<StartButton />
 	{:else}
 		<Timer />
-		<!-- LapAll in Tiles -->
-		<Tiles />
+		<Tiles /> <!-- Lap All button in Tiles -->
 		<LapTable athletes={$athletes} finishButton={true} />
 	{/if}
 	<ResetButton />

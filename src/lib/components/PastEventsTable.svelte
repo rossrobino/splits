@@ -4,7 +4,19 @@
 	import Table from "$lib/components/Table.svelte";
 
 	export let profileId = "";
+	export let organized = false;
 	let events = [];
+	let orString= "";
+	$: {
+		if (organized) {
+			orString = `organizer.eq.${profileId}`;
+		} else {
+			orString = `profile_id.eq.${profileId}`;
+		}
+		
+	}
+	let orParams = {};
+	$: if (organized) orParams = { foreignTable: "events" };
 
 	$: getPastEvents(profileId);
 
@@ -29,7 +41,7 @@
 						)
 				`
 					)
-					.eq("profile_id", id)
+					.or(orString, orParams)
 					.order("created_at", { ascending: false });
 				if (error) throw new Error(error.message);
 				data.forEach((element) => {
@@ -57,7 +69,7 @@
 </script>
 
 {#if events.length > 0}
-	<Table columnNames={["Event", "Organizer", "Date"]}>
+	<Table columnNames={[(organized ? "Organized Event" : "Event"), "Organizer", "Date"]} class="mb-4">
 		{#each events as event}
 			<tr
 				class="cursor-pointer group"

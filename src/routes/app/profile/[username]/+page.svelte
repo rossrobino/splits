@@ -12,5 +12,6 @@
 
 <div class="grid grid-cols-1 gap-4">
 	<TeamSelect profileId={$routeProfile.id} />
-	<PastEventsTable profileId={$routeProfile.id}/>
+	<PastEventsTable profileId={$routeProfile.id} />
+	<PastEventsTable profileId={$routeProfile.id} organized={true} />
 </div>

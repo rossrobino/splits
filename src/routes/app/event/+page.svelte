@@ -35,3 +35,4 @@
 <!-- </ResponsiveGrid> -->
 
 <PastEventsTable profileId={$userProfile.id}/>
+<PastEventsTable profileId={$userProfile.id} organized={true} />
