@@ -8,6 +8,7 @@
 	import PageHeader from "$lib/components/PageHeader.svelte";
 	import LoadingBar from "$lib/components/LoadingBar.svelte";
 	import LapTable from "$lib/components/LapTable/LapTable.svelte";
+	import LineChart from "$lib/components/LineChart.svelte";
 
 	let loading = false;
 	let event = {};
@@ -101,7 +102,6 @@
 			} finally {
 				deleteLoading = false;
 			}
-			
 		} else {
 			deleteWarning = true;
 		}
@@ -114,7 +114,7 @@
 
 <svelte:head>
 	<title>{title} - {event.name ? event.name : "Event"}</title>
-	<meta name="description" content="View details about your event." />
+	<meta name="description" content="View event details." />
 </svelte:head>
 
 {#if loading}
@@ -134,6 +134,8 @@
 	</PageHeader>
 
 	<LapTable {athletes} />
+
+	<LineChart {athletes} />
 
 	{#if userAthlete}
 		<button

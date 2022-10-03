@@ -1,5 +1,13 @@
 import { writable } from "svelte/store";
 
+export const colorList = writable([
+	"rgb(68,0,245)",
+	"rgb(233,0,169)",
+	"rgb(50,196,177)",
+	"rgb(46,52,64)",
+	"rgb(224,224,224)",
+]);
+
 // base layout - user auth and profile
 export const user = writable(false);
 export const userProfile = writable(false);
@@ -13,7 +21,7 @@ export const totalLaps = writable(0);
 // app/user/[username]
 export const routeProfile = writable(false);
 
-// app/event/track 
+// app/event/track
 export const athletes = writable([]);
 export const eventStarted = writable(false);
 export const eventName = writable("");
@@ -43,4 +51,3 @@ export const team = writable({});
 export const onTeam = writable(false);
 export const requestSent = writable(false);
 export const myContractId = writable("");
-
