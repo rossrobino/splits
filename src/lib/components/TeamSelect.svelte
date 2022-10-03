@@ -9,6 +9,7 @@
 	import Table from "$lib/components/Table.svelte";
 	import LoadingBar from "$lib/components/LoadingBar.svelte";
 	import { goto } from "$app/navigation";
+	import H2 from "$lib/components/headings/H2.svelte";
 
 	export let profileId;
 	let loading = false;
@@ -59,8 +60,9 @@
 	}
 </script>
 
-<div class="mb-4">
+<div class="mb-8">
 	{#if !loading && $currentTeams[0]}
+		<H2>Teams</H2>
 		<Table columnNames={["Team", "Coach"]}>
 			{#each $currentTeams as team}
 				<tr
