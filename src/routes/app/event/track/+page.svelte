@@ -6,8 +6,6 @@
 		eventName,
 		athletes,
 	} from "$lib/sessionStore";
-	import { capitalizeFirstLetter } from "$lib/modules/utilities/capitalizeFirstLetter";
-	import { getCurrentDate } from "$lib/modules/utilities/getCurrentDate";
 	import PageHeader from "$lib/components/PageHeader.svelte";
 	import TextInput from "$lib/components/TextInput.svelte";
 	import Timer from "./components/Timer/Timer.svelte";
@@ -17,8 +15,7 @@
 	import SetAthletes from "./components/SetAthletes.svelte";
 	import StartButton from "./components/StartButton.svelte";
 	import LapTable from "$lib/components/LapTable/LapTable.svelte";
-
-	$: $eventName = `${getCurrentDate()}-${capitalizeFirstLetter($eventType)}`;
+	import SetGuests from "./components/SetGuests.svelte";
 </script>
 
 <svelte:head>
@@ -28,9 +25,10 @@
 
 {#if $eventType}
 	{#if !$eventStarted}
-		<TextInput label="Event Name" id="eventName" value={$eventName} />
+		<TextInput label="Event Name" id="eventName" bind:value={$eventName} />
 		{#if $eventType === "group"}
 			<SetAthletes />
+			<SetGuests />
 		{/if}
 		<StartButton />
 	{:else}

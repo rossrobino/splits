@@ -55,6 +55,7 @@
 				.select(
 					`
 					laps,
+					guestId,
 					profiles(
 						id,
 						username,
@@ -66,14 +67,30 @@
 				.eq("event_id", $page.params.slug);
 			if (error) throw new Error(error.message);
 			data.forEach((element) => {
+				let id;
+				let username;
+				let first_name;
+				let last_name;
+				if (element.profiles) {
+					id = element.profiles.id;
+					username = element.profiles.username;
+					first_name = element.profiles.first_name;
+					last_name = element.profiles.last_name;
+				} else {
+					id = null;
+					username = null;
+					first_name = "Athlete";
+					last_name = element.guestId;
+				}
 				athletes.push({
-					id: element.profiles.id,
-					username: element.profiles.username,
-					first_name: element.profiles.first_name,
-					last_name: element.profiles.last_name,
+					id,
+					username,
+					first_name,
+					last_name,
+					guestId: element.guestId,
 					laps: element.laps,
 				});
-				if (element.profiles.id === $userProfile.id) {
+				if (id === $userProfile.id) {
 					userAthlete = true;
 				}
 			});

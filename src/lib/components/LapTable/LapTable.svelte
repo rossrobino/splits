@@ -21,21 +21,29 @@
 		}
 		columnNames = columnNames;
 	}
+
 </script>
 
 {#if totalLaps > 0}
 	<Table {columnNames} class="mb-8">
-		{#each athletes as athlete}
+		{#each athletes as athlete, i}
 			<tr>
 				<th>
-					<span>{athlete.first_name} {athlete.last_name}</span>
+					<span>
+						{athlete.first_name}
+						{athlete.username
+							? athlete.last_name
+							: `#${athlete.last_name}`}
+					</span>
 					<br />
-					<a
-						href="/app/profile/{athlete.username}"
-						class="badge badge-secondary badge-sm"
-					>
-						@{athlete.username}
-					</a>
+					{#if athlete.username}
+						<a
+							href="/app/profile/{athlete.username}"
+							class="badge badge-sm badge-secondary"
+						>
+							@{athlete.username}
+						</a>
+					{/if}
 				</th>
 				{#each [...Array(totalLaps).keys()] as i}
 					<td>

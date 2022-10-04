@@ -1,6 +1,6 @@
 <script>
 	import { supabase } from "$lib/modules/supabaseClient";
-	import { userProfile, athletes, eventStarted } from "$lib/sessionStore";
+	import { userProfile, athletes, guests } from "$lib/sessionStore";
 	import { onMount } from "svelte";
 	import { draw } from "svelte/transition";
 	import Table from "$lib/components/Table.svelte";
@@ -59,6 +59,7 @@
 					if (team.id === contract.team_id) {
 						team.athletes.push({
 							id: contract.profiles.id,
+							guestId: null,
 							first_name: contract.profiles.first_name,
 							last_name: contract.profiles.last_name,
 							username: contract.profiles.username,
@@ -112,12 +113,22 @@
 				}
 			});
 		});
+		$guests.forEach((guest) => {
+			if (guest.selected) {
+				guest.uid = uid++;
+				$athletes.push(guest);
+			}
+		});
 	}
 </script>
 
 <Table columnNames={["", "Select Participants", ""]} class="mb-4">
 	{#if loading}
-		<tr><td /><td><LoadingBar /></td><td /></tr>
+		<tr>
+			<td />
+			<td><LoadingBar /></td>
+			<td />
+		</tr>
 	{/if}
 	{#each teams as team}
 		<tr>

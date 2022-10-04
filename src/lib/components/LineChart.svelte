@@ -11,8 +11,14 @@
 	let labels = [];
 	athletes.forEach((athlete) => {
 		let color = colorIndex++ % 5;
+		let label;
+		if (athlete.username) {
+			label = "@" + athlete.username;
+		} else {
+			label = `athlete${athlete.guestId}`;
+		}
 		datasets.push({
-			label: "@" + athlete.username,
+			label,
 			lineTension: 0.2,
 			borderColor: $colorList[color],
 			backgroundColor: $colorList[color],

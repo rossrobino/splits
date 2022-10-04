@@ -58,6 +58,7 @@
 					event_id: eventId,
 					profile_id: athlete.id,
 					laps: athlete.laps,
+					guestId: athlete.guestId,
 				})
 				.single();
 			if (error) throw new Error(error.message);

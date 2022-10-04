@@ -10,7 +10,7 @@
 	export let organized = false;
 	let columnNames = [];
 	if (organized) {
-		columnNames = ["Organized Event", "Date"];
+		columnNames = ["Event", "Date"];
 	} else {
 		columnNames = ["Event", "Organizer", "Date"];
 	}
@@ -93,7 +93,7 @@
 	<div>
 		<H2>
 			{organized
-				? `${events[0].organizer.first_name}'s Events`
+				? `Organized Events`
 				: "Entries"}
 		</H2>
 		<Table {columnNames} class="mb-8">

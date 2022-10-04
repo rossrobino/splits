@@ -13,7 +13,7 @@
 		{id}
 		type="text"
 		{placeholder}
-		{value}
+		bind:value
 		class="input input-bordered w-full max-w-xs"
 	/>
 </div>

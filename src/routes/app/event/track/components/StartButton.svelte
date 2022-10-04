@@ -1,7 +1,8 @@
 <script>
-	import { eventStarted } from "$lib/sessionStore";
+	import { eventStarted, guests, athletes } from "$lib/sessionStore";
 
 	function startEvent() {
+		
 		$eventStarted = true;
 	}
 </script>

@@ -3,7 +3,6 @@
         totalMs,
         timerInterval,
 		athletes,
-		eventType
     } from "$lib/sessionStore";
 	import ResponsiveGrid from "$lib/components/ResponsiveGrid.svelte";
     import { msToTime } from "$lib/modules/utilities/msToTime";

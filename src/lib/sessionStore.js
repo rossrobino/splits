@@ -44,6 +44,8 @@ export const lapAllWarning = writable(false);
 
 // app/event/track - ./SetAthletes
 export const eventType = writable("");
+// SetGuests
+export const guests = writable([]);
 
 // app/team
 export const currentTeams = writable([]);
