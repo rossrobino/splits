@@ -63,7 +63,7 @@
 					On your mark,
 				</h1>
 				<p class="pt-6">
-					Track all participants at once with the multi-athlete timer.
+					Track all participants in real time with the multi-athlete timer.
 				</p>
 			</div>
 			<Card isLink={false}>
@@ -95,7 +95,7 @@
 				>
 					get set,
 				</h1>
-				<p class="py-6">Get instant analysis after each event.</p>
+				<p class="py-6">Instant analysis after each event.</p>
 			</div>
 		</div>
 	</div>
