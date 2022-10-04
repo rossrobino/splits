@@ -1,6 +1,6 @@
 <script>
 	import { goto } from "$app/navigation";
-	export let title = "title";
+	export let title = "";
 	export let cardLink = "/";
 	export let isLink = true;
 	let className = "";
