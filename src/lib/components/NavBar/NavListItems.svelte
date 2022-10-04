@@ -8,7 +8,7 @@
 			{#if $eventStarted}
 				Timer
 			{:else}
-				Start
+				Quick Start
 			{/if}
 		</a>
 	</li>
