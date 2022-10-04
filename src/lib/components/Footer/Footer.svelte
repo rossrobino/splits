@@ -1,6 +1,6 @@
 <script>
 	import { getCurrentDate } from "$lib/modules/utilities/getCurrentDate";
-	import GitHub from "./Github.png";
+	import GitHub from "./GitHub.png";
 </script>
 
 <footer class="footer grid-flow-col gap-3 items-center px-4 py-3 bg-neutral text-neutral-content">
