@@ -49,7 +49,7 @@
 					{title.toLowerCase()}
 				</h1>
 				<p class="py-6">{tagline}</p>
-				<a href="/app" class="btn btn-primary">Get Started</a>
+				<a href="/app" class="btn btn-accent">Get Started</a>
 			</div>
 		</div>
 	</div>
@@ -103,9 +103,9 @@
 	<div class="hero py-24 bg-base-200 rounded-lg">
 		<div class="hero-content text-center">
 			<div class="max-w-md">
-				<h1 class="text-6xl font-bold">go.</h1>
+				<h1 class="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-1">go.</h1>
 				<p class="py-6">Create an account to get started today.</p>
-				<a href="/app" class="btn btn-accent">Get Started</a>
+				<a href="/app" class="btn" >Get Started</a>
 			</div>
 		</div>
 	</div>

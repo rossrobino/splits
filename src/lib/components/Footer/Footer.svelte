@@ -1,6 +1,5 @@
 <script>
 	import { getCurrentDate } from "$lib/modules/utilities/getCurrentDate";
-	import GitHub from "./GitHub.png";
 </script>
 
 <footer
@@ -9,7 +8,7 @@
 	<div class="justify-self-start">
 		<p>
 			Copyright © {getCurrentDate().split("-")[0]} -
-			<a class="inline-block" href="https://robino.dev/" target="_blank">
+			<a class="inline-block underline" href="https://robino.dev/" target="_blank">
 				Ross Robino
 			</a>
 		</p>
