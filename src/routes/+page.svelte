@@ -74,9 +74,9 @@
 	</section>
 
 	<section
-		class="hero bg-gradient-to-r from-base-100 via-base-200 to-base-100 fullscreen:rounded-lg p-2 py-12 rotate-[8deg]"
+		class="hero bg-gradient-to-r from-base-100 via-base-200 to-base-100 fullscreen:rounded-lg p-2 py-12"
 	>
-		<div class="hero-content grid grid-cols-1 md:grid-cols-2 gap-8 -rotate-[8deg]">
+		<div class="hero-content grid grid-cols-1 md:grid-cols-2 gap-8">
 			<div class="h-32">
 				{#if showHero2}
 					<div in:fly={{ x: -400, duration }}>
