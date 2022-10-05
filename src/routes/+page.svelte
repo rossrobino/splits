@@ -1,6 +1,7 @@
 <script>
 	import { title, tagline } from "$lib/modules/info.js";
 	import { onMount } from "svelte";
+	import { fly, fade } from "svelte/transition";
 	import AlertError from "$lib/components/AlertError.svelte";
 	import ResetPassword from "$lib/components/ResetPassword.svelte";
 	import Card from "$lib/components/Card.svelte";
@@ -11,7 +12,14 @@
 	let hashType;
 	let hashToken;
 	let hashError;
+
 	let innerWidth;
+	let scrollY;
+	let duration = 500;
+	let fadeDuration = 1000;
+	let showHero2 = false;
+	let showHero3 = false;
+	let showHero4 = false;
 
 	onMount(async () => {
 		// password reset
@@ -28,6 +36,11 @@
 			}
 		}
 	});
+
+	$: if (innerWidth < 768) fadeDuration = 2000;
+	$: if (scrollY > 300) showHero2 = true;
+	$: if (scrollY > 800) showHero3 = true;
+	$: if (scrollY > 1100) showHero4 = true;
 </script>
 
 <svelte:head>
@@ -35,7 +48,7 @@
 	<meta name="description" content={tagline} />
 </svelte:head>
 
-<svelte:window bind:innerWidth />
+<svelte:window bind:innerWidth bind:scrollY />
 
 {#if hashType === "recovery"}
 	<!-- password recovery -->
@@ -45,7 +58,10 @@
 		<AlertError error={hashError} />
 	{/if}
 {:else}
-	<div class="hero py-24">
+<div class="overflow-hidden">
+
+
+	<section class="hero py-36">
 		<div class="hero-content text-center">
 			<div class="max-w-md">
 				<h1 class="text-5xl sm:text-6xl font-bold">
@@ -55,20 +71,26 @@
 				<a href="/app" class="btn btn-accent">Get Started</a>
 			</div>
 		</div>
-	</div>
+	</section>
 
-	<div class="hero bg-base-200 fullscreen:rounded-lg p-2 py-12">
-		<div class="hero-content grid grid-cols-1 md:grid-cols-2 gap-8">
-			<div>
-				<h1
-					class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-6"
-				>
-					On your mark,
-				</h1>
-				<p>
-					Track all participants in real time with the multi-athlete
-					timer.
-				</p>
+	<section
+		class="hero bg-gradient-to-r from-base-100 via-base-200 to-base-100 fullscreen:rounded-lg p-2 py-12 rotate-[8deg]"
+	>
+		<div class="hero-content grid grid-cols-1 md:grid-cols-2 gap-8 -rotate-[8deg]">
+			<div class="h-32">
+				{#if showHero2}
+					<div in:fly={{ x: -400, duration }}>
+						<h2
+							class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-6"
+						>
+							On your mark,
+						</h2>
+						<p>
+							Track all participants in real time with the
+							multi-athlete timer.
+						</p>
+					</div>
+				{/if}
 			</div>
 			<Card
 				isLink={false}
@@ -83,9 +105,9 @@
 				/>
 			</Card>
 		</div>
-	</div>
+	</section>
 
-	<div class="hero px-2 py-12">
+	<section class="hero px-2 py-12">
 		<div class="hero-content grid grid-cols-1 md:grid-cols-2 gap-8">
 			{#if innerWidth > 768}
 				<Card
@@ -100,16 +122,32 @@
 						class="rounded"
 					/>
 				</Card>
-			{/if}
-			<div>
-				<h1
-					class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary pb-6"
-				>
-					get set,
-				</h1>
-				<p>Instant analysis after each event.</p>
-			</div>
-			{#if innerWidth < 768}
+				<div class="h-32">
+					{#if showHero3}
+						<div in:fly={{ x: 400, duration }}>
+							<h2
+								class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary pb-6"
+							>
+								get set,
+							</h2>
+							<p>Instant analysis after each event.</p>
+						</div>
+					{/if}
+				</div>
+			{:else}
+				<div class="h-32">
+					{#if showHero3}
+						<div in:fly={{ x: -400, duration }}>
+							<h2
+								class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary pb-6"
+							>
+								get set,
+							</h2>
+							<p>Instant analysis after each event.</p>
+						</div>
+					{/if}
+				</div>
+
 				<Card
 					isLink={false}
 					class="w-fit justify-self-center md:justify-self-start"
@@ -124,18 +162,23 @@
 				</Card>
 			{/if}
 		</div>
-	</div>
+	</section>
 
-	<div class="hero py-24 bg-base-200 fullscreen:rounded-lg fullscreen:mb-8">
+	<section
+		class="hero py-24 bg-base-200 fullscreen:rounded-lg fullscreen:mb-8 bg-gradient-to-r from-base-100 via-base-200 to-base-100"
+	>
 		<div class="hero-content text-center">
-			<div class="max-w-md">
-				<h1
-					class="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-8"
-				>
-					go.
-				</h1>
-				<a href="/app" class="btn">Get Started</a>
-			</div>
+			{#if showHero4}
+				<div class="max-w-md" in:fade={{ duration: fadeDuration }}>
+					<h2
+						class="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-8"
+					>
+						go.
+					</h2>
+					<a href="/app" class="btn">Get Started</a>
+				</div>
+			{/if}
 		</div>
+	</section>
 	</div>
 {/if}
