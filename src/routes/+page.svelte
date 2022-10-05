@@ -38,7 +38,7 @@
 	});
 
 	$: if (innerWidth < 768) fadeDuration = 2000;
-	$: if (scrollY > 100) showHero2 = true;
+	$: if (scrollY > 50) showHero2 = true;
 	$: if (scrollY > 800) showHero3 = true;
 	$: if (scrollY > 1100) showHero4 = true;
 </script>
@@ -61,7 +61,7 @@
 <div class="overflow-hidden">
 
 
-	<section class="hero py-36">
+	<section class="hero py-48">
 		<div class="hero-content text-center">
 			<div class="max-w-md">
 				<h1 class="text-5xl sm:text-6xl font-bold">
