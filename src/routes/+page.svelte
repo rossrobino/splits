@@ -2,11 +2,14 @@
 	import { title, tagline } from "$lib/modules/info.js";
 	import { onMount } from "svelte";
 	import { fly, fade } from "svelte/transition";
+	import { theme } from "$lib/sessionStore";
 	import AlertError from "$lib/components/AlertError.svelte";
 	import ResetPassword from "$lib/components/ResetPassword.svelte";
 	import Card from "$lib/components/Card.svelte";
 	import tiles from "$lib/images/tiles.webp";
+	import tilesDark from "$lib/images/tiles-dark.webp";
 	import eventChart from "$lib/images/eventChart.webp";
+	import eventChartDark from "$lib/images/eventChart-dark.webp";
 
 	let hash;
 	let hashType;
@@ -41,6 +44,7 @@
 	$: if (scrollY > 50) showHero2 = true;
 	$: if (scrollY > 800) showHero3 = true;
 	$: if (scrollY > 1100) showHero4 = true;
+
 </script>
 
 <svelte:head>
@@ -58,9 +62,6 @@
 		<AlertError error={hashError} />
 	{/if}
 {:else}
-<div class="overflow-hidden">
-
-
 	<section class="hero py-48">
 		<div class="hero-content text-center">
 			<div class="max-w-md">
@@ -97,7 +98,7 @@
 				class="w-fit justify-self-center md:justify-self-start"
 			>
 				<img
-					src={tiles}
+					src={$theme === "light" ? tiles : tilesDark}
 					height="450px"
 					width="300px"
 					alt="Timer tiles"
@@ -115,7 +116,7 @@
 					class="w-fit justify-self-center md:justify-self-start"
 				>
 					<img
-						src={eventChart}
+						src={$theme === "light" ? eventChart : eventChartDark}
 						height="309px"
 						width="300px"
 						alt="Event chart"
@@ -126,7 +127,7 @@
 					{#if showHero3}
 						<div in:fly={{ x: 400, duration }}>
 							<h2
-								class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary pb-6"
+								class="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary pb-6"
 							>
 								get set,
 							</h2>
@@ -139,7 +140,7 @@
 					{#if showHero3}
 						<div in:fly={{ x: -400, duration }}>
 							<h2
-								class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary pb-6"
+								class="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary pb-6"
 							>
 								get set,
 							</h2>
@@ -152,8 +153,9 @@
 					isLink={false}
 					class="w-fit justify-self-center md:justify-self-start"
 				>
+
 					<img
-						src={eventChart}
+						src={$theme === "light" ? eventChart : eventChartDark}
 						height="309px"
 						width="300px"
 						alt="Event chart"
@@ -165,13 +167,13 @@
 	</section>
 
 	<section
-		class="hero py-24 bg-base-200 fullscreen:rounded-lg fullscreen:mb-8 bg-gradient-to-r from-base-100 via-base-200 to-base-100"
+		class="hero py-24 bg-base-200 fullscreen:rounded-lg bg-gradient-to-r from-base-100 via-base-200 to-base-100"
 	>
 		<div class="hero-content text-center">
 			{#if showHero4}
 				<div class="max-w-md" in:fade={{ duration: fadeDuration }}>
 					<h2
-						class="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-8"
+						class="text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-8"
 					>
 						go.
 					</h2>
@@ -180,5 +182,4 @@
 			{/if}
 		</div>
 	</section>
-	</div>
 {/if}

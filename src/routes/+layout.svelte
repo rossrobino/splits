@@ -33,6 +33,7 @@
 </script>
 
 <div
+	data-theme={$theme}
 	class="
     flex 
     flex-col 
@@ -40,8 +41,9 @@
     min-h-screen 
     min-w-[270px]
     vp-dyn
+	selection:bg-primary
+	selection:text-primary-content
     "
-	data-theme={$theme}
 >
 	<div>
 		<header>
