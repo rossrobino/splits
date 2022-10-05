@@ -98,7 +98,10 @@
 	<meta name={accountTag} />
 </svelte:head>
 
-<form class="form-control w-full max-w-sm">
+<form
+	on:submit|preventDefault={updateProfile}
+	class="form-control w-full max-w-sm"
+>
 	<PageHeader>
 		<span slot="h1">Account</span>
 		<span slot="h2">{accountTag}</span>
@@ -116,10 +119,10 @@
 		class="input input-bordered input-accent w-full max-w-sm"
 	/>
 	<label for="email" class="label mb-3">
-		<span class="label-text-alt"
-			>Upon email update a confirmation email will be sent to the current
-			and new address. Both messages must be confirmed to update.</span
-		>
+		<span class="label-text-alt">
+			Upon email update a confirmation email will be sent to the current
+			and new address. Both messages must be confirmed to update.
+		</span>
 	</label>
 
 	<label for="username" class="label">
@@ -131,7 +134,8 @@
 			? 'inputOutline'
 			: ''} w-full max-w-sm mb-3"
 	>
-		@<input
+		@
+		<input
 			class="h-full w-[90%] focus:outline-0 bg-base-100"
 			id="username"
 			type="text"
@@ -169,12 +173,7 @@
 	{#if loading}
 		<button class="btn loading mt-3">Loading</button>
 	{:else}
-		<input
-			type="submit"
-			value="Submit"
-			on:click={updateProfile}
-			class="btn btn-accent mt-3"
-		/>
+		<input type="submit" value="Submit" class="btn btn-accent mt-3" />
 	{/if}
 
 	{#if alert}
