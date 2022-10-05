@@ -75,7 +75,7 @@
 	</section>
 
 	<section
-		class="hero bg-gradient-to-r from-base-100 via-base-200 to-base-100 fullscreen:rounded-lg p-2 py-12"
+		class="hero bg-gradient-to-b from-base-100 via-base-200 to-base-100 fullscreen:rounded-lg p-2 py-12"
 	>
 		<div class="hero-content grid grid-cols-1 md:grid-cols-2 gap-8">
 			<div class="h-32">
@@ -138,7 +138,7 @@
 			{:else}
 				<div class="h-32">
 					{#if showHero3}
-						<div in:fly={{ x: -400, duration }}>
+						<div in:fly={{ x: 400, duration }}>
 							<h2
 								class="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary pb-6"
 							>
@@ -167,7 +167,7 @@
 	</section>
 
 	<section
-		class="hero py-24 bg-base-200 fullscreen:rounded-lg bg-gradient-to-r from-base-100 via-base-200 to-base-100"
+		class="hero py-24 bg-base-200 fullscreen:rounded-lg bg-gradient-to-b from-base-100 via-base-200 to-base-100"
 	>
 		<div class="hero-content text-center">
 			{#if showHero4}
