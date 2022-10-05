@@ -47,7 +47,7 @@
 		<header>
 			<NavBar />
 		</header>
-		<main class="max-w-6xl mx-auto p-4 sm:p-8">
+		<main class="max-w-6xl mx-auto">
 			<slot />
 		</main>
 	</div>

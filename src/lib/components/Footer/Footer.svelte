@@ -13,7 +13,8 @@
 			</a>
 		</p>
 	</div>
-	<div class="justify-self-end">
+	<!-- Remove hidden to show github logo below -->
+	<div class="justify-self-end hidden"> 
 		<a href="https://github.com/rossrobino/splits" target="_blank">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

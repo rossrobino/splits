@@ -1,10 +1,10 @@
 <script>
-    import Login from "$lib/components/Login.svelte";
-    import { user } from "$lib/sessionStore";
+	import Login from "$lib/components/Login.svelte";
+	import { user } from "$lib/sessionStore";
 </script>
 
 {#if $user}
-    <slot />
+	<div class="p-4 sm:p-8"><slot /></div>
 {:else}
-    <Login />
+	<Login />
 {/if}

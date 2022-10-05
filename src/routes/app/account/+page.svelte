@@ -134,8 +134,7 @@
 			? 'inputOutline'
 			: ''} w-full max-w-sm mb-3"
 	>
-		@
-		<input
+		@<input
 			class="h-full w-[90%] focus:outline-0 bg-base-100"
 			id="username"
 			type="text"

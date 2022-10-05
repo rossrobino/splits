@@ -6,6 +6,7 @@ const config = {
 	theme: {
 		screens: {
 			xs: "370px",
+			fullscreen: "1152px",
 			...defaultTheme.screens,
 		},
 	},

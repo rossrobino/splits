@@ -11,6 +11,7 @@
 	let hashType;
 	let hashToken;
 	let hashError;
+	let innerWidth;
 
 	onMount(async () => {
 		// password reset
@@ -34,6 +35,8 @@
 	<meta name="description" content={tagline} />
 </svelte:head>
 
+<svelte:window bind:innerWidth />
+
 {#if hashType === "recovery"}
 	<!-- password recovery -->
 	{#if hashToken}
@@ -54,23 +57,27 @@
 		</div>
 	</div>
 
-	<div class="hero bg-base-200 rounded-lg p-2">
-		<div class="hero-content flex-col lg:flex-row gap-12">
-			<div class="mt-8">
+	<div class="hero bg-base-200 fullscreen:rounded-lg p-2 py-12">
+		<div class="hero-content grid grid-cols-1 md:grid-cols-2 gap-8">
+			<div>
 				<h1
-					class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-1"
+					class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-6"
 				>
 					On your mark,
 				</h1>
-				<p class="pt-6">
-					Track all participants in real time with the multi-athlete timer.
+				<p>
+					Track all participants in real time with the multi-athlete
+					timer.
 				</p>
 			</div>
-			<Card isLink={false}>
+			<Card
+				isLink={false}
+				class="w-fit justify-self-center md:justify-self-start"
+			>
 				<img
 					src={tiles}
-					height="400px"
-					width="266px"
+					height="450px"
+					width="300px"
 					alt="Timer tiles"
 					class="rounded"
 				/>
@@ -78,34 +85,56 @@
 		</div>
 	</div>
 
-	<div class="hero p-2 my-12">
-		<div class="hero-content flex-col lg:flex-row gap-12">
-			<Card isLink={false}>
-				<img
-					src={eventChart}
-					height="400px"
-					width="388px"
-					alt="Event chart"
-					class="rounded"
-				/>
-			</Card>
+	<div class="hero px-2 py-12">
+		<div class="hero-content grid grid-cols-1 md:grid-cols-2 gap-8">
+			{#if innerWidth > 768}
+				<Card
+					isLink={false}
+					class="w-fit justify-self-center md:justify-self-start"
+				>
+					<img
+						src={eventChart}
+						height="309px"
+						width="300px"
+						alt="Event chart"
+						class="rounded"
+					/>
+				</Card>
+			{/if}
 			<div>
 				<h1
-					class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary pb-1"
+					class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary pb-6"
 				>
 					get set,
 				</h1>
-				<p class="py-6">Instant analysis after each event.</p>
+				<p>Instant analysis after each event.</p>
 			</div>
+			{#if innerWidth < 768}
+				<Card
+					isLink={false}
+					class="w-fit justify-self-center md:justify-self-start"
+				>
+					<img
+						src={eventChart}
+						height="309px"
+						width="300px"
+						alt="Event chart"
+						class="rounded"
+					/>
+				</Card>
+			{/if}
 		</div>
 	</div>
 
-	<div class="hero py-24 bg-base-200 rounded-lg">
+	<div class="hero py-24 bg-base-200 fullscreen:rounded-lg fullscreen:mb-8">
 		<div class="hero-content text-center">
 			<div class="max-w-md">
-				<h1 class="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-1">go.</h1>
-				<p class="py-6">Create an account to get started today.</p>
-				<a href="/app" class="btn" >Get Started</a>
+				<h1
+					class="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-8"
+				>
+					go.
+				</h1>
+				<a href="/app" class="btn">Get Started</a>
 			</div>
 		</div>
 	</div>
