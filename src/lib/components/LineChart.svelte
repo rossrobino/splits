@@ -12,7 +12,6 @@
 		PointElement,
 		CategoryScale,
 	} from "chart.js";
-
 	ChartJS.register(
 		Title,
 		Tooltip,
