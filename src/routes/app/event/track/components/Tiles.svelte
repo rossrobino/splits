@@ -40,6 +40,7 @@
 			class:btn-warning={lapAllWarning}
 			on:blur={onBlur}
 			on:touchend={onBlur}
+			on:touchmove={onBlur}
 			on:click={lapAll}
 		>
 			Lap All
