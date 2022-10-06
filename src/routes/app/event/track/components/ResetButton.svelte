@@ -1,4 +1,5 @@
 <script>
+	import { clickOutside } from "$lib/modules/utilities/clickOutside";
 	import {
 		eventType,
 		eventStarted,
@@ -37,7 +38,7 @@
 	class="btn mb-2"
 	class:btn-warning={warning}
 	on:click={resetEvent}
-	on:blur={onBlur}
+	use:clickOutside={onBlur}
 >
 	<svg
 		xmlns="http://www.w3.org/2000/svg"

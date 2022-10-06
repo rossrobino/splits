@@ -1,6 +1,7 @@
 <script>
 	import { supabase } from "$lib/modules/supabaseClient";
 	import { onTeam, requestSent, myContractId } from "$lib/sessionStore";
+	import { clickOutside } from "$lib/modules/utilities/clickOutside";
 
 	export let userCoach = false;
 	let loading = false;
@@ -36,7 +37,7 @@
 		class="btn"
 		class:loading
 		class:btn-warning={warning}
-		on:blur={blur}
+		use:clickOutside={blur}
 		on:click={leaveTeam}
 	>
 	{#if !$onTeam && $requestSent}

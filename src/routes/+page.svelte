@@ -171,9 +171,10 @@
 	>
 		<div class="hero-content text-center">
 			{#if showHero4}
-				<div class="max-w-md" in:fade={{ duration: fadeDuration }}>
+				<div class="max-w-md">
 					<h2
 						class="text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-8"
+						in:fade={{ duration: fadeDuration }}
 					>
 						go.
 					</h2>

@@ -128,17 +128,17 @@
 
 {#if !loading}
 	<Table
-		columnNames={userCoach
-			? ["Name", "Status", "Action"]
-			: ["Name"]}
+		columnNames={userCoach ? ["Name", "Status", "Action"] : ["Name"]}
 		class="mb-4"
-		>{#if !loading}
+	>
+		{#if !loading}
 			{#each roster as person}
-				<tr
-					class="cursor-pointer group"
-					on:click={() => rowClick(`/app/profile/${person.username}`)}
-				>
-					<th class="group-hover:bg-base-300 transform transition duration-250">
+				<tr class=" group">
+					<th
+						class="group-hover:bg-base-300 transform transition duration-250 cursor-pointer"
+						on:click={() =>
+							rowClick(`/app/profile/${person.username}`)}
+					>
 						<span class="font-bold">{person.name}</span>
 						<br />
 						<a
@@ -154,10 +154,14 @@
 						{/if}
 					</th>
 					{#if userCoach}
-						<td class="group-hover:bg-base-300 transform transition duration-250">
+						<td
+							class="group-hover:bg-base-300 transform transition duration-250"
+						>
 							<StatusBadge confirmed={person.confirmed} />
 						</td>
-						<td class="group-hover:bg-base-300 transform transition duration-250">
+						<td
+							class="group-hover:bg-base-300 transform transition duration-250"
+						>
 							<ActionButtons
 								confirmed={person.confirmed}
 								isCoach={person.isCoach}

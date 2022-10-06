@@ -1,6 +1,7 @@
 <script>
 	import { supabase } from "$lib/modules/supabaseClient";
 	import { goto } from "$app/navigation";
+	import { clickOutside } from "$lib/modules/utilities/clickOutside";
 
 	export let teamName = "";
 	export let teamId = "";
@@ -52,7 +53,7 @@
 	class="btn {warning ? 'btn-warning' : 'btn-error'}"
 	class:loading
 	on:click={handleClick}
-	on:blur={blur}
+	use:clickOutside={blur}
 >
 	Delete Team
 </button>

@@ -1,4 +1,6 @@
 <script>
+	import { clickOutside } from "$lib/modules/utilities/clickOutside";
+
 	export let confirmed = false;
 	export let isCoach = false;
 	export let confirmContract;
@@ -21,10 +23,10 @@
 {#if !isCoach}
 	<button
 		class="btn btn-sm btn-square {deleteWarning
-			? 'btn-warning'
-			: 'btn-error'}"
+			? 'btn-error'
+			: 'btn-ghost'}"
 		on:click={handleDelete}
-		on:blur={onDeleteBlur}
+		use:clickOutside={onDeleteBlur}
 	>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

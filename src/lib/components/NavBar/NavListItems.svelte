@@ -3,7 +3,6 @@
 </script>
 
 {#if $userProfile}
-	<li><a href="/app">Dashboard</a></li>
 	<li>
 		<a href="/app/event/track">
 			{#if $eventStarted}
@@ -15,4 +14,5 @@
 	</li>
 	<li><a href="/app/event">Events</a></li>
 	<li><a href="/app/team">Teams</a></li>
+	<li><a href="/">Home</a></li>
 {/if}

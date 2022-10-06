@@ -1,5 +1,6 @@
 <script>
     import TimerBox from "./TimerBox.svelte";
+	import { clickOutside } from "$lib/modules/utilities/clickOutside";
     import {
         time,
         totalMs,
@@ -66,6 +67,10 @@
     }
 
     let buttonClasses = "btn w-[127px] xs:w-[155px] sm:w-[184px] h-12";
+
+	function removeWarning() {
+		resetWarning = false;
+	}
 </script>
 
 <div class="flex justify-center mb-2">
@@ -73,6 +78,7 @@
         <button on:click={button1Click} class={buttonClasses}>Start</button>
         <button
             on:click={button2Click}
+			use:clickOutside={removeWarning}
             class="{buttonClasses} {resetWarning ? 'btn-warning' : ''}"
         >
             {#if $timerInterval}
