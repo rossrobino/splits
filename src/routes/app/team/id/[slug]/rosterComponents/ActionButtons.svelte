@@ -22,9 +22,7 @@
 
 {#if !isCoach}
 	<button
-		class="btn btn-sm btn-square {deleteWarning
-			? 'btn-error'
-			: 'btn-ghost'}"
+		class="btn btn-sm btn-square {deleteWarning ? 'btn-error' : ''}"
 		on:click={handleDelete}
 		use:clickOutside={onDeleteBlur}
 	>

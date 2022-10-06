@@ -1,5 +1,5 @@
 <script>
-	import { colorList } from "$lib/sessionStore";
+	import { colorList, theme } from "$lib/sessionStore";
 	import { Line } from "svelte-chartjs";
 	import { msToTime } from "$lib/modules/utilities/msToTime";
 	import "chart.js/auto";
@@ -38,9 +38,14 @@
 		labels,
 		datasets,
 	};
+
+	let tickColor = "";
+	let gridColor = "";
+	$: tickColor = $theme === "light" ? "rgb(34,39,49)" : "rgb(150,156,172)";
+	$: gridColor = $theme === "light" ? "#dfdfdf" : "rgb(80,86,102)";
 </script>
 
-<div class="mb-8 bg-base-200 rounded-lg p-2">
+<div class="mb-8 bg-base-200 rounded-xl p-2">
 	<Line
 		{data}
 		options={{
@@ -51,15 +56,32 @@
 						callback: function (value, index, ticks) {
 							return msToTime(value);
 						},
+						color: tickColor,
 					},
+					grid: {
+						color: gridColor,
+					}
+				},
+				x: {
+					ticks: {
+						color: tickColor,
+					},
+					grid: {
+						color: gridColor,
+					}
 				},
 			},
 			plugins: {
+				legend: {
+					labels: {
+						color: tickColor,
+					},
+				},
 				tooltip: {
 					callbacks: {
 						label: function (context) {
-							let label = context.parsed.y;
-							return msToTime(label);
+							let label = context.dataset.label + ": " + msToTime(context.parsed.y);
+							return label;
 						},
 					},
 				},
