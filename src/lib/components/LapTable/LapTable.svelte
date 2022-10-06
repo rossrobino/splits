@@ -1,12 +1,19 @@
 <script>
 	import { msToTime } from "$lib/modules/utilities/msToTime";
+	import { clickOutside } from "$lib/modules/utilities/clickOutside";
 	import Table from "$lib/components/Table.svelte";
 	import FinishButton from "./FinishButton.svelte";
 
-	export let finishButton = false;
+	export let live = false;
 	export let athletes = []; // [{first_name, last_name, laps[int]}, ...]
 	let columnNames = ["Athlete"];
 	let totalLaps = 0;
+
+	if (live) {
+		athletes.forEach((athlete) => {
+			athlete.deleteWarning = false;
+		});
+	}
 
 	$: {
 		columnNames = ["Athlete"];
@@ -19,14 +26,29 @@
 		for (let index = 0; index < totalLaps; index++) {
 			columnNames.push(`Lap ${index + 1}`);
 		}
+		if (live) columnNames.push("Remove");
 		columnNames = columnNames;
 	}
 
+	function removeLast(athlete) {
+		if (athlete.deleteWarning) {
+			athlete.laps.pop();
+			removeWarning(athlete);
+		} else {
+			athlete.deleteWarning = true;
+			athletes = athletes;
+		}
+	}
+
+	function removeWarning(athlete) {
+		athlete.deleteWarning = false;
+		athletes = athletes;
+	}
 </script>
 
 {#if totalLaps > 0}
 	<Table {columnNames} class="mb-8">
-		{#each athletes as athlete, i}
+		{#each athletes as athlete}
 			<tr>
 				<th>
 					<span>
@@ -52,10 +74,40 @@
 						{/if}
 					</td>
 				{/each}
+				{#if live}
+					<td>
+						<button
+							class="btn btn-square {athlete.deleteWarning
+								? 'btn-error'
+								: 'btn-ghost'}"
+							on:click={() => {
+								removeLast(athlete);
+							}}
+							use:clickOutside={() => {
+								removeWarning(athlete);
+							}}
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="w-6 h-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M6 18L18 6M6 6l12 12"
+								/>
+							</svg>
+						</button>
+					</td>
+				{/if}
 			</tr>
 		{/each}
 	</Table>
-	{#if finishButton}
+	{#if live}
 		<FinishButton />
 	{/if}
 {/if}

@@ -50,7 +50,7 @@
 </script>
 
 <button
-	class="btn {warning ? 'btn-warning' : 'btn-error'}"
+	class="btn {warning ? 'btn-error' : ''}"
 	class:loading
 	on:click={handleClick}
 	use:clickOutside={blur}

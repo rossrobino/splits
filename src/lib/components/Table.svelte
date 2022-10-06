@@ -7,7 +7,7 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<div class="card bg-base-100 shadow-xl {className}">
+<div class="card bg-base-100 border border-base-200 {className}">
 	<div class="card-body p-0">
 		<div class="overflow-x-auto w-full">
 			<table class="table w-full" class:table-compact={windowWidth < 640}>

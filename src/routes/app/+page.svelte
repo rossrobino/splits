@@ -10,7 +10,7 @@
 	} from "$lib/modules/info";
 	import PageHeader from "$lib/components/PageHeader.svelte";
 	import ResponsiveGrid from "$lib/components/ResponsiveGrid.svelte";
-	import { userProfile } from "$lib/sessionStore.js";
+	import { userProfile, eventStarted } from "$lib/sessionStore.js";
 </script>
 
 <svelte:head>
@@ -23,11 +23,11 @@
 </PageHeader>
 
 <Card
-	title="Quick Start"
+	title={$eventStarted ? "Timer" : "Quick Start"}
 	cardLink="/app/event/track"
 	class="mb-4 bg-primary text-primary-content"
 >
-	Start an event to track your splits.
+	{$eventStarted ? "Go to your active event." :"Start an event to track your splits."}
 </Card>
 
 <ResponsiveGrid>

@@ -14,7 +14,7 @@
 	class="
 		card bg-base-100 shadow-xl
 		{isLink
-		? 'hover:cursor-pointer active:scale-[0.98] transform transition duration-200 active:brightness-95'
+		? 'hover:cursor-pointer active:scale-[0.98] transform transition duration-200 active:brightness-95 active:shadow-md'
 		: ''} 
 		{className}
 	"

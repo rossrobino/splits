@@ -40,7 +40,7 @@
 	};
 </script>
 
-<div class="mb-8">
+<div class="mb-8 bg-base-200 rounded-lg p-2">
 	<Line
 		{data}
 		options={{
@@ -66,7 +66,4 @@
 			},
 		}}
 	/>
-	<!-- 
-	{JSON.stringify(athletes)}
-	{JSON.stringify(data)} -->
 </div>

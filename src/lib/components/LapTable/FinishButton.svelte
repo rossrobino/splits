@@ -13,6 +13,7 @@
 	} from "$lib/sessionStore";
 	import { supabase } from "$lib/modules/supabaseClient";
 	import { getCurrentDate } from "$lib/modules/utilities/getCurrentDate";
+	import { clickOutside } from "$lib/modules/utilities/clickOutside";
 
 	let warning = false;
 	let loading = false;
@@ -94,7 +95,7 @@
 	class:btn-success={warning}
 	class:loading
 	on:click={handleClick}
-	on:blur={onBlur}
+	use:clickOutside={onBlur}
 >
 	Finish
 </button>

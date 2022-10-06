@@ -60,7 +60,7 @@
 			shadow-xl 
 			cursor-pointer
 			{$timerInterval
-				? 'active:scale-[0.98] transform transition duration-200 active:brightness-95'
+				? 'active:scale-[0.98] transform transition duration-200 active:brightness-95 active:shadow-md'
 				: ''}
 			"
 			on:click={() => lap(athlete)}

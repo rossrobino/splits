@@ -34,7 +34,7 @@
 	{:else}
 		<Timer />
 		<Tiles /> <!-- Lap All button in Tiles -->
-		<LapTable athletes={$athletes} finishButton={true} />
+		<LapTable athletes={$athletes} live={true} />
 	{/if}
 	<ResetButton />
 {:else}
