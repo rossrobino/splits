@@ -152,7 +152,7 @@
 
 	<LapTable {athletes} />
 
-	<LineChart {athletes} />
+	<!-- <LineChart {athletes} /> -->
 
 	{#if userAthlete}
 		<button
