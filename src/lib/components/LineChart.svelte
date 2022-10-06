@@ -1,8 +1,26 @@
 <script>
 	import { colorList, theme } from "$lib/sessionStore";
-	import { Line } from "svelte-chartjs";
 	import { msToTime } from "$lib/modules/utilities/msToTime";
-	import 'chart.js/auto/auto';
+	import { Line } from "svelte-chartjs";
+	import {
+		Chart as ChartJS,
+		Title,
+		Tooltip,
+		Legend,
+		LineElement,
+		LinearScale,
+		PointElement,
+	} from "chart.js";
+
+	ChartJS.register(
+		Title,
+		Tooltip,
+		Legend,
+		LineElement,
+		LinearScale,
+		PointElement,
+		CategoryScale
+	);
 
 	export let athletes = [];
 
