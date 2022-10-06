@@ -16,9 +16,15 @@
 	let userAthlete = false;
 	let deleteWarning = false;
 	let deleteLoading = false;
+	let slug = "";
+
+	async function getSlug() {
+		slug = $page.params.slug;
+	}
 
 	onMount(async () => {
 		loading = true;
+		await getSlug();
 		await getEvent();
 		await getLaps();
 		loading = false;
@@ -38,7 +44,7 @@
 					)
 				`
 				)
-				.eq("id", $page.params.slug)
+				.eq("id", slug)
 				.single();
 			if (error) throw new Error(error.message);
 			event = data;
@@ -64,7 +70,7 @@
 					)
 				`
 				)
-				.eq("event_id", $page.params.slug);
+				.eq("event_id", slug);
 			if (error) throw new Error(error.message);
 			data.forEach((element) => {
 				let id;
@@ -109,7 +115,7 @@
 					.from("laps")
 					.delete()
 					.match({
-						event_id: $page.params.slug,
+						event_id: slug,
 						profile_id: $userProfile.id,
 					});
 				if (error) throw new Error(error.message);
@@ -152,7 +158,7 @@
 
 	<LapTable {athletes} />
 
-	<!-- <LineChart {athletes} /> -->
+	<LineChart {athletes} />
 
 	{#if userAthlete}
 		<button
