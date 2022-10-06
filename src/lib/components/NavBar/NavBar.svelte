@@ -6,7 +6,7 @@
 </script>
 
 
-<div class="navbar bg-base-200">
+<div class="navbar bg-base-200 pr-0">
     <div class="navbar-start">
         <div class="dropdown dropdown-hover">
             <label for="hamburger" tabindex="0" class="btn btn-ghost lg:hidden">

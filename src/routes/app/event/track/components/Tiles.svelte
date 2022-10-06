@@ -39,6 +39,7 @@
 			class="btn w-[260px] xs:w-[319px] sm:w-[377px] h-12 mt-2"
 			class:btn-warning={lapAllWarning}
 			on:blur={onBlur}
+			on:touchend={onBlur}
 			on:click={lapAll}
 		>
 			Lap All

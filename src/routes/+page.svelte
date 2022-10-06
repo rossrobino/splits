@@ -62,7 +62,7 @@
 		<AlertError error={hashError} />
 	{/if}
 {:else}
-	<section class="hero py-48">
+	<section class="hero py-52">
 		<div class="hero-content text-center">
 			<div class="max-w-md">
 				<h1 class="text-5xl sm:text-6xl font-bold">
