@@ -2,7 +2,7 @@
 	import { colorList, theme } from "$lib/sessionStore";
 	import { Line } from "svelte-chartjs";
 	import { msToTime } from "$lib/modules/utilities/msToTime";
-	import "chart.js/auto";
+	import "chart.js/auto/auto";
 
 	export let athletes = [];
 

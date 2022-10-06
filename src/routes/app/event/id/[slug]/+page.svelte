@@ -16,15 +16,9 @@
 	let userAthlete = false;
 	let deleteWarning = false;
 	let deleteLoading = false;
-	let slug = "";
-
-	async function getSlug() {
-		slug = $page.params.slug;
-	}
 
 	onMount(async () => {
 		loading = true;
-		await getSlug();
 		await getEvent();
 		await getLaps();
 		loading = false;
@@ -44,7 +38,7 @@
 					)
 				`
 				)
-				.eq("id", slug)
+				.eq("id", $page.params.slug)
 				.single();
 			if (error) throw new Error(error.message);
 			event = data;
@@ -70,7 +64,7 @@
 					)
 				`
 				)
-				.eq("event_id", slug);
+				.eq("event_id", $page.params.slug);
 			if (error) throw new Error(error.message);
 			data.forEach((element) => {
 				let id;
@@ -115,7 +109,7 @@
 					.from("laps")
 					.delete()
 					.match({
-						event_id: slug,
+						event_id: $page.params.slug,
 						profile_id: $userProfile.id,
 					});
 				if (error) throw new Error(error.message);
