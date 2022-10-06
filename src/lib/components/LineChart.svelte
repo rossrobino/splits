@@ -10,6 +10,7 @@
 		LineElement,
 		LinearScale,
 		PointElement,
+		CategoryScale,
 	} from "chart.js";
 
 	ChartJS.register(
