@@ -45,47 +45,52 @@
 	$: gridColor = $theme === "light" ? "#dfdfdf" : "rgb(80,86,102)";
 </script>
 
-<div class="mb-8 bg-base-200 rounded-xl p-2">
-	<Line
-		{data}
-		options={{
-			responsive: true,
-			scales: {
-				y: {
-					ticks: {
-						callback: function (value, index, ticks) {
-							return msToTime(value);
+{#if gridColor}
+	<div class="mb-8 bg-base-200 rounded-xl p-2">
+		<Line
+			{data}
+			options={{
+				responsive: true,
+				scales: {
+					y: {
+						ticks: {
+							callback: function (value, index, ticks) {
+								return msToTime(value);
+							},
+							color: tickColor,
 						},
-						color: tickColor,
+						grid: {
+							color: gridColor,
+						},
 					},
-					grid: {
-						color: gridColor,
-					}
-				},
-				x: {
-					ticks: {
-						color: tickColor,
-					},
-					grid: {
-						color: gridColor,
-					}
-				},
-			},
-			plugins: {
-				legend: {
-					labels: {
-						color: tickColor,
-					},
-				},
-				tooltip: {
-					callbacks: {
-						label: function (context) {
-							let label = context.dataset.label + ": " + msToTime(context.parsed.y);
-							return label;
+					x: {
+						ticks: {
+							color: tickColor,
+						},
+						grid: {
+							color: gridColor,
 						},
 					},
 				},
-			},
-		}}
-	/>
-</div>
+				plugins: {
+					legend: {
+						labels: {
+							color: tickColor,
+						},
+					},
+					tooltip: {
+						callbacks: {
+							label: function (context) {
+								let label =
+									context.dataset.label +
+									": " +
+									msToTime(context.parsed.y);
+								return label;
+							},
+						},
+					},
+				},
+			}}
+		/>
+	</div>
+{/if}
