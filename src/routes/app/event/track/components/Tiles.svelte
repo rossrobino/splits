@@ -2,6 +2,7 @@
 	import { totalMs, timerInterval, athletes } from "$lib/sessionStore";
 	import ResponsiveGrid from "$lib/components/ResponsiveGrid.svelte";
 	import { msToTime } from "$lib/modules/utilities/msToTime";
+	import { clickOutside } from "$lib/modules/utilities/clickOutside";
 
 	let colors = ["primary", "base-100", "neutral"];
 	let lapAllWarning = false;
@@ -38,8 +39,7 @@
 		<button
 			class="btn w-[260px] xs:w-[319px] sm:w-[377px] h-12 mt-2"
 			class:btn-warning={lapAllWarning}
-			on:blur={onBlur}
-			on:touchcancel={onBlur}
+			use:clickOutside={onBlur}
 			on:click={lapAll}
 		>
 			Lap All
