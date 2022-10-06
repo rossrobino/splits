@@ -45,7 +45,7 @@
 	$: gridColor = $theme === "light" ? "#dfdfdf" : "rgb(80,86,102)";
 </script>
 
-{#if gridColor}
+{#if gridColor && athletes[0]}
 	<div class="mb-8 bg-base-200 rounded-xl p-2">
 		<Line
 			{data}
