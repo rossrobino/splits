@@ -1,10 +1,17 @@
 <script>
     import { theme } from "$lib/sessionStore";
 	import { afterUpdate } from "svelte";
-
+	import { msToTime } from "$lib/modules/utilities/msToTime"
+ 
     const size = "5";
     let checked = false; // default light
     $: $theme = checked ? "dark" : "light";
+
+	let now = new Date();
+	now = now.getHours();
+	if (now > 6 && now < 20) {
+		checked = false;
+	}
 
 	let colorDiv;
 	let compStyles;
