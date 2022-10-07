@@ -68,11 +68,11 @@
 		style="left: { scrollY * innerWidth / 600 / 5 + innerWidth / 8}px; top: { -scrollY / 15 + innerHeight / 2.2 }px;"
 	/>
 	<div
-		class="bg-secondary p-1 w-1/3 h-52 rounded-full fixed"
+		class="bg-accent p-1 w-1/3 h-52 rounded-full fixed"
 		style="right: { scrollY * innerWidth / 600 / 5 + innerWidth / 8 }px; top: { -scrollY / 3.2 + innerHeight / 1.5 }px;"
 	/>
 	<div
-		class="bg-accent p-1 w-1/3 h-52 rounded-full fixed"
+		class="bg-secondary p-1 w-1/3 h-52 rounded-full fixed"
 		style="right: { -scrollY * innerWidth / 600 / 20 + innerWidth / 2.5 }px; top: { -scrollY / 2 + innerHeight * .95 }px;"
 	/>
 	{/if}
