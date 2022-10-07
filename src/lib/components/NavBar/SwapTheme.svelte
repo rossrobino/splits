@@ -11,6 +11,8 @@
 	now = now.getHours();
 	if (now > 6 && now < 20) {
 		checked = false;
+	} else {
+		checked = true;
 	}
 
 	let colorDiv;
