@@ -44,7 +44,7 @@
 	$: if (innerWidth < 768) fadeDuration = 2000;
 	$: if (scrollY > 50) showHero2 = true;
 	$: if (scrollY > 800) showHero3 = true;
-	$: if (scrollY > 1100) showHero4 = true;
+	$: if (scrollY > 1000) showHero4 = true;
 </script>
 
 <svelte:head>
@@ -63,18 +63,26 @@
 	{/if}
 {:else}
 	{#if innerHeight}
-	<div
-		class="bg-primary p-1 w-1/3 h-52 rounded-full fixed"
-		style="left: { scrollY * innerWidth / 600 / 5 + innerWidth / 8}px; top: { -scrollY / 15 + innerHeight / 2.2 }px;"
-	/>
-	<div
-		class="bg-accent p-1 w-1/3 h-52 rounded-full fixed"
-		style="right: { scrollY * innerWidth / 600 / 5 + innerWidth / 8 }px; top: { -scrollY / 3.2 + innerHeight / 1.5 }px;"
-	/>
-	<div
-		class="bg-secondary p-1 w-1/3 h-52 rounded-full fixed"
-		style="right: { -scrollY * innerWidth / 600 / 20 + innerWidth / 2.5 }px; top: { -scrollY / 2 + innerHeight * .95 }px;"
-	/>
+		<div
+			class="bg-primary p-1 w-1/3 h-52 rounded-full fixed"
+			style="
+				left: {(scrollY * innerWidth) / 600 / 5 + innerWidth / 8}px; 
+				top: {-scrollY / 15 + innerHeight / 2.2}px;
+			"
+		/>
+		<div
+			class="bg-accent p-1 w-1/3 h-52 rounded-full fixed"
+			style="
+				right: {(scrollY * innerWidth) / 600 / 5 + innerWidth / 8}px; 
+				top: {-scrollY / 3.2 + innerHeight / 1.5}px;
+			"
+		/>
+		<div
+			class="bg-secondary p-1 w-1/3 h-52 rounded-full fixed"
+			style="
+				right: {(-scrollY * innerWidth) / 600 / 20 + innerWidth / 2.5}px; 
+				top: {-scrollY / 2 + innerHeight * 0.95}px;"
+		/>
 	{/if}
 	<div class="backdrop-blur-[130px] text-accent-content">
 		<section class="hero py-52">
@@ -96,9 +104,7 @@
 				<div class="h-32">
 					{#if showHero2}
 						<div in:fly={{ x: -400, duration }}>
-							<h2
-								class="text-4xl font-bold pb-6"
-							>
+							<h2 class="text-4xl font-bold pb-6">
 								On your mark,
 							</h2>
 							<p>
@@ -143,9 +149,7 @@
 					<div class="h-32">
 						{#if showHero3}
 							<div in:fly={{ x: 400, duration }}>
-								<h2
-									class="text-6xl font-bold pb-6"
-								>
+								<h2 class="text-6xl font-bold pb-6">
 									get set,
 								</h2>
 								<p>Instant analysis after each event.</p>
@@ -156,9 +160,7 @@
 					<div class="h-32">
 						{#if showHero3}
 							<div in:fly={{ x: 400, duration }}>
-								<h2
-									class="text-6xl font-bold pb-6"
-								>
+								<h2 class="text-6xl font-bold pb-6">
 									get set,
 								</h2>
 								<p>Instant analysis after each event.</p>
@@ -194,8 +196,12 @@
 						>
 							go.
 						</h2>
-						<a href="/app" class="btn text-primary-content">Get Started</a>
+						<a href="/app" class="btn text-primary-content">
+							Get Started
+						</a>
 					</div>
+				{:else}
+					<div class="p-12" />
 				{/if}
 			</div>
 		</section>
