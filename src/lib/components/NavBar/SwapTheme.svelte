@@ -9,10 +9,10 @@
 
 	let now = new Date();
 	now = now.getHours();
-	if (now > 6 && now < 20) {
-		checked = false;
-	} else {
+	if (now < 6 || now > 20) {
 		checked = true;
+	} else {
+		checked = false;
 	}
 
 	let colorDiv;
