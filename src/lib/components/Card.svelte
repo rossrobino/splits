@@ -13,7 +13,7 @@
 
 <div
 	class="
-		card bg-base-100 shadow-xl
+		card shadow-xl
 		{isLink
 		? 'hover:cursor-pointer active:scale-[0.98] transform transition duration-200 active:brightness-95 active:shadow-md'
 		: ''} 
