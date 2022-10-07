@@ -47,7 +47,7 @@
 </script>
 
 {#if totalLaps > 0}
-	<Table {columnNames} class="mb-8">
+	<Table {columnNames} class="mb-4">
 		{#each athletes as athlete}
 			<tr>
 				<th>

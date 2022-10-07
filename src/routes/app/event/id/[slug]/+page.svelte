@@ -5,6 +5,7 @@
 	import { goto } from "$app/navigation";
 	import { onMount } from "svelte";
 	import { supabase } from "$lib/modules/supabaseClient";
+	import { clickOutside } from "$lib/modules/utilities/clickOutside";
 	import PageHeader from "$lib/components/PageHeader.svelte";
 	import LoadingBar from "$lib/components/LoadingBar.svelte";
 	import LapTable from "$lib/components/LapTable/LapTable.svelte";
@@ -157,10 +158,10 @@
 	{#if userAthlete}
 		<button
 			class="btn"
-			class:btn-warning={deleteWarning}
+			class:btn-error={deleteWarning}
 			class:loading={deleteLoading}
 			on:click={deleteMyResults}
-			on:blur={blurDelete}
+			use:clickOutside={blurDelete}
 		>
 			Delete My Results
 		</button>

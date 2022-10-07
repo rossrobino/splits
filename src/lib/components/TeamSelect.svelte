@@ -61,31 +61,40 @@
 </script>
 
 <div class="mb-8">
-	{#if !loading && $currentTeams[0]}
+	{#if loading}
+		<LoadingBar />
+	{:else}
 		<H2>Teams</H2>
 		<Table columnNames={["Team", "Coach"]}>
-			{#each $currentTeams as team}
-				<tr
-					on:click={() => rowClick(`/app/team/id/${team.team_name}`)}
-					class="cursor-pointer group"
-				>
-					<th class="group-hover:bg-base-300 transform transition duration-250">
-						#{team.team_name}
-					</th>
-					<td class="group-hover:bg-base-300 transform transition duration-250">
-						<span>{team.coach}</span>
-						<br />
-						<a
-							href="/app/profile/{team.coach_username}"
-							class="badge badge-secondary badge-sm"
+			{#if $currentTeams[0]}
+				{#each $currentTeams as team}
+					<tr
+						on:click={() =>
+							rowClick(`/app/team/id/${team.team_name}`)}
+						class="cursor-pointer group"
+					>
+						<th
+							class="group-hover:bg-base-300 transform transition duration-250"
 						>
-							@{team.coach_username}
-						</a>
-					</td>
-				</tr>
-			{/each}
+							#{team.team_name}
+						</th>
+						<td
+							class="group-hover:bg-base-300 transform transition duration-250"
+						>
+							<span>{team.coach}</span>
+							<br />
+							<a
+								href="/app/profile/{team.coach_username}"
+								class="badge badge-secondary badge-sm"
+							>
+								@{team.coach_username}
+							</a>
+						</td>
+					</tr>
+				{/each}
+			{:else}
+				<tr><td>No teams yet - <a href="/app/team/new" class="underline">create a team</a>.</td></tr>
+			{/if}
 		</Table>
-	{:else if loading}
-		<LoadingBar />
 	{/if}
 </div>

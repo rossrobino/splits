@@ -68,7 +68,7 @@
 			<div class="card-body p-4 sm:p-6">
 				<h2 class="card-title text-base xs:text-lg sm:text-xl">
 					{athlete.first_name}
-					{athlete.last_name}
+					{`${athlete.guestId ? "#" : ""}${athlete.last_name}`}
 				</h2>
 				<div class="font-mono">
 					<div class="stat-title text-sm xs:text-base sm:text-lg">

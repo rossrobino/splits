@@ -89,51 +89,56 @@
 
 {#if loading}
 	<LoadingBar />
-{:else if events.length > 0}
+{:else}
 	<div>
 		<H2>
-			{organized
-				? `Organized Events`
-				: "Entries"}
+			{organized ? `Organized Events` : "Entries"}
 		</H2>
 		<Table {columnNames} class="mb-8">
-			{#each events as event}
-				<tr
-					class="cursor-pointer group"
-					on:click={() => rowClick(`/app/event/id/${event.id}`)}
-				>
-					<th
-						class="group-hover:bg-base-300 transform transition duration-250"
+			{#if events.length > 0}
+				{#each events as event}
+					<tr
+						class="cursor-pointer group"
+						on:click={() => rowClick(`/app/event/id/${event.id}`)}
 					>
-						<div>{event.name}</div>
-						<!-- <div class="text-sm opacity-50">Location</div> -->
-					</th>
+						<th
+							class="group-hover:bg-base-300 transform transition duration-250"
+						>
+							<div>{event.name}</div>
+							<!-- <div class="text-sm opacity-50">Location</div> -->
+						</th>
 
-					{#if !organized}
+						{#if !organized}
+							<td
+								class="group-hover:bg-base-300 transform transition duration-250"
+							>
+								<span>
+									{event.organizer.first_name}
+									{event.organizer.last_name}
+								</span>
+								<br />
+								<a
+									href="/app/profile/{event.organizer
+										.username}"
+									class="badge badge-secondary badge-sm"
+								>
+									@{event.organizer.username}
+								</a>
+							</td>
+						{/if}
+
 						<td
 							class="group-hover:bg-base-300 transform transition duration-250"
 						>
-							<span>
-								{event.organizer.first_name}
-								{event.organizer.last_name}
-							</span>
-							<br />
-							<a
-								href="/app/profile/{event.organizer.username}"
-								class="badge badge-secondary badge-sm"
-							>
-								@{event.organizer.username}
-							</a>
+							{event.date}
 						</td>
-					{/if}
-
-					<td
-						class="group-hover:bg-base-300 transform transition duration-250"
-					>
-						{event.date}
-					</td>
+					</tr>
+				{/each}
+			{:else}
+				<tr>
+					<td>No events yet - <a href="/app/event/track" class="underline">start an event</a>.</td>
 				</tr>
-			{/each}
+			{/if}
 		</Table>
 	</div>
 {/if}
