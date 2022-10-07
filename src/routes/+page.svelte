@@ -44,7 +44,6 @@
 	$: if (scrollY > 50) showHero2 = true;
 	$: if (scrollY > 800) showHero3 = true;
 	$: if (scrollY > 1100) showHero4 = true;
-
 </script>
 
 <svelte:head>
@@ -62,125 +61,140 @@
 		<AlertError error={hashError} />
 	{/if}
 {:else}
-	<section class="hero py-52">
-		<div class="hero-content text-center">
-			<div class="max-w-md">
-				<h1 class="text-5xl sm:text-6xl font-bold">
-					{title.toLowerCase()}
-				</h1>
-				<p class="py-6">{tagline}</p>
-				<a href="/app" class="btn btn-accent">Get Started</a>
+	<div
+		class="bg-primary p-1 w-1/3 h-52 rounded-full fixed"
+		style="left: {scrollY * innerWidth/600 / 5 + 70}px; top: {300}px;"
+	/>
+	<div
+		class="bg-secondary p-1 w-1/3 h-56 rounded-full fixed"
+		style="right: {scrollY * innerWidth/600 / 5 + 100}px; top: {scrollY / 7 + 150}px;"
+	/>
+	<div
+		class="bg-accent p-1 w-1/3 h-56 rounded-full fixed"
+		style="right: {scrollY * innerWidth/600 / 20 + 150}px; top: {- scrollY / 20 + 550}px;"
+	/>
+	<div class="backdrop-blur-3xl text-accent-content">
+		<section class="hero py-52">
+			<div class="hero-content text-center ">
+				<div class="max-w-md">
+					<h1 class="text-5xl sm:text-6xl font-bold">
+						{title.toLowerCase()}
+					</h1>
+					<p class="py-6">{tagline}</p>
+					<a href="/app" class="btn text-primary-content">
+						Get Started
+					</a>
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<section
-		class="hero bg-gradient-to-b from-base-100 via-base-200 to-base-100 fullscreen:rounded-lg p-2 py-12"
-	>
-		<div class="hero-content grid grid-cols-1 md:grid-cols-2 gap-8">
-			<div class="h-32">
-				{#if showHero2}
-					<div in:fly={{ x: -400, duration }}>
+		<section class="hero p-2 py-12">
+			<div class="hero-content grid grid-cols-1 md:grid-cols-2 gap-8">
+				<div class="h-32">
+					{#if showHero2}
+						<div in:fly={{ x: -400, duration }}>
+							<h2
+								class="text-4xl font-bold pb-6"
+							>
+								On your mark,
+							</h2>
+							<p>
+								Track all participants in real time with the
+								multi-athlete timer.
+							</p>
+						</div>
+					{/if}
+				</div>
+				<Card
+					isLink={false}
+					class="w-fit justify-self-center md:justify-self-start"
+				>
+					<img
+						src={$theme === "light" ? tiles : tilesDark}
+						height="450px"
+						width="300px"
+						alt="Timer tiles"
+						class="rounded"
+					/>
+				</Card>
+			</div>
+		</section>
+
+		<section class="hero px-2 py-12">
+			<div class="hero-content grid grid-cols-1 md:grid-cols-2 gap-8">
+				{#if innerWidth > 768}
+					<Card
+						isLink={false}
+						class="w-fit justify-self-center md:justify-self-start"
+					>
+						<img
+							src={$theme === "light"
+								? eventChart
+								: eventChartDark}
+							height="309px"
+							width="300px"
+							alt="Event chart"
+							class="rounded"
+						/>
+					</Card>
+					<div class="h-32">
+						{#if showHero3}
+							<div in:fly={{ x: 400, duration }}>
+								<h2
+									class="text-6xl font-bold pb-6"
+								>
+									get set,
+								</h2>
+								<p>Instant analysis after each event.</p>
+							</div>
+						{/if}
+					</div>
+				{:else}
+					<div class="h-32">
+						{#if showHero3}
+							<div in:fly={{ x: 400, duration }}>
+								<h2
+									class="text-6xl font-bold pb-6"
+								>
+									get set,
+								</h2>
+								<p>Instant analysis after each event.</p>
+							</div>
+						{/if}
+					</div>
+
+					<Card
+						isLink={false}
+						class="w-fit justify-self-center md:justify-self-start"
+					>
+						<img
+							src={$theme === "light"
+								? eventChart
+								: eventChartDark}
+							height="309px"
+							width="300px"
+							alt="Event chart"
+							class="rounded"
+						/>
+					</Card>
+				{/if}
+			</div>
+		</section>
+
+		<section class="hero py-24">
+			<div class="hero-content text-center">
+				{#if showHero4}
+					<div class="max-w-md">
 						<h2
-							class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-6"
+							class="text-8xl font-bold pb-8"
+							in:fade={{ duration: fadeDuration }}
 						>
-							On your mark,
+							go.
 						</h2>
-						<p>
-							Track all participants in real time with the
-							multi-athlete timer.
-						</p>
+						<a href="/app" class="btn">Get Started</a>
 					</div>
 				{/if}
 			</div>
-			<Card
-				isLink={false}
-				class="w-fit justify-self-center md:justify-self-start"
-			>
-				<img
-					src={$theme === "light" ? tiles : tilesDark}
-					height="450px"
-					width="300px"
-					alt="Timer tiles"
-					class="rounded"
-				/>
-			</Card>
-		</div>
-	</section>
-
-	<section class="hero px-2 py-12">
-		<div class="hero-content grid grid-cols-1 md:grid-cols-2 gap-8">
-			{#if innerWidth > 768}
-				<Card
-					isLink={false}
-					class="w-fit justify-self-center md:justify-self-start"
-				>
-					<img
-						src={$theme === "light" ? eventChart : eventChartDark}
-						height="309px"
-						width="300px"
-						alt="Event chart"
-						class="rounded"
-					/>
-				</Card>
-				<div class="h-32">
-					{#if showHero3}
-						<div in:fly={{ x: 400, duration }}>
-							<h2
-								class="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary pb-6"
-							>
-								get set,
-							</h2>
-							<p>Instant analysis after each event.</p>
-						</div>
-					{/if}
-				</div>
-			{:else}
-				<div class="h-32">
-					{#if showHero3}
-						<div in:fly={{ x: 400, duration }}>
-							<h2
-								class="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary pb-6"
-							>
-								get set,
-							</h2>
-							<p>Instant analysis after each event.</p>
-						</div>
-					{/if}
-				</div>
-
-				<Card
-					isLink={false}
-					class="w-fit justify-self-center md:justify-self-start"
-				>
-
-					<img
-						src={$theme === "light" ? eventChart : eventChartDark}
-						height="309px"
-						width="300px"
-						alt="Event chart"
-						class="rounded"
-					/>
-				</Card>
-			{/if}
-		</div>
-	</section>
-
-	<section
-		class="hero py-24 bg-base-200 fullscreen:rounded-lg bg-gradient-to-b from-base-100 via-base-200 to-base-100"
-	>
-		<div class="hero-content text-center">
-			{#if showHero4}
-				<div class="max-w-md">
-					<h2
-						class="text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pb-8"
-						in:fade={{ duration: fadeDuration }}
-					>
-						go.
-					</h2>
-					<a href="/app" class="btn">Get Started</a>
-				</div>
-			{/if}
-		</div>
-	</section>
+		</section>
+	</div>
 {/if}

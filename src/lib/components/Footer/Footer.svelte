@@ -3,7 +3,7 @@
 </script>
 
 <footer
-	class="footer grid-flow-col gap-3 items-center px-4 py-3 bg-neutral text-neutral-content"
+	class="footer grid-flow-col gap-3 items-center px-4 py-3 bg-neutral text-neutral-content z-10"
 >
 	<div class="justify-self-start">
 		<p>
