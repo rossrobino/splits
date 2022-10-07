@@ -62,19 +62,21 @@
 		<AlertError error={hashError} />
 	{/if}
 {:else}
+	{#if innerHeight}
 	<div
 		class="bg-primary p-1 w-1/3 h-52 rounded-full fixed"
-		style="left: {scrollY * innerWidth/600 / 5 + 70}px; top: {- scrollY / 20 + 300}px;"
+		style="left: { scrollY * innerWidth / 600 / 5 + innerWidth / 8}px; top: { -scrollY / 15 + innerHeight / 2.2 }px;"
 	/>
 	<div
-		class="bg-secondary p-1 w-1/3 h-56 rounded-full fixed"
-		style="right: {scrollY * innerWidth/600 / 5 + 100}px; top: {scrollY / 30 + 400}px;"
+		class="bg-secondary p-1 w-1/3 h-52 rounded-full fixed"
+		style="right: { scrollY * innerWidth / 600 / 5 + innerWidth / 8 }px; top: { -scrollY / 3.2 + innerHeight / 1.5 }px;"
 	/>
 	<div
-		class="bg-accent p-1 w-1/3 h-56 rounded-full fixed"
-		style="right: {scrollY * innerWidth/600 / 20 + 150}px; top: {- scrollY / 7 + 550}px;"
+		class="bg-accent p-1 w-1/3 h-52 rounded-full fixed"
+		style="right: { -scrollY * innerWidth / 600 / 20 + innerWidth / 2.5 }px; top: { -scrollY / 2 + innerHeight * .95 }px;"
 	/>
-	<div class="backdrop-blur-3xl text-accent-content">
+	{/if}
+	<div class="backdrop-blur-[140px] text-accent-content">
 		<section class="hero py-52">
 			<div class="hero-content text-center ">
 				<div class="max-w-md">
@@ -108,7 +110,7 @@
 				</div>
 				<Card
 					isLink={false}
-					class="w-fit justify-self-center md:justify-self-start"
+					class="w-fit justify-self-center md:justify-self-start bg-base-100 opacity-90 bg-opacity-70"
 				>
 					<img
 						src={$theme === "light" ? tiles : tilesDark}
@@ -126,7 +128,7 @@
 				{#if innerWidth > 768}
 					<Card
 						isLink={false}
-						class="w-fit justify-self-center md:justify-self-start"
+						class="w-fit justify-self-center md:justify-self-start bg-base-100 opacity-90 bg-opacity-70"
 					>
 						<img
 							src={$theme === "light"
@@ -166,7 +168,7 @@
 
 					<Card
 						isLink={false}
-						class="w-fit justify-self-center md:justify-self-start"
+						class="w-fit justify-self-center md:justify-self-start bg-base-100 opacity-90 bg-opacity-70"
 					>
 						<img
 							src={$theme === "light"
