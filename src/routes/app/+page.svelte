@@ -25,7 +25,8 @@
 <Card
 	title={$eventStarted ? "Timer" : "Quick Start"}
 	cardLink="/app/event/track"
-	class="mb-4 bg-primary text-primary-content"
+	primary={true}
+	class="mb-4"
 >
 	{$eventStarted ? "Go to your active event." :"Start an event to track your splits."}
 </Card>

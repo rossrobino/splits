@@ -3,6 +3,7 @@
 	export let title = "";
 	export let cardLink = "/";
 	export let isLink = true;
+	export let primary = false;
 	let className = "";
 	export { className as class };
 	export let cardClick = () => {
@@ -17,6 +18,7 @@
 		? 'hover:cursor-pointer active:scale-[0.98] transform transition duration-200 active:brightness-95 active:shadow-md'
 		: ''} 
 		{className}
+		{primary ? "bg-primary text-primary-content" : ""}
 	"
 	on:click={cardClick}
 >

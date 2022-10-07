@@ -17,6 +17,7 @@
 	let hashError;
 
 	let innerWidth;
+	let innerHeight;
 	let scrollY;
 	let duration = 500;
 	let fadeDuration = 1000;
@@ -51,7 +52,7 @@
 	<meta name="description" content={tagline} />
 </svelte:head>
 
-<svelte:window bind:innerWidth bind:scrollY />
+<svelte:window bind:innerWidth bind:innerHeight bind:scrollY />
 
 {#if hashType === "recovery"}
 	<!-- password recovery -->
@@ -63,15 +64,15 @@
 {:else}
 	<div
 		class="bg-primary p-1 w-1/3 h-52 rounded-full fixed"
-		style="left: {scrollY * innerWidth/600 / 5 + 70}px; top: {300}px;"
+		style="left: {scrollY * innerWidth/600 / 5 + 70}px; top: {- scrollY / 20 + 300}px;"
 	/>
 	<div
 		class="bg-secondary p-1 w-1/3 h-56 rounded-full fixed"
-		style="right: {scrollY * innerWidth/600 / 5 + 100}px; top: {scrollY / 7 + 150}px;"
+		style="right: {scrollY * innerWidth/600 / 5 + 100}px; top: {scrollY / 30 + 400}px;"
 	/>
 	<div
 		class="bg-accent p-1 w-1/3 h-56 rounded-full fixed"
-		style="right: {scrollY * innerWidth/600 / 20 + 150}px; top: {- scrollY / 20 + 550}px;"
+		style="right: {scrollY * innerWidth/600 / 20 + 150}px; top: {- scrollY / 7 + 550}px;"
 	/>
 	<div class="backdrop-blur-3xl text-accent-content">
 		<section class="hero py-52">
@@ -191,7 +192,7 @@
 						>
 							go.
 						</h2>
-						<a href="/app" class="btn">Get Started</a>
+						<a href="/app" class="btn text-primary-content">Get Started</a>
 					</div>
 				{/if}
 			</div>

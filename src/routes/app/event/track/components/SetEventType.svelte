@@ -31,7 +31,7 @@
 
 <ResponsiveGrid>
 	<Card
-		class="bg-primary text-primary-content"
+		primary={true}
 		title="Group"
 		cardClick={startGroup}
 	>
