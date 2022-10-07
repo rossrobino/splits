@@ -76,7 +76,7 @@
 		style="right: { -scrollY * innerWidth / 600 / 20 + innerWidth / 2.5 }px; top: { -scrollY / 2 + innerHeight * .95 }px;"
 	/>
 	{/if}
-	<div class="backdrop-blur-[140px] text-accent-content">
+	<div class="backdrop-blur-[130px] text-accent-content">
 		<section class="hero py-52">
 			<div class="hero-content text-center ">
 				<div class="max-w-md">
