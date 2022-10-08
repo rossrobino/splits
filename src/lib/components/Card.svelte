@@ -18,7 +18,7 @@
 		? 'hover:cursor-pointer active:scale-[0.98] transform transition duration-200 active:brightness-95 active:shadow-md'
 		: ''} 
 		{className}
-		{primary ? "bg-primary text-primary-content" : ""}
+		{primary ? "bg-primary text-primary-content" : "bg-base-100"}
 	"
 	on:click={cardClick}
 >
