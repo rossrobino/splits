@@ -4,7 +4,7 @@
 </script>
 
 {#if $user}
-	<div class="p-4 sm:p-8"><slot /></div>
+	<div class="p-4 sm:p-8 max-w-6xl mx-auto overflow-hidden"><slot /></div>
 {:else}
 	<Login />
 {/if}

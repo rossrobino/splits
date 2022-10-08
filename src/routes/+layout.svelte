@@ -49,7 +49,7 @@
 		<header>
 			<NavBar />
 		</header>
-		<main class="max-w-6xl mx-auto overflow-hidden">
+		<main>
 			<slot />
 		</main>
 	</div>
