@@ -49,7 +49,7 @@
 		<header>
 			<NavBar />
 		</header>
-		<main>
+		<main class="overflow-hidden">
 			<slot />
 		</main>
 	</div>
