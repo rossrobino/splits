@@ -67,12 +67,20 @@
 				: ''}
 			"
 			style="
-				background-color: {$colorList[athlete.uid % 5]};
-				color: {athlete.uid % 5 == 0 ? 'hsl(var(--pc))'
-				: athlete.uid % 5 == 1 ? 'hsl(var(--ac))'
-				: athlete.uid % 5 == 2 ? 'hsl(var(--sc))'
-				: athlete.uid % 5 == 3 ? 'hsl(var(--n))'
-				: athlete.uid % 5 == 4 ? 'hsl(var(--nc))'
+				background-color: {athlete.uid % 5 == 3
+				? 'hsl(var(--b2))'
+				: $colorList[athlete.uid % 5]};
+
+				color: {athlete.uid % 5 == 0
+				? 'hsl(var(--pc))'
+				: athlete.uid % 5 == 1
+				? 'hsl(var(--ac))'
+				: athlete.uid % 5 == 2
+				? 'hsl(var(--sc))'
+				: athlete.uid % 5 == 3
+				? 'hsl(var(--bc))'
+				: athlete.uid % 5 == 4
+				? 'hsl(var(--nc))'
 				: 'rgb(253,253,253)'};
 			"
 			on:click={() => lap(athlete)}
