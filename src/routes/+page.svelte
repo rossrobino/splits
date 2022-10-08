@@ -71,14 +71,14 @@
 			"
 		/>
 		<div
-			class="bg-accent p-1 w-64 md:w-[32rem] h-56 md:h-72 rounded-full fixed"
+			class="bg-secondary p-1 w-64 md:w-[32rem] h-56 md:h-72 rounded-full fixed"
 			style="
 				right: {(scrollY * innerWidth) / 600 / 5 + innerWidth / 8}px; 
 				top: {-scrollY / 4 + innerHeight / 1.5}px;
 			"
 		/>
 		<div
-			class="bg-secondary p-1 w-64 md:w-[32rem] h-56 md:h-72 rounded-full fixed"
+			class="bg-accent p-1 w-64 md:w-[32rem] h-56 md:h-72 rounded-full fixed"
 			style="
 				right: {(-scrollY * innerWidth) / 600 / 20 + innerWidth / 2.5}px; 
 				top: {-scrollY / 2.5 + innerHeight * 0.85}px;"
