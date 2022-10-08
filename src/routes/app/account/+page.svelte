@@ -135,8 +135,7 @@
 			: ''} w-full max-w-sm mb-3"
 	>
 		@<input
-			class="h-full w-[90%] focus:outline-0 bg-base-100"
-			style="-webkit-appearance:none; -moz-appearance: none; appearance: none;"
+			class="h-full w-[90%] focus:outline-0 focus:ring-0 focus:ring-offset-0 bg-base-100"
 			id="username"
 			type="text"
 			placeholder="new username"
