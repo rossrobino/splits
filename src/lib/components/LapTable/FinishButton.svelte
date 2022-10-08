@@ -25,6 +25,8 @@
 			for (const athlete of $athletes) {
 				await uploadLaps(athlete);
 			}
+			resetEvent();
+			goto(`/app/event/id/${eventId}`);
 		} else {
 			warning = true;
 		}
@@ -63,8 +65,6 @@
 				})
 				.single();
 			if (error) throw new Error(error.message);
-			resetEvent();
-			goto(`/app/event/id/${eventId}`);
 		} catch (error) {
 			console.log(error.message);
 		} finally {
@@ -87,6 +87,10 @@
 
 	function onBlur() {
 		warning = false;
+	}
+
+	function delay(time) {
+		return new Promise((resolve) => setTimeout(resolve, time));
 	}
 </script>
 

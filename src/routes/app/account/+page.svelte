@@ -136,6 +136,7 @@
 	>
 		@<input
 			class="h-full w-[90%] focus:outline-0 bg-base-100"
+			style="-webkit-appearance:none; -moz-appearance: none; appearance: none;"
 			id="username"
 			type="text"
 			placeholder="new username"
