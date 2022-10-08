@@ -1,10 +1,14 @@
 <script>
-	import { totalMs, timerInterval, athletes } from "$lib/sessionStore";
+	import {
+		totalMs,
+		timerInterval,
+		athletes,
+		colorList,
+	} from "$lib/sessionStore";
 	import ResponsiveGrid from "$lib/components/ResponsiveGrid.svelte";
 	import { msToTime } from "$lib/modules/utilities/msToTime";
 	import { clickOutside } from "$lib/modules/utilities/clickOutside";
 
-	let colors = ["primary", "base-100", "neutral"];
 	let lapAllWarning = false;
 
 	function lap(athlete) {
@@ -55,13 +59,21 @@
 	{#each $athletes as athlete}
 		<div
 			class="
-				card bg-{colors[athlete.uid % 3]} 
-				text-{colors[athlete.uid % 3]}-content 
+			card
 			shadow-xl 
 			cursor-pointer
 			{$timerInterval
 				? 'active:scale-[0.98] transform transition duration-200 active:brightness-95 active:shadow-md'
 				: ''}
+			"
+			style="
+				background-color: {$colorList[athlete.uid % 5]};
+				color: {athlete.uid % 5 == 0 ? 'hsl(var(--pc))'
+				: athlete.uid % 5 == 1 ? 'hsl(var(--ac))'
+				: athlete.uid % 5 == 2 ? 'hsl(var(--sc))'
+				: athlete.uid % 5 == 3 ? 'hsl(var(--n))'
+				: athlete.uid % 5 == 4 ? 'hsl(var(--nc))'
+				: 'rgb(253,253,253)'};
 			"
 			on:click={() => lap(athlete)}
 		>

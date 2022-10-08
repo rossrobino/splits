@@ -2,10 +2,10 @@ import { writable } from "svelte/store";
 
 export const colorList = writable([
 	"rgb(68,0,245)",
-	"rgb(233,0,169)",
 	"rgb(50,196,177)",
-	"rgb(46,52,64)",
+	"rgb(233,0,169)",
 	"rgb(224,224,224)",
+	"rgb(46,52,64)",
 ]);
 
 // base layout - user auth and profile
