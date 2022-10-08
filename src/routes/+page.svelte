@@ -67,7 +67,7 @@
 			class="bg-primary p-1 w-64 md:w-[32rem] h-56 md:h-72 rounded-full fixed"
 			style="
 				left: {(scrollY * innerWidth) / 600 / 5 + innerWidth / 8}px; 
-				top: {-scrollY / 15 + innerHeight / 2.2}px;
+				top: {-scrollY / 6 + innerHeight / 2.2}px;
 			"
 		/>
 		<div
@@ -84,7 +84,7 @@
 				top: {-scrollY / 2 + innerHeight * 0.95}px;"
 		/>
 	{/if}
-	<div class="backdrop-blur-[130px] md:backdrop-blur-[190px] text-accent-content">
+	<div class="backdrop-blur-[130px] md:backdrop-blur-[220px] text-accent-content">
 		<section class="hero py-52">
 			<div class="hero-content text-center ">
 				<div class="max-w-md">
