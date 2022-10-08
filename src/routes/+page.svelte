@@ -67,21 +67,21 @@
 			class="bg-primary p-1 w-64 md:w-[32rem] h-56 md:h-72 rounded-full fixed"
 			style="
 				left: {(scrollY * innerWidth) / 600 / 5 + innerWidth / 8}px; 
-				top: {-scrollY / 6 + innerHeight / 2.2}px;
+				top: {-scrollY / 10 + innerHeight / 2.2}px;
 			"
 		/>
 		<div
 			class="bg-accent p-1 w-64 md:w-[32rem] h-56 md:h-72 rounded-full fixed"
 			style="
 				right: {(scrollY * innerWidth) / 600 / 5 + innerWidth / 8}px; 
-				top: {-scrollY / 3.2 + innerHeight / 1.5}px;
+				top: {-scrollY / 4 + innerHeight / 1.5}px;
 			"
 		/>
 		<div
 			class="bg-secondary p-1 w-64 md:w-[32rem] h-56 md:h-72 rounded-full fixed"
 			style="
 				right: {(-scrollY * innerWidth) / 600 / 20 + innerWidth / 2.5}px; 
-				top: {-scrollY / 2 + innerHeight * 0.95}px;"
+				top: {-scrollY / 2.5 + innerHeight * 0.85}px;"
 		/>
 	{/if}
 	<div class="backdrop-blur-[130px] md:backdrop-blur-[220px] text-accent-content">
