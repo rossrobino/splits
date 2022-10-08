@@ -9,7 +9,7 @@
 
 	let now = new Date();
 	now = now.getHours();
-	if (now < 6 || now > 20) {
+	if (now < 7 || now > 19) {
 		checked = true;
 	} else {
 		checked = false;
