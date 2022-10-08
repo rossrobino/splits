@@ -135,7 +135,11 @@
 			: ''} w-full max-w-sm mb-3"
 	>
 		@<input
-			class="h-full w-[90%] focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:shadow-none bg-base-100"
+			class="h-full w-[90%] focus:outline-0"
+			style="
+				outline: 0 !important;
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
+			"
 			id="username"
 			type="text"
 			placeholder="new username"
