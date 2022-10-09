@@ -21,8 +21,10 @@
 <!-- <ResponsiveGrid class="mb-8"> -->
 <Card
 	title="Track"
+	primary={true}
 	cardLink="/app/event/track"
-	class="bg-primary text-primary-content mb-8"
+	class="mb-8"
+	
 >
 	Start a new event to track in real time.
 </Card>
