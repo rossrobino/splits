@@ -41,8 +41,6 @@
 	}
 </script>
 
-{JSON.stringify($athletes)}
-
 {#if $athletes.length > 1}
 	<!-- Lap All Button -->
 	<div class="flex justify-center">

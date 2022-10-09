@@ -33,7 +33,7 @@
 				columnNames.push("Rest");
 			}
 		}
-		if (live) columnNames.push("Remove");
+		if (live) columnNames.push("");
 		columnNames = columnNames;
 	}
 
