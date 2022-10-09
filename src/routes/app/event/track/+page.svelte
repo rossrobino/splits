@@ -8,6 +8,7 @@
 	} from "$lib/sessionStore";
 	import PageHeader from "$lib/components/PageHeader.svelte";
 	import TextInput from "$lib/components/TextInput.svelte";
+	import RestToggle from "./components/RestToggle.svelte";
 	import Timer from "./components/Timer/Timer.svelte";
 	import SetEventType from "./components/SetEventType.svelte";
 	import Tiles from "./components/Tiles.svelte";
@@ -26,6 +27,7 @@
 {#if $eventType}
 	{#if !$eventStarted}
 		<TextInput label="Event Name" id="eventName" bind:value={$eventName} />
+		<RestToggle />
 		{#if $eventType === "group"}
 			<SetAthletes />
 			<SetGuests />
@@ -33,7 +35,8 @@
 		<StartButton />
 	{:else}
 		<Timer />
-		<Tiles /> <!-- Lap All button in Tiles -->
+		<Tiles />
+		<!-- Lap All button in Tiles -->
 		<LapTable athletes={$athletes} live={true} />
 	{/if}
 	<ResetButton />

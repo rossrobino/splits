@@ -10,6 +10,7 @@
 		totalMs,
 		pausedTime,
 		pausedMs,
+		rest,
 	} from "$lib/sessionStore";
 	import { supabase } from "$lib/modules/supabaseClient";
 	import { getCurrentDate } from "$lib/modules/utilities/getCurrentDate";
@@ -22,6 +23,13 @@
 	async function handleClick() {
 		if (warning) {
 			await createEvent();
+			if ($rest) {
+				$athletes.forEach(athlete => {
+					if (athlete.laps.length % 2 == 0) {
+						athlete.laps.pop();
+					}
+				});
+			}
 			for (const athlete of $athletes) {
 				await uploadLaps(athlete);
 			}
@@ -62,6 +70,7 @@
 					profile_id: athlete.id,
 					laps: athlete.laps,
 					guestId: athlete.guestId,
+					rest: athlete.rest,
 				})
 				.single();
 			if (error) throw new Error(error.message);

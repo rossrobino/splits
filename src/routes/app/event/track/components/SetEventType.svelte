@@ -1,5 +1,5 @@
 <script>
-	import { eventType, eventName, athletes, userProfile } from "$lib/sessionStore";
+	import { eventType, eventName, athletes, userProfile, rest } from "$lib/sessionStore";
 	import Card from "$lib/components/Card.svelte";
 	import ResponsiveGrid from "$lib/components/ResponsiveGrid.svelte";
 	import { capitalizeFirstLetter } from "$lib/modules/utilities/capitalizeFirstLetter";
@@ -19,6 +19,7 @@
 			last_name: $userProfile.last_name,
 			username: $userProfile.username,
 			selected: true,
+			resting: true,
 			laps: [],
 		});
 		setEventName();

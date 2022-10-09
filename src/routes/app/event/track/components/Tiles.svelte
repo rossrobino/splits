@@ -4,6 +4,7 @@
 		timerInterval,
 		athletes,
 		colorList,
+		rest,
 	} from "$lib/sessionStore";
 	import ResponsiveGrid from "$lib/components/ResponsiveGrid.svelte";
 	import { msToTime } from "$lib/modules/utilities/msToTime";
@@ -13,6 +14,9 @@
 
 	function lap(athlete) {
 		if ($timerInterval) {
+			if ($rest) {
+				athlete.resting = !athlete.resting;
+			}
 			let lapSum = athlete.laps.reduce((a, b) => a + b, 0);
 			athlete.laps.push($totalMs - lapSum);
 			$athletes = $athletes;
@@ -36,6 +40,8 @@
 		lapAllWarning = false;
 	}
 </script>
+
+{JSON.stringify($athletes)}
 
 {#if $athletes.length > 1}
 	<!-- Lap All Button -->
@@ -92,7 +98,11 @@
 				</h2>
 				<div class="font-mono">
 					<div class="stat-title text-sm xs:text-base sm:text-lg">
-						Lap #{athlete.laps.length + 1}
+						{#if athlete.resting}
+							Resting
+						{:else}
+							Lap #{athlete.laps.length + 1 - ($rest ? ~~(athlete.laps.length/2) : 0)}
+						{/if}
 					</div>
 					<div class="stat-value text-3xl xs:text-4xl sm:text-5xl">
 						{msToTime(

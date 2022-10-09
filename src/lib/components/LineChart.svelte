@@ -47,7 +47,15 @@
 		if (athlete.laps.length > labels.length) {
 			labels = [];
 			for (let index = 0; index < athlete.laps.length; index++) {
-				labels.push(`Lap ${index + 1}`);
+				if (!athletes[0].rest || index % 2 == 0) {
+					labels.push(
+						`Lap #${
+							index + 1 - (athletes[0].rest ? ~~(index / 2) : 0)
+						}`
+					);
+				} else {
+					labels.push("Rest");
+				}
 			}
 		}
 	});

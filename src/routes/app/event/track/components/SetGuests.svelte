@@ -1,6 +1,6 @@
 <script>
 	import Table from "$lib/components/Table.svelte";
-	import { guests } from "$lib/sessionStore";
+	import { guests, rest } from "$lib/sessionStore";
 
 	$guests = [];
 	let guestId = 1;
@@ -12,6 +12,7 @@
 			username: null,
 			guestId: guestId++,
 			selected: true,
+			resting: true,
 			laps: [],
 		});
 		$guests = $guests;

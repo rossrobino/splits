@@ -3,6 +3,7 @@
 	import { clickOutside } from "$lib/modules/utilities/clickOutside";
 	import Table from "$lib/components/Table.svelte";
 	import FinishButton from "./FinishButton.svelte";
+	import { theme } from "$lib/sessionStore";
 
 	export let live = false;
 	export let athletes = []; // [{first_name, last_name, laps[int]}, ...]
@@ -24,7 +25,13 @@
 			}
 		});
 		for (let index = 0; index < totalLaps; index++) {
-			columnNames.push(`Lap ${index + 1}`);
+			if (!athletes[0].rest || index % 2 == 0) {
+				columnNames.push(
+					`Lap #${index + 1 - (athletes[0].rest ? ~~(index / 2) : 0)}`
+				);
+			} else {
+				columnNames.push("Rest");
+			}
 		}
 		if (live) columnNames.push("Remove");
 		columnNames = columnNames;
@@ -68,7 +75,15 @@
 					{/if}
 				</th>
 				{#each [...Array(totalLaps).keys()] as i}
-					<td>
+					<td 
+						class:text-gray-400={
+							$theme == "light" && athlete.rest && i % 2 == 1
+						}
+						class:text-gray-500={
+							$theme == "dark" && athlete.rest && i % 2 == 1
+						}
+					
+						>
 						{#if athlete.laps[i]}
 							{msToTime(athlete.laps[i])}
 						{/if}

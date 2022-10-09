@@ -34,6 +34,9 @@
         if (!$timerInterval) {
             if (!$totalMs) {
                 $startTime = new Date();
+				$athletes.forEach(athlete => {
+					athlete.resting = false;
+				});
             }
             if ($pausedTime) {
                 now = new Date();
@@ -60,6 +63,7 @@
             $pausedMs = 0;
             $athletes.forEach((athlete) => {
                 athlete.laps = [];
+				athlete.resting = true;
             });
             $athletes = $athletes; // to update lap counter reactivity
             resetWarning = false;

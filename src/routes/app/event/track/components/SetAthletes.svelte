@@ -1,8 +1,7 @@
 <script>
 	import { supabase } from "$lib/modules/supabaseClient";
-	import { userProfile, athletes, guests } from "$lib/sessionStore";
+	import { userProfile, athletes, guests, rest } from "$lib/sessionStore";
 	import { onMount } from "svelte";
-	import { draw } from "svelte/transition";
 	import Table from "$lib/components/Table.svelte";
 	import LoadingBar from "$lib/components/LoadingBar.svelte";
 
@@ -65,6 +64,7 @@
 							last_name: contract.profiles.last_name,
 							username: contract.profiles.username,
 							selected: false,
+							resting: true,
 							laps: [],
 						});
 					}
@@ -124,6 +124,7 @@
 					last_name: $userProfile.last_name,
 					username: $userProfile.username,
 					selected: true,
+					resting: true,
 					laps: [],
 					uid: uid++,
 				});
@@ -198,9 +199,6 @@
 							class="w-6 h-6"
 						>
 							<path
-								in:draw={{
-									duration: 300,
-								}}
 								stroke-linecap="round"
 								stroke-linejoin="round"
 								d="M19.5 8.25l-7.5 7.5-7.5-7.5"

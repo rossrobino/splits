@@ -14,6 +14,6 @@
 		type="text"
 		{placeholder}
 		bind:value
-		class="input input-bordered w-full max-w-xs"
+		class="input input-bordered w-full max-w-sm"
 	/>
 </div>

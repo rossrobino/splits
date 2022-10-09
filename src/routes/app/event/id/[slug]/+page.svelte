@@ -57,6 +57,7 @@
 					`
 					laps,
 					guestId,
+					rest,
 					profiles(
 						id,
 						username,
@@ -90,6 +91,7 @@
 					last_name,
 					guestId: element.guestId,
 					laps: element.laps,
+					rest: element.rest,
 				});
 				if (id === $userProfile.id) {
 					userAthlete = true;
