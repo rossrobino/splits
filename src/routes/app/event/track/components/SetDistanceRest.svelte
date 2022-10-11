@@ -64,7 +64,7 @@
 		<input type="checkbox" class="toggle" bind:checked={$distance} />
 	</label>
 	{#if $distance}
-		<hr />
+		<hr class="border-base-300"/>
 		<div class="form-control my-2">
 			{#each $distanceList as dist}
 				<label class="input-group mb-2">
@@ -77,7 +77,7 @@
 						disabled={dist.units === "rest"}
 					/>
 					<select
-						class="select select-bordered w-5/12 bg-neutral text-neutral-content rounded-l-none rounded-r-lg"
+						class="select select-bordered w-5/12 bg-neutral text-neutral-content rounded-l-none rounded-r-lg border-neutral"
 						bind:value={dist.units}
 					>
 						{#each unitList as unit}
@@ -108,7 +108,7 @@
 					</button>
 				</label>
 			{/each}
-			<hr />
+			<hr class="border-base-300"/>
 			<div class="mt-2">
 				<div
 					class="grid {previousUnits == 'rest'

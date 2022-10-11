@@ -101,5 +101,5 @@
 	on:click={handleClick}
 	use:clickOutside={onBlur}
 >
-	Finish
+	{warning ? "Confirm" : "Finish"}
 </button>

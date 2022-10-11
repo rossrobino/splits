@@ -53,7 +53,7 @@
 				if (lap.len) {
 					label = `${lap.len}${abbrDist(lap.units)}`;
 				} else if (lap.units == "rest") {
-					label = "Rest"
+					label = "Rest";
 				} else {
 					label = "Lap #" + lapIndex++;
 				}
@@ -73,7 +73,7 @@
 	$: gridColor = $theme === "light" ? "#dfdfdf" : "rgb(80,86,102)";
 </script>
 
-<div class="mb-8 bg-base-200 rounded-xl p-2">
+<div class="mb-8 bg-base-200 rounded-xl p-2 font-mono">
 	<Line
 		{data}
 		options={{
@@ -85,6 +85,9 @@
 							return msToTime(value);
 						},
 						color: tickColor,
+						font: {
+							family: "Menlo",
+						},
 					},
 					grid: {
 						color: gridColor,
@@ -93,6 +96,9 @@
 				x: {
 					ticks: {
 						color: tickColor,
+						font: {
+							family: "Menlo",
+						},
 					},
 					grid: {
 						color: gridColor,

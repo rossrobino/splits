@@ -140,11 +140,11 @@
 {:else if event.name}
 	<PageHeader>
 		<span slot="h1">{event.name}</span>
-		<span slot="h2">
+		<span slot="h2" class="flex">
 			<span>{event.date}</span>
 			<a
 				href="/app/profile/{event.profiles.username}"
-				class="badge badge-primary"
+				class="badge badge-primary font-bold text-xs sm:text-sm my-1 sm:my-[.40rem] ml-2"
 			>
 				organizer @{event.profiles.username}
 			</a>

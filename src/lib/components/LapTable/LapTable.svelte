@@ -7,7 +7,7 @@
 	import { theme } from "$lib/sessionStore";
 
 	export let live = false;
-	export let athletes = []; // [{first_name, last_name, laps[int]}, ...]
+	export let athletes = []; // [{first_name, last_name, laps[{}]}, ...]
 	let columnNames = ["Athlete"];
 	let totalLaps = 0;
 
@@ -86,6 +86,7 @@
 							getLapUnits(athlete.laps[i]) == "rest"}
 						class:text-gray-500={$theme == "dark" &&
 							getLapUnits(athlete.laps[i]) == "rest"}
+						class="font-mono text-sm"
 					>
 						{#if athlete.laps[i]}
 							{msToTime(athlete.laps[i].time)}
