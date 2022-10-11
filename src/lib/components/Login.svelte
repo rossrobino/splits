@@ -8,6 +8,7 @@
 	let alertError = "";
 
 	async function handleLogin() {
+		email = email.trim();
 		if (email && password) {
 			try {
 				loading = true;
@@ -38,7 +39,9 @@
 				</label>
 				<input
 					id="email"
-					type="text"
+					type="email"
+					minlength="5"
+					maxlength="50"
 					placeholder="email"
 					class="input input-bordered"
 					bind:value={email}
@@ -51,6 +54,7 @@
 				<input
 					id="password"
 					type="password"
+					maxlength="50"
 					placeholder="password"
 					class="input input-bordered"
 					bind:value={password}

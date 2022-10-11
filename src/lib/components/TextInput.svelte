@@ -12,6 +12,8 @@
 	<input
 		{id}
 		type="text"
+		minlength="1"
+		maxlength="40"
 		{placeholder}
 		bind:value
 		class="input input-bordered w-full max-w-sm"

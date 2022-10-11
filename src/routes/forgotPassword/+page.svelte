@@ -9,6 +9,7 @@
     let success;
 
     async function resetPassword() {
+		email = email.trim();
         try {
             loading = true;
             const { error, data } =
@@ -39,7 +40,9 @@
                     </label>
                     <input
                         id="email"
-                        type="text"
+                        type="email"
+						minlength="5"
+						maxlength="50"
                         placeholder="email"
                         class="input input-bordered"
                         bind:value={email}

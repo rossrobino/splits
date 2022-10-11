@@ -11,9 +11,13 @@
 	];
 	const unitList = ["meters", "kilometers", "yards", "miles", "rest"];
 
-	// if rest then len is 0
 	$: $distanceList.forEach((dist) => {
 		if (dist.units == "rest") {
+			dist.len = 0;
+		} else if (dist.len < 1) {
+			dist.len = 1;
+		}
+		if (dist.len < 0) {
 			dist.len = 0;
 		}
 	});
@@ -64,13 +68,14 @@
 		<input type="checkbox" class="toggle" bind:checked={$distance} />
 	</label>
 	{#if $distance}
-		<hr class="border-base-300"/>
+		<hr class="border-base-300" />
 		<div class="form-control my-2">
 			{#each $distanceList as dist}
 				<label class="input-group mb-2">
 					<input
-						type="text"
+						type="number"
 						placeholder="Distance"
+						min="0"
 						class="input input-bordered w-full"
 						style="border: 1px solid hsl(var(--b3));"
 						bind:value={dist.len}
@@ -108,7 +113,7 @@
 					</button>
 				</label>
 			{/each}
-			<hr class="border-base-300"/>
+			<hr class="border-base-300" />
 			<div class="mt-2">
 				<div
 					class="grid {previousUnits == 'rest'

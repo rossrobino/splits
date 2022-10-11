@@ -5,6 +5,7 @@
 	import AlertError from "$lib/components/AlertError.svelte";
 	import AlertSuccess from "$lib/components/AlertSuccess.svelte";
 	import PageHeader from "$lib/components/PageHeader.svelte";
+	import { capitalizeFirstLetter } from "$lib/modules/utilities/capitalizeFirstLetter";
 
 	let email = "";
 	let username = "";
@@ -20,6 +21,10 @@
 	const onBlur = () => (usernameFocus = false);
 
 	async function updateProfile() {
+		email = email.trim().toLowerCase();
+		username = username.trim().toLowerCase();
+		fname = capitalizeFirstLetter(fname.trim());
+		lname = capitalizeFirstLetter(lname.trim());
 		try {
 			alert = "";
 			success = "";
@@ -113,7 +118,9 @@
 	</label>
 	<input
 		id="email"
-		type="text"
+		type="email"
+		minlength="5"
+		maxlength="50"
 		placeholder="new email"
 		bind:value={email}
 		class="input input-bordered input-accent w-full max-w-sm"
@@ -138,6 +145,10 @@
 			class="h-full w-[90%] focus:outline-0"
 			style="outline: 0 !important;"
 			id="username"
+			minlength="2"
+			maxlength="20"
+			pattern={String.raw`^[a-zA-Z0-9]+`}
+			title="Letters and numbers only."
 			type="text"
 			placeholder="new username"
 			on:focus={onFocus}
@@ -153,6 +164,10 @@
 	<input
 		id="first_name"
 		type="text"
+		minlength="2"
+		maxlength="30"
+		pattern={String.raw`^[a-zA-Z -]+`}
+		title="Letters, spaces and dashes only."
 		placeholder="new first name"
 		bind:value={fname}
 		class="input input-bordered input-accent w-full max-w-sm mb-3"
@@ -165,6 +180,10 @@
 	<input
 		id="last_name"
 		type="text"
+		minlength="2"
+		maxlength="30"
+		pattern={String.raw`^[a-zA-Z -]+`}
+		title="Letters, spaces and dashes only."
 		placeholder="new last name"
 		bind:value={lname}
 		class="input input-bordered input-accent w-full max-w-sm mb-3"

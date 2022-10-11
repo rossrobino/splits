@@ -81,12 +81,16 @@
 
 	function getLastDistLen(athlete) {
 		if (athlete.laps.length > 0) {
-			let distances = athlete.laps.map(({len}) => len);
-			let unitList = athlete.laps.map(({units}) => units) 
+			let distances = athlete.laps.map(({ len }) => len);
+			let unitList = athlete.laps.map(({ units }) => units);
 			if (athlete.laps.slice(-1)[0].units === "rest") {
-				return `: ${distances.slice(-2)[0]}${abbrDist(unitList.slice(-2)[0])}`;
+				return `: ${distances.slice(-2)[0]}${abbrDist(
+					unitList.slice(-2)[0]
+				)}`;
 			} else {
-				return `: ${distances.slice(-1)[0]}${abbrDist(unitList.slice(-1)[0])}`;
+				return `: ${distances.slice(-1)[0]}${abbrDist(
+					unitList.slice(-1)[0]
+				)}`;
 			}
 		} else {
 			return "";

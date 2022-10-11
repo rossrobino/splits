@@ -30,6 +30,7 @@
 
 	async function updateTeam() {
 		if (newTeamName) {
+			newTeamName = newTeamName.toLowerCase().replace(/\s+/g, "");
 			try {
 				loading = true;
 				const updates = { team_name: newTeamName };
@@ -40,7 +41,6 @@
 				if (error) throw new Error(error.message);
 				window.location.href = `/app/team/id/${newTeamName}`;
 			} catch (error) {
-				console.log("hello");
 				alert = error.description || error.message;
 			} finally {
 				loading = false;
@@ -89,8 +89,13 @@
 		>
 			#<input
 				class="h-full w-[90%] focus:outline-0 bg-base-100"
+				style="outline: 0 !important;"
 				id="teamName"
 				type="text"
+				minlength="2"
+				maxlength="40"
+				pattern={String.raw`^[a-zA-Z0-9-]+`}
+				title="Letters, numbers, and dashes only."
 				placeholder="new team name"
 				on:focus={() => onFocus(teamNameFocus)}
 				on:blur={() => onBlur(teamNameFocus)}
@@ -101,11 +106,7 @@
 		{#if loading}
 			<button class="btn loading mt-3">Loading</button>
 		{:else}
-			<input
-				type="submit"
-				value="Submit"
-				class="btn btn-accent mt-3"
-			/>
+			<input type="submit" value="Submit" class="btn btn-accent mt-3" />
 		{/if}
 
 		{#if alert}

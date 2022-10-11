@@ -31,12 +31,16 @@
 		try {
 			loading = true;
 			alert = "";
-			const { data, error } = await supabase.from("teams").insert([
-				{
-					team_name: submitTeamName,
-					coach: $userProfile.id,
-				},
-			]).select().single();
+			const { data, error } = await supabase
+				.from("teams")
+				.insert([
+					{
+						team_name: submitTeamName,
+						coach: $userProfile.id,
+					},
+				])
+				.select()
+				.single();
 			if (error) throw new Error(error.message);
 			team = data;
 		} catch (error) {
@@ -49,13 +53,13 @@
 	async function createContract() {
 		try {
 			loading = true;
-			const { data, error } = await supabase
-				.from("contracts")
-				.insert([{
+			const { data, error } = await supabase.from("contracts").insert([
+				{
 					team_id: team.id,
 					profile_id: $userProfile.id,
-					confirmed: true
-				}])
+					confirmed: true,
+				},
+			]);
 			if (error) throw new Error(error.message);
 		} catch (error) {
 			alert = error.message;
@@ -63,7 +67,6 @@
 			loading = false;
 		}
 	}
-
 </script>
 
 <svelte:head>
@@ -75,7 +78,10 @@
 	<span slot="h1">New Team</span>
 	<span slot="h2">{newTeamTag}</span>
 </PageHeader>
-<form class="form-control w-full max-w-sm">
+<form
+	class="form-control w-full max-w-sm"
+	on:submit|preventDefault={handleSubmit}
+>
 	<label for="teamName" class="label">
 		<span class="label-text">Team Name</span>
 		<span class="label-text-alt">
@@ -91,12 +97,18 @@
 	>
 		#<input
 			class="h-full w-[90%] focus:outline-0 bg-base-100"
+			style="outline: 0 !important;"
 			id="teamName"
 			type="text"
+			minlength="2"
+			maxlength="40"
+			pattern={String.raw`^[a-zA-Z0-9-]+`}
+			title="Letters, numbers, and dashes only."
 			placeholder="team"
 			on:focus={() => onFocus(teamNameFocus)}
 			on:blur={() => onBlur(teamNameFocus)}
 			bind:value={teamName}
+			required
 		/>
 	</div>
 	<label for="teamName" class="label mb-3">
@@ -108,12 +120,7 @@
 	{#if loading}
 		<button class="btn loading">Loading</button>
 	{:else}
-		<input
-			type="submit"
-			value="Submit"
-			on:click={handleSubmit}
-			class="btn btn-secondary mb-4"
-		/>
+		<input type="submit" value="Submit" class="btn btn-secondary mb-4" />
 	{/if}
 
 	{#if alert === 'duplicate key value violates unique constraint "teams_team_name_key"'}
