@@ -46,8 +46,9 @@ export const lapAllWarning = writable(false);
 export const eventType = writable("");
 // SetGuests
 export const guests = writable([]);
-// RestToggle
-export const rest = writable(false);
+// Distance
+export const distance = writable(false);
+export const distanceList = writable([]);
 
 // app/team
 export const currentTeams = writable([]);

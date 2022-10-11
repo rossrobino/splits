@@ -1,6 +1,7 @@
 <script>
 	import { msToTime } from "$lib/modules/utilities/msToTime";
 	import { clickOutside } from "$lib/modules/utilities/clickOutside";
+	import { abbrDist } from "$lib/modules/utilities/abbrDist";
 	import Table from "$lib/components/Table.svelte";
 	import FinishButton from "./FinishButton.svelte";
 	import { theme } from "$lib/sessionStore";
@@ -21,18 +22,16 @@
 		totalLaps = 0;
 		athletes.forEach((athlete) => {
 			if (athlete.laps.length > totalLaps) {
+				columnNames = ["Athlete"];
 				totalLaps = athlete.laps.length;
+				let index = 1;
+				athlete.laps.forEach((lap) => {
+					columnNames.push(
+						`${lap.units == "lap" || lap.units == "rest" ? "" : lap.len}${abbrDist(lap.units)}${lap.units == "lap" ? (" #" + index++) : ""}`
+					);
+				});
 			}
 		});
-		for (let index = 0; index < totalLaps; index++) {
-			if (!athletes[0].rest || index % 2 == 0) {
-				columnNames.push(
-					`Lap #${index + 1 - (athletes[0].rest ? ~~(index / 2) : 0)}`
-				);
-			} else {
-				columnNames.push("Rest");
-			}
-		}
 		if (live) columnNames.push("");
 		columnNames = columnNames;
 	}
@@ -50,6 +49,13 @@
 	function removeWarning(athlete) {
 		athlete.deleteWarning = false;
 		athletes = athletes;
+	}
+
+	function getLapUnits(lap) {
+		if (lap) {
+			return lap.units;
+		}
+		return "";
 	}
 </script>
 
@@ -75,17 +81,14 @@
 					{/if}
 				</th>
 				{#each [...Array(totalLaps).keys()] as i}
-					<td 
-						class:text-gray-400={
-							$theme == "light" && athlete.rest && i % 2 == 1
-						}
-						class:text-gray-500={
-							$theme == "dark" && athlete.rest && i % 2 == 1
-						}
-					
-						>
+					<td
+						class:text-gray-400={$theme == "light" &&
+							getLapUnits(athlete.laps[i]) == "rest"}
+						class:text-gray-500={$theme == "dark" &&
+							getLapUnits(athlete.laps[i]) == "rest"}
+					>
 						{#if athlete.laps[i]}
-							{msToTime(athlete.laps[i])}
+							{msToTime(athlete.laps[i].time)}
 						{/if}
 					</td>
 				{/each}

@@ -4,21 +4,34 @@
 		timerInterval,
 		athletes,
 		colorList,
-		rest,
+		distance,
+		distanceList,
 	} from "$lib/sessionStore";
 	import ResponsiveGrid from "$lib/components/ResponsiveGrid.svelte";
 	import { msToTime } from "$lib/modules/utilities/msToTime";
+	import { abbrDist } from "$lib/modules/utilities/abbrDist";
 	import { clickOutside } from "$lib/modules/utilities/clickOutside";
 
 	let lapAllWarning = false;
 
 	function lap(athlete) {
 		if ($timerInterval) {
-			if ($rest) {
-				athlete.resting = !athlete.resting;
+			// len/units = 0 means no length/units provided
+			let len = 0;
+			let units = "lap";
+			// if there's a distance, then set to the distanceList index based on lap #
+			if ($distance) {
+				let lapListLength = getLapList(athlete).length;
+				len = $distanceList[lapListLength % $distanceList.length].len;
+				units =
+					$distanceList[lapListLength % $distanceList.length].units;
 			}
-			let lapSum = athlete.laps.reduce((a, b) => a + b, 0);
-			athlete.laps.push($totalMs - lapSum);
+			let lapSum = getLapList(athlete).reduce((a, b) => a + b, 0);
+			athlete.laps.push({
+				time: $totalMs - lapSum,
+				len,
+				units,
+			});
 			$athletes = $athletes;
 		}
 		lapAllWarning = false;
@@ -38,6 +51,46 @@
 
 	function onBlur() {
 		lapAllWarning = false;
+	}
+
+	function getLapList(athlete) {
+		const lapList = athlete.laps.map(({ time }) => time);
+		return lapList;
+	}
+
+	function getDistance(athlete) {
+		let len = 0;
+		let units = "";
+		let lapListLength = getLapList(athlete).length;
+		len = $distanceList[lapListLength % $distanceList.length].len;
+		units = $distanceList[lapListLength % $distanceList.length].units;
+		return { len, units };
+	}
+
+	function getLastDistTime(athlete) {
+		if (athlete.laps.length > 0) {
+			if (athlete.laps.slice(-1)[0].units === "rest") {
+				return msToTime(getLapList(athlete).slice(-2)[0]);
+			} else {
+				return msToTime(getLapList(athlete).slice(-1)[0]);
+			}
+		} else {
+			return msToTime(0);
+		}
+	}
+
+	function getLastDistLen(athlete) {
+		if (athlete.laps.length > 0) {
+			let distances = athlete.laps.map(({len}) => len);
+			let unitList = athlete.laps.map(({units}) => units) 
+			if (athlete.laps.slice(-1)[0].units === "rest") {
+				return `- ${distances.slice(-2)[0]}${unitList.slice(-2)[0]}`;
+			} else {
+				return `- ${distances.slice(-1)[0]}${unitList.slice(-1)[0]}`;
+			}
+		} else {
+			return "";
+		}
 	}
 </script>
 
@@ -96,23 +149,36 @@
 				</h2>
 				<div class="font-mono">
 					<div class="stat-title text-sm xs:text-base sm:text-lg">
-						{#if athlete.resting}
-							Resting
+						{#if $distance}
+							{#if athlete.laps.length}
+								{#if getDistance(athlete).units === "rest"}
+									Resting
+								{:else}
+									{`${getDistance(athlete).len}${abbrDist(
+										getDistance(athlete).units
+									)}`}
+								{/if}
+							{:else}
+								{`${$distanceList[0].len}${abbrDist(
+									$distanceList[0].units
+								)}`}
+							{/if}
 						{:else}
-							Lap #{athlete.laps.length + 1 - ($rest ? ~~(athlete.laps.length/2) : 0)}
+							Lap #{athlete.laps.length + 1}
 						{/if}
 					</div>
 					<div class="stat-value text-3xl xs:text-4xl sm:text-5xl">
 						{msToTime(
-							$totalMs - athlete.laps.reduce((a, b) => a + b, 0),
+							$totalMs -
+								getLapList(athlete).reduce((a, b) => a + b, 0),
 							false
 						)}
 					</div>
 					<div class="stat-title text-sm xs:text-base sm:text-lg">
-						Previous
+						Previous {getLastDistLen(athlete)}
 					</div>
 					<div class="stat-value text-lg xs:text-xl sm:text-2xl">
-						{msToTime(athlete.laps.slice(-1))}
+						{getLastDistTime(athlete)}
 					</div>
 				</div>
 			</div>

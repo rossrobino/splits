@@ -8,7 +8,7 @@
 	} from "$lib/sessionStore";
 	import PageHeader from "$lib/components/PageHeader.svelte";
 	import TextInput from "$lib/components/TextInput.svelte";
-	import RestToggle from "./components/RestToggle.svelte";
+	import SetDistanceRest from "./components/SetDistanceRest.svelte";
 	import Timer from "./components/Timer/Timer.svelte";
 	import SetEventType from "./components/SetEventType.svelte";
 	import Tiles from "./components/Tiles.svelte";
@@ -27,7 +27,7 @@
 {#if $eventType}
 	{#if !$eventStarted}
 		<TextInput label="Event Name" id="eventName" bind:value={$eventName} />
-		<RestToggle />
+		<SetDistanceRest />
 		{#if $eventType === "group"}
 			<SetAthletes />
 			<SetGuests />

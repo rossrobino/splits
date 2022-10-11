@@ -1,12 +1,7 @@
 <script>
-	import { eventStarted, athletes, rest } from "$lib/sessionStore";
+	import { eventStarted } from "$lib/sessionStore";
 
 	function startEvent() {
-		if ($rest) {
-			$athletes.forEach((athlete) => {
-				athlete.rest = true;
-			});
-		}
 		$eventStarted = true;
 	}
 </script>

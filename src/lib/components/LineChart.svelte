@@ -2,6 +2,7 @@
 	import { colorList, theme } from "$lib/sessionStore";
 	import { msToTime } from "$lib/modules/utilities/msToTime";
 	import { Line } from "svelte-chartjs";
+	import { abbrDist } from "$lib/modules/utilities/abbrDist";
 	import {
 		Chart as ChartJS,
 		Title,
@@ -40,23 +41,24 @@
 			lineTension: 0.2,
 			borderColor: $colorList[color],
 			backgroundColor: $colorList[color],
-			data: athlete.laps,
+			data: athlete.laps.map(({ time }) => time),
 		});
 
 		// if athletes have different numbers of laps...
 		if (athlete.laps.length > labels.length) {
 			labels = [];
-			for (let index = 0; index < athlete.laps.length; index++) {
-				if (!athletes[0].rest || index % 2 == 0) {
-					labels.push(
-						`Lap #${
-							index + 1 - (athletes[0].rest ? ~~(index / 2) : 0)
-						}`
-					);
+			let lapIndex = 1;
+			athlete.laps.forEach((lap) => {
+				let label = "";
+				if (lap.len) {
+					label = `${lap.len}${abbrDist(lap.units)}`;
+				} else if (lap.units == "rest") {
+					label = "Rest"
 				} else {
-					labels.push("Rest");
+					label = "Lap #" + lapIndex++;
 				}
-			}
+				labels.push(label);
+			});
 		}
 	});
 

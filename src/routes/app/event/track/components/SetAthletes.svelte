@@ -1,6 +1,6 @@
 <script>
 	import { supabase } from "$lib/modules/supabaseClient";
-	import { userProfile, athletes, guests, rest } from "$lib/sessionStore";
+	import { userProfile, athletes, guests } from "$lib/sessionStore";
 	import { onMount } from "svelte";
 	import Table from "$lib/components/Table.svelte";
 	import LoadingBar from "$lib/components/LoadingBar.svelte";
