@@ -84,11 +84,11 @@
 			let distances = athlete.laps.map(({ len }) => len);
 			let unitList = athlete.laps.map(({ units }) => units);
 			if (athlete.laps.slice(-1)[0].units === "rest") {
-				return `: ${distances.slice(-2)[0]}${abbrDist(
+				return `${distances.slice(-2)[0]}${abbrDist(
 					unitList.slice(-2)[0]
 				)}`;
 			} else {
-				return `: ${distances.slice(-1)[0]}${abbrDist(
+				return `${distances.slice(-1)[0]}${abbrDist(
 					unitList.slice(-1)[0]
 				)}`;
 			}
@@ -179,7 +179,7 @@
 						)}
 					</div>
 					<div class="stat-title text-sm xs:text-base sm:text-lg">
-						Previous{getLastDistLen(athlete)}
+						Previous {getLastDistLen(athlete)}
 					</div>
 					<div class="stat-value text-lg xs:text-xl sm:text-2xl">
 						{getLastDistTime(athlete)}
