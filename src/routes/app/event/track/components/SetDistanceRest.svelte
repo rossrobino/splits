@@ -14,8 +14,6 @@
 	$: $distanceList.forEach((dist) => {
 		if (dist.units == "rest") {
 			dist.len = 0;
-		} else if (dist.len < 1) {
-			dist.len = 1;
 		}
 		if (dist.len < 0) {
 			dist.len = 0;

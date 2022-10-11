@@ -4,12 +4,30 @@
 	import { abbrDist } from "$lib/modules/utilities/abbrDist";
 	import Table from "$lib/components/Table.svelte";
 	import FinishButton from "./FinishButton.svelte";
-	import { theme } from "$lib/sessionStore";
+	import { theme, colorList } from "$lib/sessionStore";
 
 	export let live = false;
 	export let athletes = []; // [{first_name, last_name, laps[{}]}, ...]
 	let columnNames = ["Athlete"];
 	let totalLaps = 0;
+	let colorIndex = 0;
+	let colorContent = [
+		"hsl(var(--pc))",
+		"hsl(var(--ac))",
+		"hsl(var(--sc))",
+		"hsl(var(--bc))",
+		"hsl(var(--nc))",
+	];
+
+	athletes.forEach((athlete) => {
+		athlete.badgeColor = $colorList[colorIndex];
+		if (colorIndex ==3) {
+			athlete.badgeColor = "hsl(var(--b2))"
+		}
+		athlete.badgeContent = colorContent[colorIndex];
+		colorIndex++;
+		if (colorIndex > 4) colorIndex = 0;
+	});
 
 	if (live) {
 		athletes.forEach((athlete) => {
@@ -27,7 +45,13 @@
 				let index = 1;
 				athlete.laps.forEach((lap) => {
 					columnNames.push(
-						`${lap.units == "lap" || lap.units == "rest" ? "" : lap.len}${abbrDist(lap.units)}${lap.units == "lap" ? (" #" + index++) : ""}`
+						`${
+							lap.units == "lap" || lap.units == "rest"
+								? ""
+								: lap.len
+						}${abbrDist(lap.units)}${
+							lap.units == "lap" ? " #" + index++ : ""
+						}`
 					);
 				});
 			}
@@ -74,10 +98,26 @@
 					{#if athlete.username}
 						<a
 							href="/app/profile/{athlete.username}"
-							class="badge badge-sm badge-secondary"
+							class="badge badge-sm"
+							style="
+								background-color: {athlete.badgeColor};
+								border: 1px solid {athlete.badgeColor};
+								color: {athlete.badgeContent};
+							"
 						>
 							@{athlete.username}
 						</a>
+					{:else}
+						<div
+							class="badge badge-sm"
+							style="
+								background-color: {athlete.badgeColor};
+								border: 1px solid {athlete.badgeColor};
+								color: {athlete.badgeContent};
+							"
+						>
+							athlete{athlete.last_name}
+						</div>
 					{/if}
 				</th>
 				{#each [...Array(totalLaps).keys()] as i}
