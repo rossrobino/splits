@@ -4,6 +4,7 @@
 	import { onMount } from "svelte";
 	import Table from "$lib/components/Table.svelte";
 	import LoadingBar from "$lib/components/LoadingBar.svelte";
+	import { sortArrayObjs} from "$lib/modules/utilities/sortArrayObjs";
 
 	let loading = false;
 	let teams = [];
@@ -25,6 +26,7 @@
 					expanded: false,
 				});
 			});
+			teams.sort(sortArrayObjs("name"));
 		} catch (error) {
 			console.log(error.message);
 		}
@@ -69,6 +71,7 @@
 						});
 					}
 				});
+				team.athletes.sort(sortArrayObjs("first_name"))
 			});
 			teams = teams;
 		} catch (error) {

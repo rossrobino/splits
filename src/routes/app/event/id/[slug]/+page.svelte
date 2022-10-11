@@ -144,7 +144,7 @@
 			<span>{event.date}</span>
 			<a
 				href="/app/profile/{event.profiles.username}"
-				class="badge badge-primary font-bold text-xs sm:text-sm my-1 sm:my-[.40rem] ml-2"
+				class="badge font-bold text-xs sm:text-sm my-1 sm:my-[.40rem] ml-2"
 			>
 				organizer @{event.profiles.username}
 			</a>

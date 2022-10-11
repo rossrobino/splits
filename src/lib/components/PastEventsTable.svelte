@@ -1,13 +1,14 @@
 <script>
 	import { supabase } from "$lib/modules/supabaseClient";
 	import { goto } from "$app/navigation";
+	import { userProfile } from "$lib/sessionStore";
 	import Table from "$lib/components/Table.svelte";
 	import LoadingBar from "$lib/components/LoadingBar.svelte";
 	import H2 from "$lib/components/headings/H2.svelte";
 
 	let loading = false;
 	let showAll = false;
-	let showAllId = "showAll" + (Math.random()).toString();
+	let showAllId = "showAll" + Math.random().toString();
 
 	export let profileId = "";
 	export let organized = false;
@@ -18,16 +19,6 @@
 		columnNames = ["Event", "Organizer", "Date"];
 	}
 	let events = [];
-	let orString = "";
-	$: {
-		if (organized) {
-			orString = `organizer.eq.${profileId}`;
-		} else {
-			orString = `profile_id.eq.${profileId}`;
-		}
-	}
-	let orParams = {};
-	$: if (organized) orParams = { foreignTable: "events" };
 
 	$: getPastEvents(profileId);
 
@@ -48,35 +39,40 @@
 							profiles(
 								first_name,
 								last_name,
-								username
+								username,
+								id
 							)
 						)
 				`
 					)
-					.or(orString, orParams)
+					.eq("profile_id", id)
 					.order("created_at", { ascending: false });
 				if (error) throw new Error(error.message);
 				let uid = 0;
 				data.forEach((element) => {
 					let inList = false;
-
 					events.forEach((currentItem) => {
 						if (element.event_id === currentItem.id) {
 							inList = true;
 						}
 					});
 					if (!inList) {
-						events.push({
-							id: element.event_id,
-							name: element.events.name,
-							date: element.events.date,
-							organizer: {
-								username: element.events.profiles.username,
-								first_name: element.events.profiles.first_name,
-								last_name: element.events.profiles.last_name,
-							},
-							uid: uid++,
-						});
+						let organizerId = element.events.profiles.id;
+						if (!organized || organizerId === $userProfile.id) {
+							events.push({
+								id: element.event_id,
+								name: element.events.name,
+								date: element.events.date,
+								organizer: {
+									username: element.events.profiles.username,
+									first_name:
+										element.events.profiles.first_name,
+									last_name:
+										element.events.profiles.last_name,
+								},
+								uid: uid++,
+							});
+						}
 					}
 				});
 				events = events;
@@ -90,10 +86,6 @@
 
 	function rowClick(url) {
 		goto(url);
-	}
-
-	function toggleShowAll() {
-		showAll = !showAll;
 	}
 </script>
 
@@ -184,9 +176,8 @@
 							href="/app/event/track"
 							class="underline"
 						>
-							start an event
+							start an event.
 						</a>
-						.
 					</td>
 				</tr>
 			{/if}
