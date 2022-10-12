@@ -5,6 +5,7 @@
 	import { title, selectedTeamTag } from "$lib/modules/info";
 	import PageHeader from "$lib/components/PageHeader.svelte";
 	import CopyButton from "$lib/components/CopyButton.svelte";
+	import ShareButton from "$lib/components/ShareButton.svelte";
 
 	const teamName = $page.params.slug;
 </script>
@@ -21,5 +22,7 @@
 <TeamRoster {teamName} />
 
 <CopyButton copyText="https://splits.best/app/team/id/{teamName}" >Copy Invite Link</CopyButton>
+
+<ShareButton shareText="https://splits.best/app/team/id/{teamName}" />
 
 <TeamSettingsButton />
