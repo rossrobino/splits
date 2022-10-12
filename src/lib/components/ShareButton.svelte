@@ -7,7 +7,7 @@
 </script>
 
 <button class="btn w-full flex max-w-sm my-4" on:click={handleClick}>
-	Share
+	Invite
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		fill="none"
