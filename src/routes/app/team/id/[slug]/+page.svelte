@@ -21,8 +21,17 @@
 
 <TeamRoster {teamName} />
 
-<CopyButton copyText="https://splits.best/app/team/id/{teamName}" >Copy Invite Link</CopyButton>
-
-<ShareButton shareText="https://splits.best/app/team/id/{teamName}" />
-
+{#if !navigator.canShare}
+	<CopyButton copyText="https://splits.best/app/team/id/{teamName}">
+		Copy Invite Link
+	</CopyButton>
+{:else}
+	<ShareButton
+		shareData={{
+			title,
+			text: "Join my team on Splits!",
+			url: `https://splits.best/app/team/id/${teamName}`,
+		}}
+	/>
+{/if}
 <TeamSettingsButton />

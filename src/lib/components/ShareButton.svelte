@@ -1,18 +1,12 @@
 <script>
-	export let shareText = "";
-	let complete = false;
+	export let shareData = {};
 
 	function handleClick() {
-		navigator.share(shareText);
-		complete = true;
+		navigator.share(shareData);
 	}
 </script>
 
-<button
-	class="btn w-full flex max-w-sm my-4"
-	class:btn-success={complete}
-	on:click={handleClick}
->
+<button class="btn w-full flex max-w-sm my-4" on:click={handleClick}>
 	Share
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
