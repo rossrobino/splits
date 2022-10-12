@@ -11,7 +11,7 @@
     async function getRouteProfile() {
         const { data, error } = await supabase
             .from("profiles")
-            .select(`id, username, first_name, last_name, avatar_url`)
+            .select(`id, username, first_name, last_name`)
             .eq("username", username)
             .single();
         if (error) throw new Error(error.message);

@@ -8,7 +8,7 @@
 {#if display && ($userProfile.id === $team.coach)}
 	<a
 		href="/app/team/id/{$team.team_name}/settings"
-		class="btn"
+		class="btn w-full max-w-sm"
 	>
 		Settings
 	</a>

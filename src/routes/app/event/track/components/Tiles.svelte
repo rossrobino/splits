@@ -83,14 +83,17 @@
 		if (athlete.laps.length > 0) {
 			let distances = athlete.laps.map(({ len }) => len);
 			let unitList = athlete.laps.map(({ units }) => units);
+			let d = "";
+			let u = "";
 			if (athlete.laps.slice(-1)[0].units === "rest") {
-				return `${distances.slice(-2)[0]}${abbrDist(
-					unitList.slice(-2)[0]
-				)}`;
+				d = distances.slice(-2)[0];
+				u = abbrDist(unitList.slice(-2)[0]);
+				return `${d}${u}`;
 			} else {
-				return `${distances.slice(-1)[0]}${abbrDist(
-					unitList.slice(-1)[0]
-				)}`;
+				d = distances.slice(-1)[0];
+				u = abbrDist(unitList.slice(-1)[0]);
+				if (d === 0) return "";
+				return `${d}${u}`;
 			}
 		} else {
 			return "";

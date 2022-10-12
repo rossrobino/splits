@@ -4,6 +4,7 @@
 	import TeamRoster from "./rosterComponents/TeamRoster.svelte";
 	import { title, selectedTeamTag } from "$lib/modules/info";
 	import PageHeader from "$lib/components/PageHeader.svelte";
+	import CopyButton from "$lib/components/CopyButton.svelte";
 
 	const teamName = $page.params.slug;
 </script>
@@ -13,10 +14,12 @@
 	<meta name="description" content={selectedTeamTag} />
 </svelte:head>
 
-<PageHeader h2={false} >
+<PageHeader h2={false}>
 	<span slot="h1">#{teamName}</span>
 </PageHeader>
 
-<TeamRoster teamName={teamName} />
+<TeamRoster {teamName} />
+
+<CopyButton copyText="https://splits.best/app/team/id/{teamName}" >Copy Invite Link</CopyButton>
 
 <TeamSettingsButton />

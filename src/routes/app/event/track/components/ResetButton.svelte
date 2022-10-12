@@ -35,7 +35,7 @@
 </script>
 
 <button
-	class="btn mt-4"
+	class="btn mt-8 w-full max-w-sm"
 	class:btn-error={warning}
 	on:click={resetEvent}
 	use:clickOutside={onBlur}
@@ -54,5 +54,5 @@
 			d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
 		/>
 	</svg>
-	<span>&nbsp;Reset</span>
+	<span>&nbsp;Reset Event</span>
 </button>
