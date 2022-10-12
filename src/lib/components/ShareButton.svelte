@@ -1,8 +1,12 @@
 <script>
 	export let shareData = {};
 
-	function handleClick() {
-		navigator.share(shareData);
+	async function handleClick() {
+		try {
+			await navigator.share(shareData);
+		} catch (error) {
+			console.log(error);
+		}
 	}
 </script>
 
