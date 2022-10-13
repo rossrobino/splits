@@ -9,7 +9,7 @@
 </script>
 
 <button
-	class="btn w-full flex max-w-sm my-4"
+	class="btn w-full flex max-w-md my-4"
 	class:btn-success={complete}
 	on:click={handleClick}
 >

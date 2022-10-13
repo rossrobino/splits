@@ -79,7 +79,7 @@
 	<span slot="h2">{newTeamTag}</span>
 </PageHeader>
 <form
-	class="form-control w-full max-w-sm"
+	class="form-control w-full max-w-md"
 	on:submit|preventDefault={handleSubmit}
 >
 	<label for="teamName" class="label">
@@ -93,7 +93,7 @@
 	<div
 		class="input input-bordered input-secondary {teamNameFocus
 			? 'inputOutline'
-			: ''} w-full max-w-sm"
+			: ''} w-full max-w-md"
 	>
 		#<input
 			class="h-full w-[90%] focus:outline-0 bg-base-100"

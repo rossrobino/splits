@@ -10,10 +10,13 @@
 		totalMs,
 		pausedTime,
 		pausedMs,
+		demoFinished,
 	} from "$lib/sessionStore";
 	import { supabase } from "$lib/modules/supabaseClient";
 	import { getCurrentDate } from "$lib/modules/utilities/getCurrentDate";
 	import { clickOutside } from "$lib/modules/utilities/clickOutside";
+
+	export let demo = false;
 
 	let warning = false;
 	let loading = false;
@@ -21,12 +24,17 @@
 
 	async function handleClick() {
 		if (warning) {
-			await createEvent();
-			for (const athlete of $athletes) {
-				await uploadLaps(athlete);
+			if (!demo) {
+				await createEvent();
+				for (const athlete of $athletes) {
+					await uploadLaps(athlete);
+				}
+				resetEvent();
+				goto(`/app/event/id/${eventId}`);
+			} else {
+				$demoFinished = true;
 			}
-			resetEvent();
-			goto(`/app/event/id/${eventId}`);
+			warning = false;
 		} else {
 			warning = true;
 		}
@@ -53,6 +61,7 @@
 	}
 
 	async function uploadLaps(athlete) {
+		let guestName = athlete.guestId ? athlete.first_name : null;
 		try {
 			loading = true;
 			const { data, error } = await supabase
@@ -62,6 +71,7 @@
 					profile_id: athlete.id,
 					laps: athlete.laps,
 					guestId: athlete.guestId,
+					guest_name: guestName,
 				})
 				.single();
 			if (error) throw new Error(error.message);
@@ -87,10 +97,6 @@
 
 	function onBlur() {
 		warning = false;
-	}
-
-	function delay(time) {
-		return new Promise((resolve) => setTimeout(resolve, time));
 	}
 </script>
 

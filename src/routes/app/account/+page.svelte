@@ -105,7 +105,7 @@
 
 <form
 	on:submit|preventDefault={updateProfile}
-	class="form-control w-full max-w-sm"
+	class="form-control w-full max-w-md"
 >
 	<PageHeader>
 		<span slot="h1">Account</span>
@@ -123,7 +123,7 @@
 		maxlength="50"
 		placeholder="new email"
 		bind:value={email}
-		class="input input-bordered input-accent w-full max-w-sm"
+		class="input input-bordered input-accent w-full"
 	/>
 	<label for="email" class="label mb-3">
 		<span class="label-text-alt">
@@ -139,7 +139,7 @@
 	<div
 		class="input input-bordered input-accent {usernameFocus
 			? 'inputOutline'
-			: ''} w-full max-w-sm mb-3"
+			: ''} w-full mb-3"
 	>
 		@<input
 			class="h-6 w-[90%] mt-[.65rem] focus:outline-0 bg-base-100"
@@ -170,7 +170,7 @@
 		title="Letters, spaces and dashes only."
 		placeholder="new first name"
 		bind:value={fname}
-		class="input input-bordered input-accent w-full max-w-sm mb-3"
+		class="input input-bordered input-accent w-full mb-3"
 	/>
 
 	<label for="last_name" class="label">
@@ -186,7 +186,7 @@
 		title="Letters, spaces and dashes only."
 		placeholder="new last name"
 		bind:value={lname}
-		class="input input-bordered input-accent w-full max-w-sm mb-3"
+		class="input input-bordered input-accent w-full mb-3"
 	/>
 
 	{#if loading}

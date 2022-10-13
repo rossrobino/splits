@@ -57,6 +57,7 @@
 					`
 					laps,
 					guestId,
+					guest_name,
 					profiles(
 						id,
 						username,
@@ -80,7 +81,7 @@
 				} else {
 					id = null;
 					username = null;
-					first_name = "Athlete";
+					first_name = element.guest_name ? element.guest_name : "Athlete";
 					last_name = element.guestId;
 				}
 				athletes.push({

@@ -56,3 +56,6 @@ export const team = writable({});
 export const onTeam = writable(false);
 export const requestSent = writable(false);
 export const myContractId = writable("");
+
+// demo
+export const demoFinished = writable(false);

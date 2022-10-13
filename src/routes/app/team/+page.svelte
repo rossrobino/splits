@@ -17,6 +17,6 @@
 
 <TeamSelect profileId={$userProfile.id} />
 
-<a href="/app/team/new" class="btn w-full max-w-sm">
+<a href="/app/team/new" class="btn w-full max-w-md">
 	New Team
 </a>

@@ -8,22 +8,28 @@
 		totalMs,
 		pausedTime,
 		pausedMs,
+		guests,
+		demoFinished,
 	} from "$lib/sessionStore";
 
+	export let demo = false;
 	let warning = false;
 
 	function resetEvent() {
 		if (warning) {
-			$eventType = "";
+			$eventType = demo ? "group" : "";
 			$eventStarted = false;
 			$athletes = [];
+			$guests = [];
 			$totalMs = 0;
 			$pausedTime = 0;
 			$pausedMs = 0;
+			$demoFinished = false;
 			if ($timerInterval) {
 				clearInterval($timerInterval);
 				$timerInterval = false;
 			}
+			warning = false;
 		} else {
 			warning = true;
 		}
@@ -35,7 +41,7 @@
 </script>
 
 <button
-	class="btn mt-8 w-full max-w-sm"
+	class="btn mt-8 w-full max-w-md"
 	class:btn-error={warning}
 	on:click={resetEvent}
 	use:clickOutside={onBlur}

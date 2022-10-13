@@ -2,7 +2,7 @@
 	import { title, tagline } from "$lib/modules/info.js";
 	import { onMount } from "svelte";
 	import { fly, fade } from "svelte/transition";
-	import { theme } from "$lib/sessionStore";
+	import { theme, userProfile } from "$lib/sessionStore";
 	import AlertError from "$lib/components/AlertError.svelte";
 	import ResetPassword from "$lib/components/ResetPassword.svelte";
 	import Card from "$lib/components/Card.svelte";
@@ -92,8 +92,8 @@
 						{title.toLowerCase()}
 					</h1>
 					<p class="py-6">{tagline}</p>
-					<a href="/app" class="btn text-primary-content">
-						Get Started
+					<a href={$userProfile ? "/app" : "/demo"} class="btn text-primary-content">
+						{$userProfile ? "Dashboard" : "Try it out"}
 					</a>
 				</div>
 			</div>
@@ -196,8 +196,8 @@
 						>
 							go.
 						</h2>
-						<a href="/app" class="btn text-primary-content">
-							Get Started
+						<a href={$userProfile ? "/app" : "/signup"}  class="btn text-primary-content">
+							{$userProfile ? "Get Started" : "Sign Up"} 
 						</a>
 					</div>
 				{:else}

@@ -4,27 +4,30 @@
 	import { onMount } from "svelte";
 	import Table from "$lib/components/Table.svelte";
 	import LoadingBar from "$lib/components/LoadingBar.svelte";
-	import { sortArrayObjs} from "$lib/modules/utilities/sortArrayObjs";
+	import { sortArrayObjs } from "$lib/modules/utilities/sortArrayObjs";
 
 	let loading = false;
 	let teams = [];
 	let orString = "";
 	let userSelected = true;
+	if (!$userProfile) userSelected = false;
 
 	async function getTeamIds() {
 		try {
 			const { data, error } = await supabase
 				.from("contracts")
-				.select(`team_id, teams(team_name)`)
+				.select(`team_id, teams(team_name), confirmed`)
 				.eq("profile_id", $userProfile.id);
 			if (error) throw new Error(error.message);
 			data.forEach((team) => {
-				teams.push({
-					id: team.team_id,
-					name: team.teams.team_name,
-					selected: false,
-					expanded: false,
-				});
+				if (team.confirmed) {
+					teams.push({
+						id: team.team_id,
+						name: team.teams.team_name,
+						selected: false,
+						expanded: false,
+					});
+				}
 			});
 			teams.sort(sortArrayObjs("name"));
 		} catch (error) {
@@ -71,7 +74,7 @@
 						});
 					}
 				});
-				team.athletes.sort(sortArrayObjs("first_name"))
+				team.athletes.sort(sortArrayObjs("first_name"));
 			});
 			teams = teams;
 		} catch (error) {
@@ -80,10 +83,12 @@
 	}
 
 	onMount(async () => {
-		loading = true;
-		await getTeamIds();
-		await getAthletes();
-		loading = false;
+		if ($userProfile) {
+			loading = true;
+			await getTeamIds();
+			await getAthletes();
+			loading = false;
+		}
 	});
 
 	function selectTeam(team) {
@@ -143,110 +148,112 @@
 	}
 </script>
 
-<Table columnNames={["", "Select Participants", ""]} class="mb-4">
-	{#if loading}
-		<tr>
-			<td />
-			<td><LoadingBar /></td>
-			<td />
-		</tr>
-	{:else if teams[0]}
-		{#each teams as team}
+{#if $userProfile}
+	<Table columnNames={["", "Select Participants", ""]} class="mb-4 max-w-md">
+		{#if loading}
 			<tr>
-				<th class="w-4" class:bg-base-300={team.expanded}>
+				<td />
+				<td><LoadingBar /></td>
+				<td />
+			</tr>
+		{:else if teams[0]}
+			{#each teams as team}
+				<tr>
+					<th class="w-4" class:bg-base-300={team.expanded}>
+						<input
+							type="checkbox"
+							bind:checked={team.selected}
+							on:click={() => selectTeam(team)}
+							class="checkbox sm:checkbox-lg checkbox-primary"
+						/>
+					</th>
+					<td
+						class="font-bold hover:cursor-pointer"
+						class:bg-base-300={team.expanded}
+						on:click={() => {
+							team.expanded = !team.expanded;
+						}}
+					>
+						#{team.name}
+					</td>
+					<td
+						class="hover:cursor-pointer w-16"
+						class:bg-base-300={team.expanded}
+						on:click={() => {
+							team.expanded = !team.expanded;
+						}}
+					>
+						{#if team.expanded}
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="w-6 h-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M4.5 15.75l7.5-7.5 7.5 7.5"
+								/>
+							</svg>
+						{:else}
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="w-6 h-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+								/>
+							</svg>
+						{/if}
+					</td>
+				</tr>
+				{#if team.expanded}
+					{#each team.athletes as athlete}
+						<tr>
+							<th>
+								<input
+									type="checkbox"
+									bind:checked={athlete.selected}
+									class="checkbox checkbox-secondary sm:checkbox-lg"
+								/>
+							</th>
+							<td>
+								<span>
+									{athlete.first_name}
+									{athlete.last_name}
+								</span>
+							</td>
+							<td>@{athlete.username}</td>
+						</tr>
+					{/each}
+				{/if}
+			{/each}
+		{:else}
+			<tr>
+				<th>
 					<input
 						type="checkbox"
-						bind:checked={team.selected}
-						on:click={() => selectTeam(team)}
-						class="checkbox sm:checkbox-lg checkbox-primary"
+						class="checkbox checkbox-secondary sm:checkbox-lg"
+						bind:checked={userSelected}
 					/>
 				</th>
-				<td
-					class="font-bold hover:cursor-pointer"
-					class:bg-base-300={team.expanded}
-					on:click={() => {
-						team.expanded = !team.expanded;
-					}}
-				>
-					#{team.name}
+				<td>
+					<span>
+						{$userProfile.first_name}
+						{$userProfile.last_name}
+					</span>
 				</td>
-				<td
-					class="hover:cursor-pointer w-16"
-					class:bg-base-300={team.expanded}
-					on:click={() => {
-						team.expanded = !team.expanded;
-					}}
-				>
-					{#if team.expanded}
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="w-6 h-6"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M4.5 15.75l7.5-7.5 7.5 7.5"
-							/>
-						</svg>
-					{:else}
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="w-6 h-6"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-							/>
-						</svg>
-					{/if}
-				</td>
+				<td>@{$userProfile.username}</td>
 			</tr>
-			{#if team.expanded}
-				{#each team.athletes as athlete}
-					<tr>
-						<th>
-							<input
-								type="checkbox"
-								bind:checked={athlete.selected}
-								class="checkbox checkbox-secondary sm:checkbox-lg"
-							/>
-						</th>
-						<td>
-							<span>
-								{athlete.first_name}
-								{athlete.last_name}
-							</span>
-						</td>
-						<td>@{athlete.username}</td>
-					</tr>
-				{/each}
-			{/if}
-		{/each}
-	{:else}
-		<tr>
-			<th>
-				<input
-					type="checkbox"
-					class="checkbox checkbox-secondary sm:checkbox-lg"
-					bind:checked={userSelected}
-				/>
-			</th>
-			<td>
-				<span>
-					{$userProfile.first_name}
-					{$userProfile.last_name}
-				</span>
-			</td>
-			<td>@{$userProfile.username}</td>
-		</tr>
-	{/if}
-</Table>
+		{/if}
+	</Table>
+{/if}
