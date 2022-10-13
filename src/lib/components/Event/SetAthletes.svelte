@@ -48,6 +48,7 @@
 				.select(
 					`
 					team_id,
+					confirmed,
 					profiles(
 						id,	
 						first_name,
@@ -61,17 +62,19 @@
 			teams.forEach((team) => {
 				team.athletes = [];
 				data.forEach((contract) => {
-					if (team.id === contract.team_id) {
-						team.athletes.push({
-							id: contract.profiles.id,
-							guestId: null,
-							first_name: contract.profiles.first_name,
-							last_name: contract.profiles.last_name,
-							username: contract.profiles.username,
-							selected: false,
-							resting: true,
-							laps: [],
-						});
+					if (contract.confirmed) {
+						if (team.id === contract.team_id) {
+							team.athletes.push({
+								id: contract.profiles.id,
+								guestId: null,
+								first_name: contract.profiles.first_name,
+								last_name: contract.profiles.last_name,
+								username: contract.profiles.username,
+								selected: false,
+								resting: true,
+								laps: [],
+							});
+						}
 					}
 				});
 				team.athletes.sort(sortArrayObjs("first_name"));
