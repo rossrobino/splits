@@ -3,7 +3,6 @@
 	import AlertError from "$lib/components/AlertError.svelte";
 	import { capitalizeFirstLetter } from "$lib/modules/utilities/capitalizeFirstLetter";
 
-
 	let loading = false;
 	let email;
 	let password;
@@ -172,7 +171,11 @@
 	<div class="hero min-h-screen bg-base-100">
 		<div class="hero-content text-center">
 			<div class="max-w-md">
-				<p class="py-6">Check your email to complete verification!</p>
+				<p class="py-6">
+					Check your email to complete verification! Be sure to check
+					your spam/junk if you do not receive a message within a few
+					minutes.
+				</p>
 				<a href="/app" class="btn btn-primary">Log In</a>
 			</div>
 		</div>

@@ -1,9 +1,13 @@
 <script>
-	export let shareData = {};
+	import { page } from "$app/stores";
+
+	export let title = "";
+	export let text = "";
+	export let url = $page.path;
 
 	async function handleClick() {
 		try {
-			await navigator.share(shareData);
+			await navigator.share({ title, text, url });
 		} catch (error) {
 			console.log(error);
 		}
