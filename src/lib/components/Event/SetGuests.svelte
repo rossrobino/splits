@@ -1,9 +1,13 @@
 <script>
 	import Table from "$lib/components/Table.svelte";
-	import { guests } from "$lib/sessionStore";
+	import { guests, userProfile } from "$lib/sessionStore";
 
 	$guests = [];
 	let guestId = 1;
+	let columnLabel = $userProfile ? "Guests" : "Participants";
+	if (!$userProfile) addGuest();
+	$: if ($guests.length < 1) guestId = 1;
+
 	function addGuest() {
 		$guests.push({
 			id: null,
@@ -19,9 +23,11 @@
 	}
 </script>
 
-<button class="btn w-full mb-4" on:click={addGuest}>+ Add Guest</button>
+<button class="btn w-full mb-4" on:click={addGuest}>
+	+ Add {$userProfile ? "Guest" : "Participant"}
+</button>
 {#if $guests.length}
-	<Table class="mb-4" columnNames={["", "Guests"]}>
+	<Table class="mb-4" columnNames={["", columnLabel]}>
 		{#each $guests as guest}
 			<tr>
 				<td class="w-8 sm:w-12">

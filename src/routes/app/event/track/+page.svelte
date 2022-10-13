@@ -1,22 +1,6 @@
 <script>
 	import { title } from "$lib/modules/info";
-	import {
-		eventType,
-		eventStarted,
-		eventName,
-		athletes,
-	} from "$lib/sessionStore";
-	import PageHeader from "$lib/components/PageHeader.svelte";
-	import TextInput from "$lib/components/TextInput.svelte";
-	import SetDistanceRest from "./components/SetDistanceRest.svelte";
-	import Timer from "./components/Timer/Timer.svelte";
-	import SetEventType from "./components/SetEventType.svelte";
-	import Tiles from "./components/Tiles.svelte";
-	import ResetButton from "./components/ResetButton.svelte";
-	import SetAthletes from "./components/SetAthletes.svelte";
-	import StartButton from "./components/StartButton.svelte";
-	import LapTable from "$lib/components/LapTable/LapTable.svelte";
-	import SetGuests from "./components/SetGuests.svelte";
+	import Controller from "$lib/components/Event/Controller.svelte";
 </script>
 
 <svelte:head>
@@ -24,27 +8,4 @@
 	<meta name="description" content={"Track an event."} />
 </svelte:head>
 
-{#if $eventType}
-	{#if !$eventStarted}
-		<TextInput label="Event Name" id="eventName" bind:value={$eventName} />
-		<SetDistanceRest />
-		{#if $eventType === "group"}
-			<SetAthletes />
-			<SetGuests />
-		{/if}
-		<StartButton />
-	{:else}
-		<Timer />
-		<Tiles />
-		<!-- Lap All button in Tiles -->
-		<LapTable athletes={$athletes} live={true} />
-	{/if}
-	<ResetButton />
-{:else}
-	<PageHeader>
-		<span slot="h1">Start Event</span>
-		<span slot="h2">Select and event type to get started.</span>
-	</PageHeader>
-
-	<SetEventType />
-{/if}
+<Controller />

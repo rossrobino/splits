@@ -62,9 +62,9 @@
 </script>
 
 {#if !$onTeam && !$requestSent}
-	<button class="btn mb-4" class:loading on:click={submitRequest}> Join Team </button>
+	<button class="btn w-full max-w-sm" class:loading on:click={submitRequest}> Join Team </button>
 {:else if !$onTeam || ($requestSent && !myContract.confirmed)}
-	<div class="btn btn-disabled">Request Sent</div>
+	<div class="btn btn-disabled w-full max-w-sm">Request Sent</div>
 {/if}
 
 {#if alert}

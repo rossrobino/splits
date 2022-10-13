@@ -8,22 +8,28 @@
 		totalMs,
 		pausedTime,
 		pausedMs,
+		guests,
+		demoFinished,
 	} from "$lib/sessionStore";
 
+	export let demo = false;
 	let warning = false;
 
 	function resetEvent() {
 		if (warning) {
-			$eventType = "";
+			$eventType = demo ? "group" : "";
 			$eventStarted = false;
 			$athletes = [];
+			$guests = [];
 			$totalMs = 0;
 			$pausedTime = 0;
 			$pausedMs = 0;
+			$demoFinished = false;
 			if ($timerInterval) {
 				clearInterval($timerInterval);
 				$timerInterval = false;
 			}
+			warning = false;
 		} else {
 			warning = true;
 		}

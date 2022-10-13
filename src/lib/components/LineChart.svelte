@@ -34,7 +34,7 @@
 		if (athlete.username) {
 			label = "@" + athlete.username;
 		} else {
-			label = `${athlete.first_name}${athlete.guestId}`;
+			label = `${athlete.first_name.toLowerCase()}${athlete.guestId}`;
 		}
 		datasets.push({
 			label,

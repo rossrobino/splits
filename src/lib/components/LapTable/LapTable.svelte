@@ -7,6 +7,7 @@
 	import { theme, colorList } from "$lib/sessionStore";
 
 	export let live = false;
+	export let demo = false;
 	export let athletes = []; // [{first_name, last_name, laps[{}]}, ...]
 	let columnNames = ["Athlete"];
 	let totalLaps = 0;
@@ -169,6 +170,6 @@
 		{/each}
 	</Table>
 	{#if live}
-		<FinishButton />
+		<FinishButton {demo} />
 	{/if}
 {/if}
