@@ -12,4 +12,4 @@ Splits is created with the hope of giving coaches and athletes a better way to k
 
 SvelteKit, Supabase, Tailwind, and Vercel are used to create this app. 
 
-### Open to contributions.
+### Open to contributions

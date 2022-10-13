@@ -34,7 +34,7 @@
 
 {#if !userCoach && ($onTeam || (!$onTeam && $requestSent))}
 	<button
-		class="btn block w-full max-w-sm mt-4"
+		class="btn block w-full max-w-md mt-4"
 		class:loading
 		class:btn-warning={warning}
 		use:clickOutside={blur}

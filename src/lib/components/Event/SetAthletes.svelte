@@ -149,7 +149,7 @@
 </script>
 
 {#if $userProfile}
-	<Table columnNames={["", "Select Participants", ""]} class="mb-4">
+	<Table columnNames={["", "Select Participants", ""]} class="mb-4 max-w-md">
 		{#if loading}
 			<tr>
 				<td />

@@ -41,7 +41,7 @@
 </script>
 
 <button
-	class="btn mt-8 w-full max-w-sm"
+	class="btn mt-8 w-full max-w-md"
 	class:btn-error={warning}
 	on:click={resetEvent}
 	use:clickOutside={onBlur}

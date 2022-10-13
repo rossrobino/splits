@@ -9,7 +9,7 @@
 </script>
 
 <button
-	class="block btn btn-primary w-full mb-4"
+	class="block btn btn-primary w-full max-w-md mb-4"
 	disabled={$athletes.length < 1}
 	on:click={startEvent}
 >

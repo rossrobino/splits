@@ -57,7 +57,7 @@
 	}
 </script>
 
-<div class="form-control max-w-sm mb-4 bg-base-200 rounded-lg py-1 px-3">
+<div class="form-control max-w-md mb-4 bg-base-200 rounded-lg py-1 px-3">
 	<label class="label cursor-pointer">
 		<span class="label-text flex">
 			<span>Set Distance / Rest</span>
@@ -119,11 +119,11 @@
 						: 'grid-cols-2'} gap-1"
 				>
 					{#if previousUnits != "rest"}
-						<button class="btn" on:click={addRest}>
+						<button class="btn btn-accent" on:click={addRest}>
 							+&nbsp;Rest
 						</button>
 					{/if}
-					<button class="btn btn-primary" on:click={addDistance}>
+					<button class="btn" on:click={addDistance}>
 						+&nbsp;Distance
 					</button>
 				</div>
