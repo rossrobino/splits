@@ -38,7 +38,7 @@
 			<SetAthletes />
 			<SetGuests />
 		{/if}
-		<StartButton {demo} />
+		<StartButton />
 	{:else}
 		<Timer />
 		<Tiles />

@@ -24,16 +24,16 @@
 </script>
 
 <div class="max-w-md bg-base-200 rounded-lg p-3 mb-4">
-	<div class="label text-sm pt-0">
-		{$userProfile ? "Guests" : "Participants"}
-	</div>
 	{#if $guests.length}
-		<hr class="mb-2" />
+		<div class="label text-sm pt-0">
+			{$userProfile ? "Guests" : "Participants"}
+		</div>
+		<hr class="mb-2 border-base-300" />
 		{#each $guests as guest}
 			<div class="input-group mb-2">
 				<input
 					type="checkbox"
-					class="checkbox checkbox-secondary checkbox-lg mt-2 mr-2 bg-base-100"
+					class="checkbox checkbox-secondary checkbox-lg mt-2 ml-2 mr-4 bg-base-100"
 					style="border-radius: .5rem"
 					bind:checked={guest.selected}
 				/>
@@ -52,7 +52,7 @@
 				</span>
 			</div>
 		{/each}
-		<hr class="mb-2" />
+		<hr class="mb-2 border-base-300" />
 	{/if}
 	<button class="btn w-full" on:click={addGuest}>
 		+ {$userProfile ? "Guest" : "Participant"}

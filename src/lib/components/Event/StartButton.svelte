@@ -1,8 +1,6 @@
 <script>
 	import { eventStarted, athletes } from "$lib/sessionStore";
 
-	export let demo = false;
-
 	function startEvent() {
 		$eventStarted = true;
 	}
