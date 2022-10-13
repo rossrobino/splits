@@ -116,7 +116,7 @@
 								color: {athlete.badgeContent};
 							"
 						>
-							athlete{athlete.last_name}
+							{athlete.first_name}{athlete.last_name}
 						</div>
 					{/if}
 				</th>

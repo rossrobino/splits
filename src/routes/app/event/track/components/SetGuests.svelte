@@ -19,9 +19,7 @@
 	}
 </script>
 
-<button class="btn w-full mb-4" on:click={addGuest}>
-	+ Add Guest
-</button>
+<button class="btn w-full mb-4" on:click={addGuest}>+ Add Guest</button>
 {#if $guests.length}
 	<Table class="mb-4" columnNames={["", "Guests"]}>
 		{#each $guests as guest}
@@ -33,7 +31,17 @@
 						bind:checked={guest.selected}
 					/>
 				</td>
-				<td>{guest.first_name} {guest.last_name}</td>
+				<td>
+					<input
+						type="text"
+						maxlength="40"
+						bind:value={guest.first_name}
+						class="input input-bordered w-40"
+					/>
+					<span class="ml-2">
+						#{guest.last_name}
+					</span>
+				</td>
 			</tr>
 		{/each}
 	</Table>

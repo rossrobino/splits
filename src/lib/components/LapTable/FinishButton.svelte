@@ -53,6 +53,7 @@
 	}
 
 	async function uploadLaps(athlete) {
+		let guestName = athlete.guestId ? athlete.first_name : null;
 		try {
 			loading = true;
 			const { data, error } = await supabase
@@ -62,6 +63,7 @@
 					profile_id: athlete.id,
 					laps: athlete.laps,
 					guestId: athlete.guestId,
+					guest_name: guestName,
 				})
 				.single();
 			if (error) throw new Error(error.message);
