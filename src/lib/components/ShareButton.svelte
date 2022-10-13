@@ -3,7 +3,7 @@
 
 	export let title = "";
 	export let text = "";
-	export let url = $page.path;
+	export let url = $page.url.pathname;
 
 	async function handleClick() {
 		try {
