@@ -9,12 +9,11 @@
 		<p>
 			Copyright © {getCurrentDate().split("-")[0]} -
 			<a class="inline-block underline" href="https://robino.dev/" target="_blank">
-				Ross Robino
+				Robino
 			</a>
 		</p>
 	</div>
-	<!-- Remove hidden to show github logo below -->
-	<div class="justify-self-end hidden"> 
+	<div class="justify-self-end"> 
 		<a href="https://github.com/rossrobino/splits" target="_blank">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
