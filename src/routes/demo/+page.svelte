@@ -23,7 +23,7 @@
 			to add teammates and save results.
 		</span>
 	</PageHeader>
-	<hr class="mb-4 sm:mb-8">
+	<hr class="mb-4 sm:mb-8 border-base-300">
 	{#if $demoFinished}
 		<LineChart athletes={$athletes} />
 		<LapTable athletes={$athletes} />
