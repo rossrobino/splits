@@ -10,6 +10,6 @@ Splits is created with the hope of giving coaches and athletes a better way to k
 
 ### Tooling
 
-SvelteKit, Supabase, Tailwind, DaisyUI, and Vercel are used to create this app. 
+SvelteKit, Supabase, Tailwind, DaisyUI, Chart.js and Vercel are used to create this app. 
 
 ### Open to contributions
