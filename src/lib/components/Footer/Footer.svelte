@@ -8,13 +8,13 @@
 	<div class="justify-self-start">
 		<p>
 			Copyright © {getCurrentDate().split("-")[0]} -
-			<a class="inline-block underline" href="https://robino.dev/" target="_blank">
+			<a class="inline-block underline" href="https://robino.dev/">
 				Robino
 			</a>
 		</p>
 	</div>
 	<div class="justify-self-end"> 
-		<a href="https://github.com/rossrobino/splits" target="_blank">
+		<a href="https://github.com/rossrobino/splits">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 24 24"
