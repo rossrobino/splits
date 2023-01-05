@@ -25,7 +25,7 @@
     "type": "module",
     "dependencies": {
         "@supabase/supabase-js": "^1.35.7",
-        "chart.js": "^3.9.1",
+        "chart.js": "^4.1.2",
         "daisyui": "^2.46.1",
         "svelte-chartjs": "^3.1.0"
     }
